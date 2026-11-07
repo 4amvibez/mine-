@@ -10,7 +10,7 @@ import os, html
 HERE = os.path.dirname(os.path.abspath(__file__))
 IMG = os.path.join(HERE, "images")
 HANDLE = "@raj_in_jp"
-TOTAL = 10
+TOTAL = 11
 
 
 def img(name):
@@ -39,13 +39,20 @@ body{background:#888;font-family:NotoJP,'Noto Color Emoji',sans-serif;color:var(
 .bottom{position:absolute;bottom:52px;left:72px;right:72px;display:flex;justify-content:space-between;align-items:center;font-family:Archivo,'Noto Color Emoji';font-size:30px;z-index:5}
 .swipe{color:var(--pink)}
 .bar{position:absolute;left:0;right:0;bottom:0;height:18px;background:var(--pink)}
+rt{font-family:NotoJP,sans-serif;font-weight:700;font-size:.42em;color:var(--pink);letter-spacing:0;line-height:1.1}
+.word rt{font-size:.2em}
+.word ruby,.word{ruby-position:over}
+ruby{ruby-align:center}
+.bubble rt{font-size:.24em}
 /* content slide */
+.pic{position:absolute;right:-30px;top:10px;width:290px;height:380px;object-fit:cover;border-radius:28px;border:6px solid var(--ink);box-shadow:10px 10px 0 var(--pink);transform:rotate(3deg);z-index:1}
+
 .c{position:absolute;top:150px;left:72px;right:72px;bottom:130px;display:flex;flex-direction:column}
 .tag{display:inline-block;align-self:flex-start;font-family:Dela;font-size:34px;background:var(--pink);color:#fff;padding:10px 24px;border-radius:12px;transform:rotate(-2deg)}
 .wordrow{display:flex;align-items:center;gap:36px;margin-top:34px}
 .word{font-family:Brush;font-size:300px;line-height:1;position:relative}
 .word.long{font-size:210px}
-.x{position:absolute;right:-30px;top:-20px;width:110px;height:110px;border-radius:50%;background:var(--pink);color:#fff;font-family:Archivo;font-size:70px;
+.x{z-index:3;position:absolute;right:-80px;bottom:10px;width:110px;height:110px;border-radius:50%;background:var(--pink);color:#fff;font-family:Archivo;font-size:70px;
   display:flex;align-items:center;justify-content:center;transform:rotate(12deg);box-shadow:6px 6px 0 var(--ink)}
 .romaji{font-family:Dela;font-size:52px;margin-top:8px}
 .mean{font-family:NotoJP;font-weight:900;font-size:44px;margin-top:6px}
@@ -82,7 +89,9 @@ def word_slide(n, word, romaji, meaning, desc, mlabel, mval, say=None, say_note=
         bottom = f'<div class="say"><div class="ok">✓</div><div><small>SAY THIS INSTEAD</small><b>{say}</b><em>{say_note}</em></div></div>'
     else:
         bottom = f'<div class="no">{never[0]}<small>{never[1]}</small></div>'
-    inner = f"""<div class="c">
+    pic = img(f"s{n:02d}.png")
+    pic_html = f'<img class="pic" src="{pic}">' if pic else ""
+    inner = f"""<div class="c">{pic_html}
 <div class="tag">ANIME ONLY ✕</div>
 <div class="wordrow"><div class="word{' long' if long else ''}">{word}<div class="x">✕</div></div></div>
 <div class="romaji">{romaji}</div>
@@ -100,7 +109,7 @@ slides = []
 cov = img("cover.png")
 cover_img = (f'<img src="{cov}" style="position:absolute;right:-20px;bottom:110px;height:640px;z-index:2">' if cov else
              '<div style="position:absolute;right:50px;bottom:150px;z-index:2;transform:rotate(6deg)">'
-             '<div style="background:#fff;border:8px solid #141414;border-radius:56px;padding:22px 44px 30px;font-family:Brush;font-size:135px;line-height:1;box-shadow:14px 14px 0 #E8175D">お前！</div>'
+             '<div class="bubble" style="background:#fff;border:8px solid #141414;border-radius:56px;padding:22px 44px 30px;font-family:Brush;font-size:135px;line-height:1.25;box-shadow:14px 14px 0 #E8175D">お前！</div>'
              '<div style="width:0;height:0;border-left:36px solid transparent;border-right:36px solid transparent;border-top:60px solid #141414;margin-left:80px"></div></div>')
 slides.append(f"""<section class="slide" id="s1">
 <div style="position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 85% 70%,rgba(232,23,93,.10) 0deg 6deg,transparent 6deg 14deg)"></div>
@@ -120,7 +129,7 @@ stake_visual = (f'<img src="{st}" style="width:100%;height:560px;object-fit:cove
                 '<div style="margin-top:auto;display:flex;gap:28px;align-items:stretch">'
                 '<div style="flex:1;background:#fff;border:6px solid #141414;border-radius:28px;padding:34px;box-shadow:10px 10px 0 #E8175D">'
                 '<div style="font-family:Archivo;font-size:30px;color:#E8175D">YOU, TO YOUR BOSS</div>'
-                '<div style="font-family:Brush;font-size:118px;line-height:1.2;margin-top:24px;white-space:nowrap">おい、<br>お前！</div></div>'
+                '<div class="bubble" style="font-family:Brush;font-size:112px;line-height:1.4;margin-top:6px;white-space:nowrap">おい、<br>お前！</div></div>'
                 '<div style="flex:1;background:#141414;color:#fff;border-radius:28px;padding:34px;box-shadow:10px 10px 0 #E8175D">'
                 '<div style="font-family:Archivo;font-size:30px;color:#FFD23F">YOUR BOSS</div>'
                 '<div style="font-size:150px;line-height:1.1;margin-top:20px">😨</div>'
@@ -167,18 +176,48 @@ slides.append(frame(9, f"""<div class="c">
 <div style="margin-top:auto;font-weight:900;font-size:40px;line-height:1.4">Not sure? <span style="background:var(--yellow);padding:0 10px">Name + さん and です</span> are always safe.</div>
 </div>"""))
 
-# 10 CTA
-slides.append(f"""<section class="slide" id="s10" style="background:var(--pink);color:#fff">
+# 10 QUIZ
+q = img("s10.png")
+q_html = f'<img src="{q}" style="width:100%;height:210px;object-fit:cover;border-radius:24px;border:6px solid #141414;margin-top:22px">' if q else ""
+opts = [("A", "おい、お前！"), ("B", "田中さん、すみません"), ("C", "貴様！")]
+opts_html = "".join(
+    f'<div style="display:flex;align-items:center;gap:26px;margin-top:{22 if q else 30}px;background:#fff;border:5px solid #141414;border-radius:24px;padding:{12 if q else 22}px 28px;box-shadow:8px 8px 0 #141414">'
+    f'<div style="flex:none;width:84px;height:84px;border-radius:50%;background:var(--pink);color:#fff;font-family:Archivo;font-size:48px;display:flex;align-items:center;justify-content:center">{k}</div>'
+    f'<div style="font-weight:900;font-size:48px;line-height:1.5">{t}</div></div>' for k, t in opts)
+slides.append(frame(10, f"""<div class="c">
+<div class="tag" style="background:var(--yellow);color:var(--ink)">QUIZ TIME 🧠</div>
+<div style="font-family:Dela;font-size:62px;line-height:1.15;margin-top:30px">You need your boss,<br><span class='jp'>田中</span>. What do you say?</div>
+{q_html}
+{opts_html}
+<div style="margin-top:auto;font-family:Dela;font-size:46px;color:var(--pink)">Comment A, B or C 👇</div>
+</div>"""))
+
+# 11 CTA
+slides.append(f"""<section class="slide" id="s11" style="background:var(--pink);color:#fff">
 <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.18) 3px,transparent 3.5px);background-size:28px 28px"></div>
 <div class="top"><div class="handle" style="color:#fff">@raj_in_jp</div><div class="pg" style="background:#fff;color:var(--pink)">{TOTAL}/{TOTAL}</div></div>
 <div style="position:absolute;top:230px;left:96px;right:96px;z-index:3;text-align:center">
-  <div style="font-size:170px;line-height:1">📩</div>
+  {('<img src="'+img("s11.png")+'" style="height:300px;border-radius:28px;border:6px solid #141414;box-shadow:10px 10px 0 #141414">') if img("s11.png") else '<div style="font-size:170px;line-height:1">📩</div>'}
   <div style="font-family:Dela;font-size:92px;line-height:1.12;margin-top:40px">Send this to<br>your anime<br>friend</div>
   <div style="font-weight:900;font-size:46px;margin-top:34px">before they visit Japan.</div>
   <div style="display:inline-block;margin-top:70px;background:#fff;color:var(--ink);border-radius:999px;padding:24px 46px;font-family:Archivo;font-size:40px;box-shadow:10px 10px 0 var(--ink)">More real Japanese → <span style="color:var(--pink)">@raj_in_jp</span></div>
 </div>
 <div class="bottom" style="color:#fff"><span>ANIME vs REAL LIFE</span><span>ANIME HUB</span></div>
 <div class="bar" style="background:var(--ink)"></div></section>""")
+
+FURI = [
+    ("名前", "<ruby>名<rt>な</rt>前<rt>まえ</rt></ruby>"),
+    ("お前", "お<ruby>前<rt>まえ</rt></ruby>"),
+    ("貴様", "<ruby>貴<rt>き</rt>様<rt>さま</rt></ruby>"),
+    ("俺様", "<ruby>俺<rt>おれ</rt>様<rt>さま</rt></ruby>"),
+    ("拙者", "<ruby>拙<rt>せっ</rt>者<rt>しゃ</rt></ruby>"),
+    ("田中", "<ruby>田<rt>た</rt>中<rt>なか</rt></ruby>"),
+    ("私", "<ruby>私<rt>わたし</rt></ruby>"),
+]
+body = "".join(slides)
+for k, v in FURI:
+    body = body.replace(k, v)
+slides = [body]
 
 with open(os.path.join(HERE, "slides.html"), "w") as f:
     f.write(f"<!doctype html><html><head><meta charset='utf-8'><style>{CSS}</style></head><body>{''.join(slides)}</body></html>")

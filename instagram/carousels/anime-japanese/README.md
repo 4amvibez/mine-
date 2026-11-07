@@ -1,13 +1,19 @@
-# Anime Japanese that gets you fired (10-slide carousel)
+# Anime Japanese that gets you fired (11-slide carousel)
 
-`slides/` has the 10 finished 1080x1350 PNGs, ready to upload in order.
+`slides/` has the 11 finished 1080x1350 PNGs, ready to upload in order.
 
 ## Add your own anime images (optional)
 
-Save them in `images/` with these exact names, then rebuild:
+Every kanji has furigana. Save images in `images/` with these exact names, then
+rebuild. Any slide without an image still works as it is.
 
-- `cover.png`: replaces the お前！ speech bubble on slide 1
-- `stake.png`: replaces the two boss cards on slide 2
+| File | Slide | Shape |
+|---|---|---|
+| `cover.png` | 1, cover character (transparent background) | portrait |
+| `stake.png` | 2, the boss scene | landscape |
+| `s03.png` to `s08.png` | 3 to 8, one character per word | portrait 3:4 |
+| `s10.png` | 10, quiz scene | wide |
+| `s11.png` | 11, CTA character | square |
 
 ## Rebuild
 
