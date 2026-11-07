@@ -45,7 +45,12 @@ for n, (fname, a, b, crop) in CLIPS.items():
         f"loop=loop=-1:size=32767,trim=0:{DUR},setpts=PTS-STARTPTS[clip];"
         f"[0:v][clip]overlay={g['x']}:{g['y']}:shortest=0[v1];"
         f"[v1][2:v]overlay={g['cx']}:{g['cy']},format=yuv420p,trim=0:{DUR}[v];"
-        f"[1:a]atrim={a}:{b},asetpts=PTS-STARTPTS,aloop=loop=-1:size=2e9,atrim=0:{DUR},afade=t=out:st={DUR-0.25}:d=0.25[aout]"
+        f"[1:a]atrim={a}:{b},asetpts=PTS-STARTPTS,"
+        f"highpass=f=90,lowpass=f=7500,afftdn=nr=18:nf=-30,"  # cut rumble/hiss, reduce noise
+        f"afade=t=in:d=0.04,afade=t=out:st={b-a-0.08}:d=0.08,"  # no clicks at the loop point
+        f"aloop=loop=-1:size=2e9,atrim=0:{DUR},"
+        f"loudnorm=I=-26:TP=-4:LRA=7,"  # same, gentler volume on every slide
+        f"afade=t=out:st={DUR-0.25}:d=0.25,aresample=44100[aout]"
     )
     cmd = ["ffmpeg", "-v", "error", "-y",
            "-loop", "1", "-framerate", str(FPS), "-t", str(DUR), "-i", base,

@@ -172,27 +172,27 @@ slides.append(frame(2, f"""<div class="c">
 slides.append(word_slide(3, "お前", "omae", '= "you"',
     "Every anime rival says it. Between close friends it's fine. To anyone above you, it's rude.",
     "RUDENESS", 3, say="名前 + さん", say_note="their name + san",
-    heard="<div><b>Fist of the North Star</b>, Kenshiro<br>「お前はもう死んでいる」</div>"))
+    heard="<div><b>Fist of the North Star</b><br>Kenshiro</div>"))
 slides.append(word_slide(4, "てめえ", "temee", '= a rougher "you"',
     "This is how anime characters talk right before a fight. In real life, these are fighting words too.",
     "RUDENESS", 5, never=("Just don't. ✕", "No polite version. Use their name + さん."), long=True,
-    heard="<div><b>My Hero Academia</b>, Bakugo<br>to almost everyone</div>"))
+    heard="<div><b>My Hero Academia</b><br>Bakugo</div>"))
 slides.append(word_slide(5, "貴様", "kisama", '= "you"',
     "Centuries ago it was respectful. Today it sounds like pure hate. Villains love it.",
     "RUDENESS", 5, say="名前 + さん", say_note="their name + san",
-    heard="<div><b>Naruto Shippuden</b>, Pain<br><b>Dragon Ball Z</b>, Vegeta</div>"))
+    heard="<div><b>Naruto Shippuden</b><br>Pain</div>"))
 slides.append(word_slide(6, "俺様", "oresama", '= "I, the great one"',
     "Pure anime ego. Say it at work and you're the joke of the office.",
     "RUDENESS", 4, say="私", say_note="watashi",
-    heard="<div><b>Prince of Tennis</b>, Atobe<br>「俺様の美技に酔いな」</div>"))
+    heard="<div><b>My Gift Lvl 9999 Unlimited Gacha</b><br>says ボク様, the same ego with ボク</div>"))
 slides.append(word_slide(7, "だぜ", "daze", "= tough-guy ending",
     "Sounds cool in a shounen fight. At a shop counter it sounds like you're doing a bad impression.",
     "CRINGE", 4, say="です", say_note="desu",
-    heard="<div><b>JoJo's Bizarre Adventure</b>, Jotaro<br>「やれやれだぜ」</div>"))
+    heard="<div><b>JoJo's Bizarre Adventure</b><br>Jotaro</div>"))
 slides.append(word_slide(8, "拙者", "sessha · <span class='jp' style='font-weight:700'>でござる</span>", "= samurai speech",
-    "Straight out of a samurai anime. Use it in real life and people will laugh, kindly but loudly.",
+    "Straight out of an Edo-era story. Use it in real life and people will laugh, kindly but loudly.",
     "CRINGE", 5, say="私 · です", say_note="watashi · desu",
-    heard="<div><b>Rurouni Kenshin</b>, Kenshin<br>in every single episode</div>"))
+    heard="<div><b>Shabake</b> (しゃばけ)<br>set in Edo-era Japan</div>"))
 
 # 9 RECAP
 rows = [("お前・てめえ・貴様", "名前 + さん"), ("俺様・拙者", "私"), ("だぜ・でござる", "です")]
