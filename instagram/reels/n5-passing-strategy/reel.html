@@ -1,0 +1,180 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Archivo;src:url(fonts/ArchivoBlack.ttf)}
+@font-face{font-family:Caveat;src:url(fonts/Caveat.ttf)}
+@font-face{font-family:Kure;src:url(fonts/ZenKurenaido.ttf)}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-500.ttf);font-weight:500}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-700.ttf);font-weight:700}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-900.ttf);font-weight:900}
+:root{--paper:#F3EEE4;--ink:#1B1A18;--soft:#6B655C;--red:#D3262E;--line:#D9D1C3;--pink:#E8175D}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000;font-family:NotoJP,sans-serif;color:var(--ink)}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden}
+.layer{position:absolute;inset:0}
+/* photo hook */
+#photo{background:url(img/desk.jpg) center/cover;filter:brightness(.42) saturate(.8)}
+#photo2{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 75%)}
+/* paper */
+#paper{background:var(--paper)}
+#grain{position:absolute;inset:0;opacity:.35;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .42  0 0 0 0 .38  0 0 0 .55 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
+#rules{position:absolute;inset:0;background-image:repeating-linear-gradient(to bottom,transparent 0 95px,var(--line) 95px 97px);opacity:.55}
+#margin{position:absolute;top:0;bottom:0;left:120px;width:3px;background:rgba(211,38,46,.35)}
+.top{position:absolute;top:250px;left:120px;right:110px;display:flex;justify-content:space-between;align-items:center;z-index:20;font-family:Archivo;font-size:30px;letter-spacing:1px}
+.scene{position:absolute;inset:0;display:none}
+.hand{font-family:Caveat;color:var(--red)}
+.big{font-family:Archivo;line-height:.95}
+svg.pen{position:absolute;overflow:visible;pointer-events:none}
+svg.pen path,svg.pen ellipse,svg.pen line{fill:none;stroke:var(--red);stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
+.row{position:absolute;left:160px;right:110px;display:flex;align-items:flex-end;border-bottom:3px solid var(--ink);padding-bottom:18px}
+.row .n{font-family:Archivo;font-size:44px;width:80px;color:var(--red)}
+.row .t{flex:1}
+.row .t b{display:block;font-weight:900;font-size:48px;line-height:1.1;white-space:nowrap}
+.row .t span{font-size:32px;color:var(--soft);font-weight:700}
+.row .m{padding-left:24px;font-family:Archivo;font-size:84px;line-height:.9;text-align:right}
+.row .m small{font-size:34px;margin-left:6px}
+.gauge{position:absolute;left:160px;right:110px}
+.gauge .lab{display:flex;justify-content:space-between;align-items:flex-end;font-weight:900;font-size:40px}
+.gauge .lab span{font-family:Archivo;font-size:40px}
+.gauge .track{position:relative;height:64px;margin-top:16px;border:4px solid var(--ink);border-radius:12px;background:#fff}
+.gauge .fill{position:absolute;left:0;top:0;bottom:0;background:var(--ink);border-radius:6px}
+.gauge .min{position:absolute;top:-22px;bottom:-22px;width:6px;background:var(--red)}
+.gauge .minlab{position:absolute;top:84px;transform:translateX(-50%);font-family:Caveat;font-size:54px;color:var(--red);white-space:nowrap}
+.check{position:absolute;left:160px;right:110px;display:flex;gap:30px;align-items:flex-start}
+.check .box{flex:none;width:70px;height:70px;border:5px solid var(--ink);border-radius:10px;position:relative;margin-top:6px}
+.check .txt b{display:block;font-weight:900;font-size:54px;line-height:1.15}
+.check .txt span{display:block;font-size:34px;color:var(--soft);font-weight:700;margin-top:6px}
+</style></head>
+<body><div id="stage">
+ <div class="layer" id="photoL"><div class="layer" id="photo"></div><div id="photo2"></div></div>
+ <div class="layer" id="paperL"><div class="layer" id="paper"></div><div id="rules"></div><div id="margin"></div><div id="grain"></div></div>
+ <div class="top" id="top"><span id="handle">@raj_in_jp</span><span id="tag" style="color:var(--red)">JLPT N5 · DEC 2026</span></div>
+
+ <!-- 1 HOOK -->
+ <div class="scene" id="s1" style="color:#fff">
+  <div id="h1" style="position:absolute;top:560px;left:110px;font-family:NotoJP;font-weight:900;font-size:76px">Only</div>
+  <div id="h2" class="big" style="position:absolute;top:650px;left:100px;font-size:300px;letter-spacing:-6px"><span id="h80" style="color:#FF4A4F">0</span><span style="font-size:150px">/180</span></div>
+  <div id="h3" style="position:absolute;top:960px;left:110px;font-weight:900;font-size:76px;line-height:1.15">to pass<br>JLPT N5?</div>
+  <div id="h4" style="position:absolute;top:1230px;left:110px;font-family:Caveat;font-size:118px;color:#FF4A4F">There's a catch.</div>
+  <svg class="pen" id="h4u" style="left:100px;top:1360px" width="760" height="60"><path d="M10 30 C 200 10, 420 48, 740 18" pathLength="1"/></svg>
+ </div>
+
+ <!-- 2 DATE -->
+ <div class="scene" id="s2">
+  <div id="d1" style="position:absolute;top:470px;left:160px;font-weight:900;font-size:52px;color:var(--soft)">The exam</div>
+  <div id="d2" class="big" style="position:absolute;top:560px;left:150px;font-size:210px">DEC</div>
+  <div id="d3" class="big" style="position:absolute;top:760px;left:150px;font-size:420px;letter-spacing:-10px">6</div>
+  <svg class="pen" id="d3c" style="left:110px;top:740px" width="420" height="460"><ellipse cx="200" cy="225" rx="185" ry="205" pathLength="1"/></svg>
+  <div id="d4" style="position:absolute;top:840px;left:560px;font-weight:900;font-size:58px;line-height:1.2">Sunday<br><span style="color:var(--soft)">2026</span></div>
+  <div id="d5" class="hand" style="position:absolute;top:1230px;left:160px;font-size:104px;transform:rotate(-3deg)">30 days. One plan.</div>
+ </div>
+
+ <!-- 3 SECTIONS -->
+ <div class="scene" id="s3">
+  <div id="t3" style="position:absolute;top:440px;left:160px;font-weight:900;font-size:64px">3 sections · <span style="color:var(--red)">90 min</span></div>
+  <div class="row" id="r1" style="top:600px"><div class="n">1</div><div class="t"><b>Vocabulary</b><span>4 question types</span></div><div class="m"><span id="m1">0</span><small>min</small></div></div>
+  <div class="row" id="r2" style="top:800px"><div class="n">2</div><div class="t"><b>Grammar + Reading</b><span>6 question types</span></div><div class="m"><span id="m2">0</span><small>min</small></div></div>
+  <div class="row" id="r3" style="top:1000px"><div class="n">3</div><div class="t"><b>Listening</b><span>4 question types</span></div><div class="m"><span id="m3">0</span><small>min</small></div></div>
+  <div id="n3" class="hand" style="position:absolute;top:1200px;left:160px;font-size:66px;transform:rotate(-2deg)">Most choices: 4 options (some listening: 3)</div>
+ </div>
+
+ <!-- 4 SCORING -->
+ <div class="scene" id="s4">
+  <div id="t4" style="position:absolute;top:430px;left:160px;font-weight:900;font-size:64px">How scoring works</div>
+  <div class="gauge" id="g0" style="top:560px"><div class="lab">Total<span><span id="g0v">0</span>/180</span></div><div class="track"><div class="fill" id="g0f"></div><div class="min" style="left:44.4%"></div><div class="minlab" style="left:44.4%">pass 80</div></div></div>
+  <div class="gauge" id="g1" style="top:820px"><div class="lab">Vocab · Grammar · Reading<span>/120</span></div><div class="track"><div class="fill" id="g1f"></div><div class="min" style="left:31.7%"></div><div class="minlab" style="left:31.7%">min 38</div></div></div>
+  <div class="gauge" id="g2" style="top:1080px"><div class="lab">Listening<span>/60</span></div><div class="track"><div class="fill" id="g2f"></div><div class="min" style="left:31.7%"></div><div class="minlab" style="left:31.7%">min 19</div></div></div>
+ </div>
+
+ <!-- 5 THE CATCH -->
+ <div class="scene" id="s5">
+  <div id="t5" class="hand" style="position:absolute;top:420px;left:160px;font-size:96px">The catch:</div>
+  <div id="c1" style="position:absolute;top:560px;left:160px;right:110px;font-weight:900;font-size:40px;white-space:nowrap;display:flex;gap:24px;justify-content:space-between;border-bottom:3px solid var(--ink);padding-bottom:14px"><span>Vocab + Grammar + Reading</span><span style="font-family:Archivo;font-size:56px">110 ✓</span></div>
+  <div id="c2" style="position:absolute;top:690px;left:160px;right:110px;font-weight:900;font-size:40px;white-space:nowrap;display:flex;gap:24px;justify-content:space-between;border-bottom:3px solid var(--ink);padding-bottom:14px"><span>Listening</span><span style="font-family:Archivo;color:var(--red);font-size:56px">18 ✗ <span style="font-size:32px">(min 19)</span></span></div>
+  <div id="c3" style="position:absolute;top:820px;left:160px;right:110px;font-weight:900;font-size:64px;display:flex;justify-content:space-between"><span>Total</span><span style="font-family:Archivo">128<span style="font-size:40px">/180</span></span></div>
+  <div id="stamp" style="position:absolute;top:960px;left:250px;width:600px;height:260px;border:12px solid var(--red);border-radius:24px;color:var(--red);display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-8deg)">
+    <div style="font-family:Kure;font-size:110px;line-height:1">不合格</div><div style="font-family:Archivo;font-size:58px;letter-spacing:6px">FAIL</div></div>
+  <div id="c4" style="position:absolute;top:1300px;left:160px;right:110px;font-weight:900;font-size:50px;line-height:1.3">Miss one minimum = fail.<br><span style="color:var(--red)">Skip a section = fail.</span></div>
+ </div>
+
+ <!-- 6 STRATEGY -->
+ <div class="scene" id="s6">
+  <div id="t6" style="position:absolute;top:430px;left:160px;font-weight:900;font-size:64px">Passing strategy</div>
+  <div class="check" id="k1" style="top:570px"><div class="box"><svg class="pen" style="left:-6px;top:-24px" width="90" height="90"><path d="M10 50 L35 75 L85 8" pathLength="1"/></svg></div><div class="txt"><b>Don't count answers</b><span>Scores are scaled, not raw</span></div></div>
+  <div class="check" id="k2" style="top:770px"><div class="box"><svg class="pen" style="left:-6px;top:-24px" width="90" height="90"><path d="M10 50 L35 75 L85 8" pathLength="1"/></svg></div><div class="txt"><b>Aim ~60% everywhere</b><span>Buffer above every minimum</span></div></div>
+  <div class="check" id="k3" style="top:970px"><div class="box"><svg class="pen" style="left:-6px;top:-24px" width="90" height="90"><path d="M10 50 L35 75 L85 8" pathLength="1"/></svg></div><div class="txt"><b>Never leave a blank</b><span>A guess can score, a blank can't</span></div></div>
+  <div class="check" id="k4" style="top:1170px"><div class="box"><svg class="pen" style="left:-6px;top:-24px" width="90" height="90"><path d="M10 50 L35 75 L85 8" pathLength="1"/></svg></div><div class="txt"><b>Listening every day</b><span>The minimum people miss</span></div></div>
+ </div>
+
+ <!-- 7 CTA -->
+ <div class="scene" id="s7">
+  <div id="e1" style="position:absolute;top:520px;left:160px;font-weight:900;font-size:92px;line-height:1.1">Save this<br>for Dec 6.</div>
+  <div id="e2" class="hand" style="position:absolute;top:820px;left:160px;font-size:92px;transform:rotate(-2deg)">Which section scares you?</div>
+  <div id="e3" style="position:absolute;top:980px;left:160px;display:flex;gap:28px">
+   <div class="opt" style="width:180px;height:180px;border:6px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Archivo;font-size:96px">1</div>
+   <div class="opt" style="width:180px;height:180px;border:6px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Archivo;font-size:96px">2</div>
+   <div class="opt" style="width:180px;height:180px;border:6px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Archivo;font-size:96px">3</div>
+  </div>
+  <div id="e4" style="position:absolute;top:1220px;left:160px;font-weight:900;font-size:48px">Comment 1 · 2 · 3 👇 &nbsp;Follow <span style="color:var(--red)">@raj_in_jp</span></div>
+ </div>
+</div>
+<script>
+// Scene start times (seconds). Retimed to the voiceover later.
+window.T = {s1:0, s2:4.2, s3:9.0, s4:19.5, s5:31.0, s6:39.0, s7:50.0, end:55.0};
+window.TOTAL = T.end;
+const cl = x => Math.min(Math.max(x,0),1);
+const ease = x => 1-Math.pow(1-cl(x),3);
+const back = x => {x=cl(x); const c=1.6; return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+const $ = id => document.getElementById(id);
+function pop(id, t, d=0.35, dy=40){ const el=$(id); const p=ease(t/d); el.style.opacity = t<0?0:p; el.style.transform = `translateY(${(1-p)*dy}px)` + (el.dataset.rot?` rotate(${el.dataset.rot})`:''); }
+function draw(id, t, d=0.5){ const el=$(id); const p=cl(t/d); el.querySelectorAll('path,ellipse,line').forEach(s=>{s.style.strokeDasharray=1; s.style.strokeDashoffset=1-p;}); el.style.opacity = t<0?0:1; }
+function slideIn(id,t,d=0.4){ const el=$(id); const p=ease(t/d); el.style.opacity=t<0?0:1; el.style.transform=`translateX(${(1-p)*-1100}px)`; }
+function render(t){
+  const sc=['s1','s2','s3','s4','s5','s6','s7']; let cur='s1';
+  sc.forEach(s=>{ if(t>=T[s]) cur=s; });
+  sc.forEach(s=>$(s).style.display = s===cur?'block':'none');
+  const lt = t - T[cur];
+  // background: photo for hook, paper after; paper slides up as a page turn at s2
+  const pt = ease((t - T.s2)/0.55);
+  $('paperL').style.transform = `translateY(${(1-pt)*1920}px)`;
+  $('photoL').style.transform = `scale(${1.08 - 0.08*cl(t/4.2)})`;
+  $('top').style.color = t < T.s2+0.3 ? '#fff' : 'var(--ink)';
+  $('handle').style.opacity = 1;
+  if(cur==='s1'){
+    pop('h1',lt-0.05); pop('h2',lt-0.15,0.3,60); pop('h3',lt-0.9);
+    $('h80').textContent = Math.round(80*ease((lt-0.2)/0.9));
+    pop('h4',lt-2.0,0.3); draw('h4u',lt-2.35,0.45);
+  }
+  if(cur==='s2'){
+    pop('d1',lt-0.5); pop('d2',lt-0.65,0.35,60); pop('d3',lt-0.8,0.4,80); draw('d3c',lt-1.5,0.55);
+    pop('d4',lt-1.2); $('d5').dataset.rot='-3deg'; pop('d5',lt-2.6,0.4);
+  }
+  if(cur==='s3'){
+    pop('t3',lt-0.1);
+    [['r1','m1',20,0.9],['r2','m2',40,3.6],['r3','m3',30,6.3]].forEach(([r,m,v,d])=>{ slideIn(r,lt-d); $(m).textContent=Math.round(v*ease((lt-d-0.2)/0.6)); });
+    $('n3').dataset.rot='-2deg'; pop('n3',lt-8.6);
+  }
+  if(cur==='s4'){
+    pop('t4',lt-0.1);
+    pop('g0',lt-0.6); const v0 = 80*ease((lt-1.0)/1.4); $('g0f').style.width=(v0/180*100)+'%'; $('g0v').textContent=Math.round(v0);
+    pop('g1',lt-4.0); $('g1f').style.width=(38/120*100*ease((lt-4.4)/1.0))+'%';
+    pop('g2',lt-7.3); $('g2f').style.width=(19/60*100*ease((lt-7.7)/1.0))+'%';
+  }
+  if(cur==='s5'){
+    pop('t5',lt-0.05); pop('c1',lt-0.5); pop('c2',lt-1.1); pop('c3',lt-1.8);
+    const st=$('stamp'); const sp=cl((lt-2.6)/0.18);
+    st.style.opacity = lt<2.6?0:1; st.style.transform=`rotate(-8deg) scale(${2.2-1.2*sp})`;
+    pop('c4',lt-4.0);
+  }
+  if(cur==='s6'){
+    pop('t6',lt-0.1);
+    [['k1',0.6],['k2',3.0],['k3',5.5],['k4',8.0]].forEach(([k,d])=>{ pop(k,lt-d); const svg=$(k).querySelector('svg'); svg.id=svg.id||k+'p'; draw(svg.id,lt-d-0.4,0.35); });
+  }
+  if(cur==='s7'){
+    pop('e1',lt-0.1,0.35,60); $('e2').dataset.rot='-2deg'; pop('e2',lt-0.8); pop('e3',lt-1.4); pop('e4',lt-2.2);
+    document.querySelectorAll('#e3 .opt').forEach((o,i)=>{ const p=back((lt-1.5-i*0.15)/0.35); o.style.transform=`scale(${lt<1.5+i*0.15?0:p})`; });
+  }
+}
+window.render = render;
+</script></body></html>
