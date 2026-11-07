@@ -99,15 +99,6 @@ svg.pen path,svg.pen ellipse,svg.pen line{fill:none;stroke:var(--red);stroke-wid
   <div id="d5" class="hand" style="position:absolute;top:1230px;left:160px;font-size:104px;transform:rotate(-3deg)">30 days. One plan.</div>
  </div>
 
- <!-- C CREDIBILITY -->
- <div class="scene" id="sC" style="z-index:35">
-  <div id="cimg" style="position:absolute;inset:0;background:#111 url(img/certs.jpg) center 35%/cover"></div>
-  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.15) 50%,rgba(0,0,0,.82) 100%)"></div>
-  <div id="ct1" style="position:absolute;top:1230px;left:100px;right:100px;color:#fff;font-weight:900;font-size:56px;text-shadow:0 4px 20px rgba(0,0,0,.6)">Passed every level</div>
-  <div id="ct2" style="position:absolute;top:1300px;left:96px;white-space:nowrap;color:#fff;font-family:Archivo;font-size:168px;line-height:1;text-shadow:0 6px 30px rgba(0,0,0,.6)">up to <span style="color:#FF5A60">N1</span> ✓</div>
-  <div id="ct3" style="position:absolute;top:1530px;left:100px;color:#FFE27A;font-family:Caveat;font-size:80px">Here's what I learned 👇</div>
- </div>
-
  <!-- 3 SECTIONS -->
  <div class="scene" id="s3">
   <div id="t3" style="position:absolute;top:430px;left:160px;display:flex;align-items:center;gap:26px"><div style="width:120px;height:120px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Archivo;font-size:52px">N5</div><div style="font-weight:900;font-size:60px;line-height:1.05">3 sections<br><span style="color:var(--red)">90 min</span></div></div>
@@ -212,7 +203,7 @@ svg.pen path,svg.pen ellipse,svg.pen line{fill:none;stroke:var(--red);stroke-wid
  </div>
 </div>
 <script>
-window.T = {s1:0, s2:999, sC:12.30, s3:16.80, s4:24.20, sS:33.05, w1:42.70, w2:57.30, w3:60.30, s6:65.70, s7:74.99, end:84.39};
+window.T = {s1:0, s2:999, sC:999, s3:12.30, s4:19.70, sS:28.55, w1:38.20, w2:52.80, w3:55.80, s6:61.20, s7:70.49, end:79.89};
 window.TOTAL = T.end;
 const cl = x => Math.min(Math.max(x,0),1);
 const ease = x => 1-Math.pow(1-cl(x),3);
@@ -222,7 +213,7 @@ function pop(id, t, d=0.35, dy=40){ const el=$(id); const p=ease(t/d); el.style.
 function draw(id, t, d=0.5){ const el=$(id); const p=cl(t/d); el.querySelectorAll('path,ellipse,line').forEach(s=>{s.style.strokeDasharray=1; s.style.strokeDashoffset=1-p;}); el.style.opacity = t<0?0:1; }
 function slideIn(id,t,d=0.4){ const el=$(id); const p=ease(t/d); el.style.opacity=t<0?0:1; el.style.transform=`translateX(${(1-p)*-1100}px)`; }
 function renderSync(t){
-  const sc=['s1','sC','s3','s4','sS','w1','w2','w3','s6','s7']; let cur='s1';
+  const sc=['s1','s3','s4','sS','w1','w2','w3','s6','s7']; let cur='s1';
   sc.forEach(s=>{ if(t>=T[s]) cur=s; });
   sc.forEach(s=>$(s).style.display = s===cur?'block':'none');
   const lt = t - T[cur];
@@ -249,10 +240,6 @@ function renderSync(t){
   if(cur==='s2'){
     pop('d1',lt-0.2); pop('d2',lt-0.85,0.35,60); pop('d3',lt-1.0,0.4,80); draw('d3c',lt-1.4,0.55);
     pop('d4',lt-1.25); $('d5').dataset.rot='-3deg'; pop('d5',lt-2.2,0.4);
-  }
-  if(cur==='sC'){
-    const z=1.12-0.10*cl(lt/4.5); $('cimg').style.transform=`scale(${z}) rotate(${-1.5+1.5*cl(lt/4.5)}deg)`;
-    pop('ct1',lt-0.2,0.3,50); pop('ct2',lt-0.5,0.35,80); pop('ct3',lt-2.6,0.35,40);
   }
   if(cur==='s3'){
     pop('t3',lt-0.1);
