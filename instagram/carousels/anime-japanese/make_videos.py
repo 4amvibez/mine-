@@ -17,8 +17,8 @@ RADIUS = 22
 # slide: (file, start, end, crop "w:h:x:y" of the useful picture area or None)
 CLIPS = {
     3: ("119fae12-video_20261107_153958.mp4", 0.0, 2.6, "810:1080:640:0"),               # Kenshiro
-    4: ("97db2996-video_20261107_155232.mp4", 0.0, 1.73, "810:1080:1000:0"),              # Bakugo
-    5: ("b873e0d3-Very-rude-way-SnapYT.App.mp4", 24.7, 25.8, "202:206:0:78"),  # Sasuke, 貴様
+    4: ("97db2996-video_20261107_155232.mp4", 0.0, 1.50, "810:1080:1000:0"),              # Bakugo
+    5: ("b873e0d3-Very-rude-way-SnapYT.App.mp4", 2.15, 4.10, "202:206:0:78"),  # Pain, 貴様
     6: ("8a296746-_______________________-_4____shorts-anime-SnapYT.App.mp4", 54.95, 57.4, None),  # ボク様
     7: ("df161ae0-______-SnapYT.App.mp4", 2.6, 4.9, None),                   # Jotaro
     8: ("e098e325-video_20261107_162809.mp4", 0.0, 2.0, "1210:720:181:0"),  # samurai, 拙者

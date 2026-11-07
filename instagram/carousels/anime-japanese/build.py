@@ -180,7 +180,7 @@ slides.append(word_slide(4, "てめえ", "temee", '= a rougher "you"',
 slides.append(word_slide(5, "貴様", "kisama", '= "you"',
     "Centuries ago it was respectful. Today it sounds like pure hate. Villains love it.",
     "RUDENESS", 5, say="名前 + さん", say_note="their name + san",
-    heard="<div><b>Dragon Ball Z</b>, Vegeta<br>usually yelling at Goku</div>"))
+    heard="<div><b>Naruto Shippuden</b>, Pain<br><b>Dragon Ball Z</b>, Vegeta</div>"))
 slides.append(word_slide(6, "俺様", "oresama", '= "I, the great one"',
     "Pure anime ego. Say it at work and you're the joke of the office.",
     "RUDENESS", 4, say="私", say_note="watashi",
