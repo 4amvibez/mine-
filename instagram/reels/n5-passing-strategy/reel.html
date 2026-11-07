@@ -93,9 +93,13 @@ svg.pen path,svg.pen ellipse,svg.pen line{fill:none;stroke:var(--red);stroke-wid
   <div id="c1" style="position:absolute;top:560px;left:160px;right:110px;font-weight:900;font-size:40px;white-space:nowrap;display:flex;gap:24px;justify-content:space-between;border-bottom:3px solid var(--ink);padding-bottom:14px"><span>Vocab + Grammar + Reading</span><span style="font-family:Archivo;font-size:56px">110 ✓</span></div>
   <div id="c2" style="position:absolute;top:690px;left:160px;right:110px;font-weight:900;font-size:40px;white-space:nowrap;display:flex;gap:24px;justify-content:space-between;border-bottom:3px solid var(--ink);padding-bottom:14px"><span>Listening</span><span style="font-family:Archivo;color:var(--red);font-size:56px">18 ✗ <span style="font-size:32px">(min 19)</span></span></div>
   <div id="c3" style="position:absolute;top:820px;left:160px;right:110px;font-weight:900;font-size:64px;display:flex;justify-content:space-between"><span>Total</span><span style="font-family:Archivo">128<span style="font-size:40px">/180</span></span></div>
-  <div id="stamp" style="position:absolute;top:960px;left:250px;width:600px;height:260px;border:12px solid var(--red);border-radius:24px;color:var(--red);display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-8deg)">
+  <div id="stamp" style="position:absolute;top:930px;left:250px;width:600px;height:240px;border:12px solid var(--red);border-radius:24px;color:var(--red);display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-8deg)">
     <div style="font-family:Kure;font-size:110px;line-height:1">不合格</div><div style="font-family:Archivo;font-size:58px;letter-spacing:6px">FAIL</div></div>
-  <div id="c4" style="position:absolute;top:1300px;left:160px;right:110px;font-weight:900;font-size:50px;line-height:1.3">Miss one minimum = fail.<br><span style="color:var(--red)">Skip a section = fail.</span></div>
+  <div id="c4" style="position:absolute;top:1265px;left:160px;right:110px;font-weight:900;font-size:50px;line-height:1.3">Miss one minimum = fail.<br><span style="color:var(--red)">Skip a section = fail.</span></div>
+  <div id="c5" style="position:absolute;top:1405px;left:160px;right:110px;border-left:8px solid var(--red);padding:4px 0 4px 24px">
+   <div style="font-weight:900;font-size:36px;line-height:1.3;white-space:nowrap"><span style="color:var(--red)">Dec 2025:</span> <span style="font-family:Archivo">39,558</span> failed N5. About <span style="color:var(--red)">1 in 2</span>.</div>
+   <div style="font-size:24px;color:var(--soft);font-weight:700;margin-top:4px">Source: jlpt.jp official statistics</div>
+  </div>
  </div>
 
  <!-- 6 STRATEGY -->
@@ -104,7 +108,7 @@ svg.pen path,svg.pen ellipse,svg.pen line{fill:none;stroke:var(--red);stroke-wid
   <div class="check" id="k1" style="top:570px"><div class="box"><svg class="pen" style="left:-6px;top:-24px" width="90" height="90"><path d="M10 50 L35 75 L85 8" pathLength="1"/></svg></div><div class="txt"><b>Don't count answers</b><span>Scores are scaled, not raw</span></div></div>
   <div class="check" id="k2" style="top:770px"><div class="box"><svg class="pen" style="left:-6px;top:-24px" width="90" height="90"><path d="M10 50 L35 75 L85 8" pathLength="1"/></svg></div><div class="txt"><b>Aim ~60% everywhere</b><span>Buffer above every minimum</span></div></div>
   <div class="check" id="k3" style="top:970px"><div class="box"><svg class="pen" style="left:-6px;top:-24px" width="90" height="90"><path d="M10 50 L35 75 L85 8" pathLength="1"/></svg></div><div class="txt"><b>Never leave a blank</b><span>A guess can score, a blank can't</span></div></div>
-  <div class="check" id="k4" style="top:1170px"><div class="box"><svg class="pen" style="left:-6px;top:-24px" width="90" height="90"><path d="M10 50 L35 75 L85 8" pathLength="1"/></svg></div><div class="txt"><b>Listening every day</b><span>The minimum people miss</span></div></div>
+  <div class="check" id="k4" style="top:1170px"><div class="box"><svg class="pen" style="left:-6px;top:-24px" width="90" height="90"><path d="M10 50 L35 75 L85 8" pathLength="1"/></svg></div><div class="txt"><b>Listening every day</b><span>Audio plays <em style="font-style:normal;color:var(--red)">once</em>. No replays.</span></div></div>
  </div>
 
  <!-- 7 CTA -->
@@ -165,7 +169,7 @@ function render(t){
     pop('t5',lt-0.0); pop('c1',lt-0.25); pop('c2',lt-0.6); pop('c3',lt-1.0);
     const st=$('stamp'); const sp=cl((lt-1.75)/0.18);
     st.style.opacity = lt<1.75?0:1; st.style.transform=`rotate(-8deg) scale(${2.2-1.2*sp})`;
-    pop('c4',lt-3.4);
+    pop('c4',lt-3.4); pop('c5',lt-4.3);
   }
   if(cur==='s6'){
     pop('t6',lt-0.1);
