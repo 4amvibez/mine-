@@ -213,14 +213,15 @@ slides.append(frame(9, f"""<div class="c">
 # 10 QUIZ
 q = img("s10.png")
 q_html = f'<img src="{q}" style="width:100%;height:210px;object-fit:cover;border-radius:24px;border:6px solid #141414;margin-top:22px">' if q else ""
-opts = [("A", "おい、お前！"), ("B", "田中さん、すみません"), ("C", "貴様！")]
+opts = [("A", "おい、お前！"), ("B", "田中さん、すみません！"), ("C", "貴様、聞け！")]
 opts_html = "".join(
     f'<div style="display:flex;align-items:center;gap:26px;margin-top:{22 if q else 30}px;background:#fff;border:5px solid #141414;border-radius:24px;padding:{12 if q else 22}px 28px;box-shadow:8px 8px 0 #141414">'
     f'<div style="flex:none;width:84px;height:84px;border-radius:50%;background:var(--pink);color:#fff;font-family:Archivo;font-size:48px;display:flex;align-items:center;justify-content:center">{k}</div>'
     f'<div style="font-weight:900;font-size:48px;line-height:1.5">{t}</div></div>' for k, t in opts)
 slides.append(frame(10, f"""<div class="c">
 <div class="tag" style="background:var(--yellow);color:var(--ink)">QUIZ TIME 🧠</div>
-<div style="font-family:Dela;font-size:62px;line-height:1.15;margin-top:30px">You need your boss,<br><span class='jp'>田中</span>. What do you say?</div>
+<div style="font-family:Dela;font-size:62px;line-height:1.15;margin-top:30px">You need your boss's<br>attention. What do<br>you say?</div>
+<div style="font-weight:900;font-size:38px;margin-top:18px">Your boss: <span style="background:var(--yellow);padding:0 10px">田中さん</span></div>
 {q_html}
 {opts_html}
 <div style="margin-top:auto;font-family:Dela;font-size:46px;color:var(--pink)">Comment A, B or C 👇</div>
@@ -250,6 +251,7 @@ FURI = [
     ("美技", "<ruby>美<rt>び</rt>技<rt>ぎ</rt></ruby>"),
     ("酔いな", "<ruby>酔<rt>よ</rt></ruby>いな"),
     ("ボク様", "ボク<ruby>様<rt>さま</rt></ruby>"),
+    ("聞け", "<ruby>聞<rt>き</rt></ruby>け"),
     ("関係", "<ruby>関<rt>かん</rt>係<rt>けい</rt></ruby>"),
     ("無益", "<ruby>無<rt>む</rt>益<rt>えき</rt></ruby>"),
     ("私", "<ruby>私<rt>わたし</rt></ruby>"),
