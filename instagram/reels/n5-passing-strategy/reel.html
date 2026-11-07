@@ -121,7 +121,7 @@ svg.pen path,svg.pen ellipse,svg.pen line{fill:none;stroke:var(--red);stroke-wid
 </div>
 <script>
 // Scene start times (seconds). Retimed to the voiceover later.
-window.T = {s1:0, s2:4.2, s3:9.0, s4:19.5, s5:31.0, s6:39.0, s7:50.0, end:55.0};
+window.T = {s1:0, s2:5.01, s3:9.07, s4:16.65, s5:25.33, s6:31.31, s7:39.89, end:47.4};
 window.TOTAL = T.end;
 const cl = x => Math.min(Math.max(x,0),1);
 const ease = x => 1-Math.pow(1-cl(x),3);
@@ -136,44 +136,44 @@ function render(t){
   sc.forEach(s=>$(s).style.display = s===cur?'block':'none');
   const lt = t - T[cur];
   // background: photo for hook, paper after; paper slides up as a page turn at s2
-  const pt = ease((t - T.s2)/0.55);
+  const pt = ease((t - T.s2 + 0.3)/0.55);
   $('paperL').style.transform = `translateY(${(1-pt)*1920}px)`;
-  $('photoL').style.transform = `scale(${1.08 - 0.08*cl(t/4.2)})`;
+  $('photoL').style.transform = `scale(${1.08 - 0.08*cl(t/5)})`;
   $('top').style.color = t < T.s2+0.3 ? '#fff' : 'var(--ink)';
   $('handle').style.opacity = 1;
   if(cur==='s1'){
-    pop('h1',lt-0.05); pop('h2',lt-0.15,0.3,60); pop('h3',lt-0.9);
-    $('h80').textContent = Math.round(80*ease((lt-0.2)/0.9));
-    pop('h4',lt-2.0,0.3); draw('h4u',lt-2.35,0.45);
+    pop('h1',lt-0.0); pop('h2',lt-0.15,0.3,60); pop('h3',lt-1.4);
+    $('h80').textContent = Math.round(80*ease((lt-0.2)/0.8));
+    pop('h4',lt-3.5,0.3); draw('h4u',lt-3.85,0.45);
   }
   if(cur==='s2'){
-    pop('d1',lt-0.5); pop('d2',lt-0.65,0.35,60); pop('d3',lt-0.8,0.4,80); draw('d3c',lt-1.5,0.55);
-    pop('d4',lt-1.2); $('d5').dataset.rot='-3deg'; pop('d5',lt-2.6,0.4);
+    pop('d1',lt-0.2); pop('d2',lt-0.85,0.35,60); pop('d3',lt-1.0,0.4,80); draw('d3c',lt-1.4,0.55);
+    pop('d4',lt-1.25); $('d5').dataset.rot='-3deg'; pop('d5',lt-2.2,0.4);
   }
   if(cur==='s3'){
     pop('t3',lt-0.1);
-    [['r1','m1',20,0.9],['r2','m2',40,3.6],['r3','m3',30,6.3]].forEach(([r,m,v,d])=>{ slideIn(r,lt-d); $(m).textContent=Math.round(v*ease((lt-d-0.2)/0.6)); });
-    $('n3').dataset.rot='-2deg'; pop('n3',lt-8.6);
+    [['r1','m1',20,2.1],['r2','m2',40,4.1],['r3','m3',30,5.95]].forEach(([r,m,v,d])=>{ slideIn(r,lt-d); $(m).textContent=Math.round(v*ease((lt-d-0.2)/0.6)); });
+    $('n3').dataset.rot='-2deg'; pop('n3',lt-6.8);
   }
   if(cur==='s4'){
     pop('t4',lt-0.1);
-    pop('g0',lt-0.6); const v0 = 80*ease((lt-1.0)/1.4); $('g0f').style.width=(v0/180*100)+'%'; $('g0v').textContent=Math.round(v0);
-    pop('g1',lt-4.0); $('g1f').style.width=(38/120*100*ease((lt-4.4)/1.0))+'%';
-    pop('g2',lt-7.3); $('g2f').style.width=(19/60*100*ease((lt-7.7)/1.0))+'%';
+    pop('g0',lt-0.2); const v0 = 80*ease((lt-0.5)/1.2); $('g0f').style.width=(v0/180*100)+'%'; $('g0v').textContent=Math.round(v0);
+    pop('g1',lt-2.8); $('g1f').style.width=(38/120*100*ease((lt-5.6)/0.8))+'%';
+    pop('g2',lt-7.1); $('g2f').style.width=(19/60*100*ease((lt-7.6)/0.6))+'%';
   }
   if(cur==='s5'){
-    pop('t5',lt-0.05); pop('c1',lt-0.5); pop('c2',lt-1.1); pop('c3',lt-1.8);
-    const st=$('stamp'); const sp=cl((lt-2.6)/0.18);
-    st.style.opacity = lt<2.6?0:1; st.style.transform=`rotate(-8deg) scale(${2.2-1.2*sp})`;
-    pop('c4',lt-4.0);
+    pop('t5',lt-0.0); pop('c1',lt-0.25); pop('c2',lt-0.6); pop('c3',lt-1.0);
+    const st=$('stamp'); const sp=cl((lt-1.75)/0.18);
+    st.style.opacity = lt<1.75?0:1; st.style.transform=`rotate(-8deg) scale(${2.2-1.2*sp})`;
+    pop('c4',lt-3.4);
   }
   if(cur==='s6'){
     pop('t6',lt-0.1);
-    [['k1',0.6],['k2',3.0],['k3',5.5],['k4',8.0]].forEach(([k,d])=>{ pop(k,lt-d); const svg=$(k).querySelector('svg'); svg.id=svg.id||k+'p'; draw(svg.id,lt-d-0.4,0.35); });
+    [['k1',0.15],['k2',2.9],['k3',5.25],['k4',6.6]].forEach(([k,d])=>{ pop(k,lt-d); const svg=$(k).querySelector('svg'); svg.id=svg.id||k+'p'; draw(svg.id,lt-d-0.4,0.35); });
   }
   if(cur==='s7'){
-    pop('e1',lt-0.1,0.35,60); $('e2').dataset.rot='-2deg'; pop('e2',lt-0.8); pop('e3',lt-1.4); pop('e4',lt-2.2);
-    document.querySelectorAll('#e3 .opt').forEach((o,i)=>{ const p=back((lt-1.5-i*0.15)/0.35); o.style.transform=`scale(${lt<1.5+i*0.15?0:p})`; });
+    pop('e1',lt-0.1,0.35,60); $('e2').dataset.rot='-2deg'; pop('e2',lt-1.9); pop('e3',lt-2.9); pop('e4',lt-3.5);
+    document.querySelectorAll('#e3 .opt').forEach((o,i)=>{ const p=back((lt-3.0-i*0.5)/0.3); o.style.transform=`scale(${lt<3.0+i*0.5?0:p})`; });
   }
 }
 window.render = render;

@@ -2,7 +2,7 @@
 """Original soft lo-fi bed + paper/pen sound effects for the N5 passing-strategy reel."""
 import numpy as np, wave, os
 SR = 44100
-TOTAL = 55.0
+TOTAL = 47.4
 N = int(TOTAL * SR); rng = np.random.default_rng(3)
 
 def env(n, a=0.005, d=0.2):
@@ -65,35 +65,36 @@ def rise(d=1.0):
     return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(t / .05, 1) * np.exp(-((t - d) ** 2) / .02) * .0 + \
            np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.linspace(0, np.pi, n)) * .5
 
+# scene starts, matched to the voiceover (take A)
+T = dict(s2=5.01, s3=9.07, s4=16.65, s5=25.33, s6=31.31, s7=39.89)
 # hook
 add(sfx, 0.12, thud(), .55)
-for k in range(16): add(sfx, 0.2 + k * 0.055, tick(), .35)       # 80 counting up
-add(sfx, 0.9, pop(), .4)
-add(sfx, 2.35, pen(.45), .55)                                      # underline
+for k in range(15): add(sfx, 0.2 + k * 0.053, tick(), .35)       # 80 counting up
+add(sfx, 3.85, pen(.45), .55)                                      # underline "There's a catch"
 # date (page turn into paper)
-add(sfx, 4.15, page_turn(), .8)
-for d in (4.85, 5.0): add(sfx, d, pop(), .35)
-add(sfx, 5.7, pen(.55), .6)                                        # circle the 6
-add(sfx, 6.8, pen(.5), .4)                                         # "30 days" note
+add(sfx, T["s2"] - 0.3, page_turn(), .8)
+for d in (0.85, 1.0): add(sfx, T["s2"] + d, pop(), .35)
+add(sfx, T["s2"] + 1.4, pen(.55), .6)                              # circle the 6
+add(sfx, T["s2"] + 2.2, pen(.5), .4)                               # "30 days" note
 # sections
-for d in (9.9, 12.6, 15.3): add(sfx, d, swoosh(.35, 3000), .35)
-add(sfx, 17.6, pen(.5), .4)
+for d in (2.1, 4.1, 5.95): add(sfx, T["s3"] + d, swoosh(.35, 3000), .35)
+add(sfx, T["s3"] + 6.8, pen(.5), .4)
 # scoring
-add(sfx, 19.45, page_turn(), .5)
-for d in (20.5, 23.9, 27.2): add(sfx, d, rise(1.1), .18)
+add(sfx, T["s4"] - 0.05, page_turn(), .5)
+for d, ln in ((0.5, 1.2), (5.6, 0.8), (7.6, 0.6)): add(sfx, T["s4"] + d, rise(ln), .18)
 # the catch
-add(sfx, 30.95, page_turn(), .5)
-for d in (31.5, 32.1, 32.8): add(sfx, d, pop(), .3)
-add(sfx, 33.6, thud(), 1.0)                                        # FAIL stamp
+add(sfx, T["s5"] - 0.05, page_turn(), .5)
+for d in (0.25, 0.6, 1.0): add(sfx, T["s5"] + d, pop(), .3)
+add(sfx, T["s5"] + 1.75, thud(), 1.0)                              # FAIL stamp
 # strategy
-add(sfx, 38.95, page_turn(), .5)
-for d in (39.6, 42.0, 44.5, 47.0): add(sfx, d, pop(), .3); add(sfx, d + .4, pen(.3), .55)
+add(sfx, T["s6"] - 0.05, page_turn(), .5)
+for d in (0.15, 2.9, 5.25, 6.6): add(sfx, T["s6"] + d, pop(), .3); add(sfx, T["s6"] + d + .4, pen(.3), .55)
 # CTA
-add(sfx, 49.95, page_turn(), .5)
-for i, d in enumerate((51.5, 51.65, 51.8)): add(sfx, d, pop(), .35)
+add(sfx, T["s7"] - 0.05, page_turn(), .5)
+for d in (3.0, 3.5, 4.0): add(sfx, T["s7"] + d, pop(), .35)
 
 t_all = np.arange(N) / SR
-mix = music * 0.35 + sfx
+mix = music * 0.22 + sfx * 0.8  # bed sits under the voiceover
 mix *= np.minimum(1, t_all / .05) * np.minimum(1, (TOTAL - t_all) / 1.2)
 mix /= np.max(np.abs(mix)) * 1.15
 st = np.stack([mix, mix], 1)
