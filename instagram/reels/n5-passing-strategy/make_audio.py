@@ -2,7 +2,7 @@
 """Original soft lo-fi bed + paper/pen sound effects for the N5 passing-strategy reel."""
 import numpy as np, wave, os
 SR = 44100
-TOTAL = 47.4
+TOTAL = 67.3
 N = int(TOTAL * SR); rng = np.random.default_rng(3)
 
 def env(n, a=0.005, d=0.2):
@@ -65,33 +65,46 @@ def rise(d=1.0):
     return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(t / .05, 1) * np.exp(-((t - d) ** 2) / .02) * .0 + \
            np.sin(2 * np.pi * np.cumsum(f) / SR) * np.sin(np.linspace(0, np.pi, n)) * .5
 
-# scene starts, matched to the voiceover (take A)
-T = dict(s2=5.01, s3=9.07, s4=16.65, s5=25.33, s6=31.31, s7=39.89)
+# scene starts for the 67s version (reel2.html)
+T = dict(s2=8.55, s3=12.75, sQ=20.15, s4=29.25, s5=38.10, s6=51.65, s7=60.20)
+def ding():
+    n = int(1.0 * SR); t = np.arange(n) / SR
+    return (np.sin(2*np.pi*1318.5*t) + .6*np.sin(2*np.pi*1975.5*t)) * env(n, .002, .35)
 # hook
 add(sfx, 0.12, thud(), .55)
-for k in range(15): add(sfx, 0.2 + k * 0.053, tick(), .35)       # 80 counting up
-add(sfx, 3.85, pen(.45), .55)                                      # underline "There's a catch"
-# date (page turn into paper)
+for k in range(15): add(sfx, 0.2 + k * 0.053, tick(), .35)
+add(sfx, 3.85, pen(.45), .55)
+add(sfx, 5.0, swoosh(.4, 3000), .4); add(sfx, 5.2, pop(), .35)       # banner
+# date
 add(sfx, T["s2"] - 0.3, page_turn(), .8)
 for d in (0.85, 1.0): add(sfx, T["s2"] + d, pop(), .35)
-add(sfx, T["s2"] + 1.4, pen(.55), .6)                              # circle the 6
-add(sfx, T["s2"] + 2.2, pen(.5), .4)                               # "30 days" note
-# sections
-for d in (2.1, 4.1, 5.95): add(sfx, T["s3"] + d, swoosh(.35, 3000), .35)
-add(sfx, T["s3"] + 6.8, pen(.5), .4)
+add(sfx, T["s2"] + 1.4, pen(.55), .6)
+add(sfx, T["s2"] + 2.2, pen(.5), .4)
+# sections + paper pages
+for d in (2.1, 4.1, 5.95): add(sfx, T["s3"] + d, swoosh(.35, 3000), .35); add(sfx, T["s3"] + d + .1, page_turn(), .25)
+add(sfx, T["s3"] + 6.6, pen(.5), .4)
+# quiz
+add(sfx, T["sQ"] - 0.05, page_turn(), .5)
+add(sfx, T["sQ"] + 1.9, pop(), .3)
+for k in range(3): add(sfx, T["sQ"] + 3.7 + k, tick(), 1.2)        # 3-2-1
+add(sfx, T["sQ"] + 7.45, ding(), .45); add(sfx, T["sQ"] + 7.5, pen(.45), .5)
 # scoring
 add(sfx, T["s4"] - 0.05, page_turn(), .5)
 for d, ln in ((0.5, 1.2), (5.6, 0.8), (7.6, 0.6)): add(sfx, T["s4"] + d, rise(ln), .18)
-# the catch
+# catch + stat
 add(sfx, T["s5"] - 0.05, page_turn(), .5)
 for d in (0.25, 0.6, 1.0): add(sfx, T["s5"] + d, pop(), .3)
-add(sfx, T["s5"] + 1.75, thud(), 1.0)                              # FAIL stamp
+add(sfx, T["s5"] + 1.75, thud(), 1.0)
+add(sfx, T["s5"] + 6.0, swoosh(.5, 2000), .45)
+for k in range(22): add(sfx, T["s5"] + 7.7 + k * 0.063, tick(), .3)  # counter
+add(sfx, T["s5"] + 12.4, thud(), .45)
 # strategy
 add(sfx, T["s6"] - 0.05, page_turn(), .5)
 for d in (0.15, 2.9, 5.25, 6.6): add(sfx, T["s6"] + d, pop(), .3); add(sfx, T["s6"] + d + .4, pen(.3), .55)
 # CTA
 add(sfx, T["s7"] - 0.05, page_turn(), .5)
-for d in (3.0, 3.5, 4.0): add(sfx, T["s7"] + d, pop(), .35)
+for d in (0.5, 0.7, 0.9): add(sfx, T["s7"] + d, page_turn(), .2)
+add(sfx, T["s7"] + 2.5, pop(), .45); add(sfx, T["s7"] + 2.6, ding(), .3)
 
 t_all = np.arange(N) / SR
 mix = music * 0.22 + sfx * 0.8  # bed sits under the voiceover

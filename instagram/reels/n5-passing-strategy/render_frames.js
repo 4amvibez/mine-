@@ -10,7 +10,7 @@ const fs = require('fs');
   fs.mkdirSync(out, { recursive: true });
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
-  await page.goto('file://' + path.join(dir, 'reel.html'));
+  await page.goto('file://' + path.join(dir, process.env.PAGE || 'reel.html'));
   await page.evaluate(() => document.fonts.ready);
   const total = await page.evaluate(() => window.TOTAL);
   const times = stills ? process.argv.slice(3).map(Number) : [...Array(Math.round(total * FPS)).keys()].map(i => i / FPS);
