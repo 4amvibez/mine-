@@ -16,6 +16,9 @@ RADIUS = 22
 
 # slide: (file, start, end, crop "w:h:x:y" of the useful picture area or None)
 CLIPS = {
+    1: ("16023131-My-Hero-Academia-SnapYT.App_1.mp4", 257.9, 260.8, None),  # MHA S1E7, Bakugo
+    2: ("727edf46-video_20261107_173228.mp4", 83.3, 86.0, None),            # Aggretsuko S1E1, Director Ton
+    11: ("727edf46-video_20261107_173228.mp4", 101.9, 105.8, None),         # Aggretsuko S1E1, Retsuko
     3: ("119fae12-video_20261107_153958.mp4", 0.0, 2.6, "810:1080:640:0"),               # Kenshiro
     4: ("97db2996-video_20261107_155232.mp4", 0.0, 1.50, "810:1080:1000:0"),              # Bakugo
     5: ("b873e0d3-Very-rude-way-SnapYT.App.mp4", 2.15, 4.10, "202:206:0:78"),  # Pain, 貴様

@@ -13,6 +13,9 @@ HANDLE = "@raj_in_jp"
 VIDEO = os.environ.get("VIDEO") == "1"
 # spoken line shown under each video clip
 CLIPCAP = {
+    1: "「俺を舐めてたか、てめぇは！」",
+    2: "「茶を入れろ！」",
+    11: "✓「どうぞ。失礼します」",
     3: "「お前はもう死んでいる」",
     4: "「てめぇには関係ねぇ！」",
     5: "「貴様…」",
@@ -93,6 +96,12 @@ ruby{ruby-align:center}
 """
 
 
+def vbox(n, style):
+    fs = min(30, int(400 / len(CLIPCAP[n])))
+    return (f'<div class="vbox" id="vbox{n}" style="{style}">'
+            f'<div class="vcap" id="vcap{n}" style="font-size:{fs}px">{CLIPCAP[n]}</div></div>')
+
+
 def frame(n, inner, swipe=True, extra=""):
     sw = '<span class="swipe">SWIPE →</span>' if swipe else '<span></span>'
     return f"""<section class="slide" id="s{n}">{extra}<div class="dots"></div>
@@ -144,10 +153,10 @@ slides.append(f"""<section class="slide" id="s1">
 <div class="top"><div class="handle"><b>@</b>raj_in_jp</div><div class="pg">1/{TOTAL}</div></div>
 <div style="position:absolute;top:165px;left:120px;right:120px;z-index:3">
   <div class="tag" style="font-size:36px">ANIME vs REAL LIFE</div>
-  <div style="font-family:Dela;font-size:104px;line-height:1.04;margin-top:30px">ANIME<br>JAPANESE<br>THAT GETS<br>YOU</div>
-  <div style="display:inline-block;font-family:Dela;font-size:176px;line-height:1;color:#fff;background:var(--pink);padding:6px 34px 18px;margin-top:18px;transform:rotate(-4deg);box-shadow:12px 12px 0 var(--ink)">FIRED</div>
+  <div style="font-family:Dela;font-size:{92 if VIDEO else 104}px;line-height:1.04;margin-top:30px">ANIME<br>JAPANESE<br>THAT GETS<br>YOU</div>
+  <div style="display:inline-block;font-family:Dela;font-size:{150 if VIDEO else 176}px;line-height:1;color:#fff;background:var(--pink);padding:6px 34px 18px;margin-top:18px;transform:rotate(-4deg);box-shadow:12px 12px 0 var(--ink)">FIRED</div>
 </div>
-{cover_img}
+{vbox(1, "right:46px;left:auto;top:auto;bottom:112px;width:470px;height:352px;z-index:2") if VIDEO else cover_img}
 <div style="position:absolute;left:120px;bottom:170px;z-index:3;font-weight:900;font-size:42px;line-height:1.4">Fine on screen.<br><span style="background:var(--yellow);padding:0 10px">Rude in real life.</span></div>
 <div class="bottom"><span></span><span class="swipe">SWIPE →</span></div><div class="bar"></div></section>""")
 
@@ -165,7 +174,7 @@ stake_visual = (f'<img src="{st}" style="width:100%;height:560px;object-fit:cove
 slides.append(frame(2, f"""<div class="c">
 <div style="font-family:Dela;font-size:78px;line-height:1.15;margin-top:30px">Anime taught you<br>Japanese.</div>
 <div style="font-family:Dela;font-size:78px;line-height:1.15;margin-top:24px">It also taught you<br>to <span style="color:var(--pink)">insult your<br>boss.</span></div>
-{stake_visual}
+{vbox(2, "position:relative;right:auto;top:auto;width:100%;height:520px;margin-top:auto") if VIDEO else stake_visual}
 </div>"""))
 
 # 3-8 words
@@ -231,8 +240,9 @@ slides.append(frame(10, f"""<div class="c">
 slides.append(f"""<section class="slide" id="s11" style="background:var(--pink);color:#fff">
 <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.18) 3px,transparent 3.5px);background-size:28px 28px"></div>
 <div class="top"><div class="handle" style="color:#fff">@raj_in_jp</div><div class="pg" style="background:#fff;color:var(--pink)">{TOTAL}/{TOTAL}</div></div>
-<div style="position:absolute;top:230px;left:96px;right:96px;z-index:3;text-align:center">
-  {('<img src="'+img("s11.png")+'" style="height:300px;border-radius:28px;border:6px solid #141414;box-shadow:10px 10px 0 #141414">') if img("s11.png") else '<div style="font-size:170px;line-height:1">📩</div>'}
+<div style="position:absolute;top:{150 if VIDEO else 230}px;left:96px;right:96px;z-index:3;text-align:center">
+  {vbox(11, "position:relative;display:inline-block;right:auto;top:auto;width:560px;height:350px;box-shadow:10px 10px 0 #141414;border-color:#fff") if VIDEO else ""}
+  {"" if VIDEO else (('<img src="'+img("s11.png")+'" style="height:300px;border-radius:28px;border:6px solid #141414;box-shadow:10px 10px 0 #141414">') if img("s11.png") else '<div style="font-size:170px;line-height:1">📩</div>')}
   <div style="font-family:Dela;font-size:92px;line-height:1.12;margin-top:40px">Send this to<br>your anime<br>friend</div>
   <div style="font-weight:900;font-size:46px;margin-top:34px">before they visit Japan.</div>
   <div style="display:inline-block;margin-top:70px;background:#fff;color:var(--ink);border-radius:999px;padding:24px 46px;font-family:Archivo;font-size:40px;box-shadow:10px 10px 0 var(--ink)">More real Japanese → <span style="color:var(--pink)">@raj_in_jp</span></div>
@@ -252,6 +262,10 @@ FURI = [
     ("酔いな", "<ruby>酔<rt>よ</rt></ruby>いな"),
     ("ボク様", "ボク<ruby>様<rt>さま</rt></ruby>"),
     ("聞け", "<ruby>聞<rt>き</rt></ruby>け"),
+    ("俺を", "<ruby>俺<rt>おれ</rt></ruby>を"),
+    ("舐めて", "<ruby>舐<rt>な</rt></ruby>めて"),
+    ("茶を入れろ", "<ruby>茶<rt>ちゃ</rt></ruby>を<ruby>入<rt>い</rt></ruby>れろ"),
+    ("失礼", "<ruby>失<rt>しつ</rt>礼<rt>れい</rt></ruby>"),
     ("関係", "<ruby>関<rt>かん</rt>係<rt>けい</rt></ruby>"),
     ("無益", "<ruby>無<rt>む</rt>益<rt>えき</rt></ruby>"),
     ("私", "<ruby>私<rt>わたし</rt></ruby>"),
