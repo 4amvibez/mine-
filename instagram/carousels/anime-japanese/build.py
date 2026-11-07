@@ -16,6 +16,7 @@ CLIPCAP = {
     1: "「俺を舐めてたか、てめぇは！」",
     2: "「茶を入れろ！」",
     11: "✓「どうぞ。失礼します」",
+    10: "Anya: 「へっ」",
     3: "「お前はもう死んでいる」",
     4: "「てめぇには関係ねぇ！」",
     5: "「貴様…」",
@@ -224,13 +225,15 @@ q = img("s10.png")
 q_html = f'<img src="{q}" style="width:100%;height:210px;object-fit:cover;border-radius:24px;border:6px solid #141414;margin-top:22px">' if q else ""
 opts = [("A", "おい、お前！"), ("B", "田中さん、すみません！"), ("C", "貴様、聞け！")]
 opts_html = "".join(
-    f'<div style="display:flex;align-items:center;gap:26px;margin-top:{22 if q else 30}px;background:#fff;border:5px solid #141414;border-radius:24px;padding:{12 if q else 22}px 28px;box-shadow:8px 8px 0 #141414">'
+    f'<div style="display:flex;align-items:center;gap:26px;margin-top:{22 if (q or VIDEO) else 30}px;background:#fff;border:5px solid #141414;border-radius:24px;padding:{14 if (q or VIDEO) else 22}px 28px;box-shadow:8px 8px 0 #141414">'
     f'<div style="flex:none;width:84px;height:84px;border-radius:50%;background:var(--pink);color:#fff;font-family:Archivo;font-size:48px;display:flex;align-items:center;justify-content:center">{k}</div>'
     f'<div style="font-weight:900;font-size:48px;line-height:1.5">{t}</div></div>' for k, t in opts)
-slides.append(frame(10, f"""<div class="c">
+QHEAD = "You need your<br>boss's attention.<br>What do you say?" if VIDEO else "You need your boss's<br>attention. What do<br>you say?"
+QBOX = vbox(10, "right:-20px;top:-6px;width:330px;height:400px") if VIDEO else ""
+slides.append(frame(10, f"""<div class="c">{QBOX}
 <div class="tag" style="background:var(--yellow);color:var(--ink)">QUIZ TIME 🧠</div>
-<div style="font-family:Dela;font-size:62px;line-height:1.15;margin-top:30px">You need your boss's<br>attention. What do<br>you say?</div>
-<div style="font-weight:900;font-size:38px;margin-top:18px">Your boss: <span style="background:var(--yellow);padding:0 10px">田中さん</span></div>
+<div style="font-family:Dela;font-size:{56 if VIDEO else 62}px;line-height:1.15;margin-top:30px">{QHEAD}</div>
+<div style="font-weight:900;font-size:38px;margin-top:18px;margin-bottom:{36 if VIDEO else 0}px">Your boss: <span style="background:var(--yellow);padding:0 10px">田中さん</span></div>
 {q_html}
 {opts_html}
 <div style="margin-top:auto;font-family:Dela;font-size:46px;color:var(--pink)">Comment A, B or C 👇</div>
