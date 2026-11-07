@@ -45,23 +45,27 @@ rt{font-family:NotoJP,sans-serif;font-weight:700;font-size:.42em;color:var(--pin
 ruby{ruby-align:center}
 .bubble rt{font-size:.24em}
 /* content slide */
+.heard{margin-top:22px;display:flex;align-items:center;gap:18px;font-weight:700;font-size:32px;line-height:1.35}
+.heard span{flex:none;font-family:Archivo,'Noto Color Emoji';font-size:26px;background:var(--ink);color:#fff;border-radius:10px;padding:8px 14px}
+.heard b{font-weight:900}
+
 .pic{position:absolute;right:-30px;top:10px;width:290px;height:380px;object-fit:cover;border-radius:28px;border:6px solid var(--ink);box-shadow:10px 10px 0 var(--pink);transform:rotate(3deg);z-index:1}
 
 .c{position:absolute;top:150px;left:72px;right:72px;bottom:130px;display:flex;flex-direction:column}
 .tag{display:inline-block;align-self:flex-start;font-family:Dela;font-size:34px;background:var(--pink);color:#fff;padding:10px 24px;border-radius:12px;transform:rotate(-2deg)}
-.wordrow{display:flex;align-items:center;gap:36px;margin-top:34px}
-.word{font-family:Brush;font-size:300px;line-height:1;position:relative}
-.word.long{font-size:210px}
-.x{z-index:3;position:absolute;right:-80px;bottom:10px;width:110px;height:110px;border-radius:50%;background:var(--pink);color:#fff;font-family:Archivo;font-size:70px;
+.wordrow{display:flex;align-items:center;gap:36px;margin-top:16px}
+.word{font-family:Brush;font-size:240px;line-height:1;position:relative}
+.word.long{font-size:180px}
+.x{z-index:3;position:absolute;right:-80px;bottom:10px;width:96px;height:96px;border-radius:50%;background:var(--pink);color:#fff;font-family:Archivo;font-size:70px;
   display:flex;align-items:center;justify-content:center;transform:rotate(12deg);box-shadow:6px 6px 0 var(--ink)}
 .romaji{font-family:Dela;font-size:52px;margin-top:8px}
 .mean{font-family:NotoJP;font-weight:900;font-size:44px;margin-top:6px}
 .mean span{background:var(--yellow);padding:0 10px}
-.desc{font-weight:700;font-size:42px;line-height:1.45;margin-top:34px}
-.meter{display:flex;align-items:center;gap:18px;margin-top:30px;font-family:Archivo;font-size:30px}
+.desc{font-weight:700;font-size:40px;line-height:1.4;margin-top:22px}
+.meter{display:flex;align-items:center;gap:18px;margin-top:22px;font-family:Archivo;font-size:30px}
 .meter i{display:inline-block;width:62px;height:30px;border-radius:8px;border:4px solid var(--ink);background:#fff}
 .meter i.on{background:var(--pink)}
-.say{margin-top:auto;background:var(--green2);border:5px solid var(--green);border-radius:28px;padding:30px 36px;display:flex;align-items:center;gap:28px;box-shadow:10px 10px 0 var(--ink)}
+.say{margin-top:auto;background:var(--green2);border:5px solid var(--green);border-radius:28px;padding:22px 36px;display:flex;align-items:center;gap:28px;box-shadow:10px 10px 0 var(--ink)}
 .say .ok{flex:none;width:92px;height:92px;border-radius:50%;background:var(--green);color:#fff;font-family:Archivo;font-size:58px;display:flex;align-items:center;justify-content:center}
 .say small{display:block;font-family:Archivo;font-size:28px;color:var(--green);letter-spacing:1px}
 .say b{font-family:NotoJP;font-weight:900;font-size:60px}
@@ -84,11 +88,12 @@ def meter(label, n):
     return f'<div class="meter">{label} {cells}</div>'
 
 
-def word_slide(n, word, romaji, meaning, desc, mlabel, mval, say=None, say_note="", never=None, long=False):
+def word_slide(n, word, romaji, meaning, desc, mlabel, mval, say=None, say_note="", never=None, long=False, heard=None):
     if say:
         bottom = f'<div class="say"><div class="ok">✓</div><div><small>SAY THIS INSTEAD</small><b>{say}</b><em>{say_note}</em></div></div>'
     else:
         bottom = f'<div class="no">{never[0]}<small>{never[1]}</small></div>'
+    heard_html = (f'<div class="heard"><span>🎬 HEARD IN</span>{heard}</div>' if heard else "")
     pic = img(f"s{n:02d}.png")
     pic_html = f'<img class="pic" src="{pic}">' if pic else ""
     inner = f"""<div class="c">{pic_html}
@@ -98,6 +103,7 @@ def word_slide(n, word, romaji, meaning, desc, mlabel, mval, say=None, say_note=
 <div class="mean"><span>{meaning}</span></div>
 <div class="desc">{desc}</div>
 {meter(mlabel, mval)}
+{heard_html}
 {bottom}
 </div>"""
     return frame(n, inner)
@@ -143,22 +149,28 @@ slides.append(frame(2, f"""<div class="c">
 # 3-8 words
 slides.append(word_slide(3, "お前", "omae", '= "you"',
     "Every anime rival says it. Between close friends it's fine. To anyone above you, it's rude.",
-    "RUDENESS", 3, say="名前 + さん", say_note="their name + san"))
+    "RUDENESS", 3, say="名前 + さん", say_note="their name + san",
+    heard="<div><b>Fist of the North Star</b>, Kenshiro<br>「お前はもう死んでいる」</div>"))
 slides.append(word_slide(4, "てめえ", "temee", '= a rougher "you"',
     "This is how anime characters talk right before a fight. In real life, these are fighting words too.",
-    "RUDENESS", 5, never=("Just don't. ✕", "No polite version. Use their name + さん."), long=True))
+    "RUDENESS", 5, never=("Just don't. ✕", "No polite version. Use their name + さん."), long=True,
+    heard="<div><b>My Hero Academia</b>, Bakugo<br>to almost everyone</div>"))
 slides.append(word_slide(5, "貴様", "kisama", '= "you"',
     "Centuries ago it was respectful. Today it sounds like pure hate. Villains love it.",
-    "RUDENESS", 5, say="名前 + さん", say_note="their name + san"))
+    "RUDENESS", 5, say="名前 + さん", say_note="their name + san",
+    heard="<div><b>Dragon Ball Z</b>, Vegeta<br>usually yelling at Goku</div>"))
 slides.append(word_slide(6, "俺様", "oresama", '= "I, the great one"',
     "Pure anime ego. Say it at work and you're the joke of the office.",
-    "RUDENESS", 4, say="私", say_note="watashi"))
+    "RUDENESS", 4, say="私", say_note="watashi",
+    heard="<div><b>Prince of Tennis</b>, Atobe<br>「俺様の美技に酔いな」</div>"))
 slides.append(word_slide(7, "だぜ", "daze", "= tough-guy ending",
     "Sounds cool in a shounen fight. At a shop counter it sounds like you're doing a bad impression.",
-    "CRINGE", 4, say="です", say_note="desu"))
+    "CRINGE", 4, say="です", say_note="desu",
+    heard="<div><b>JoJo's Bizarre Adventure</b>, Jotaro<br>「やれやれだぜ」</div>"))
 slides.append(word_slide(8, "拙者", "sessha · <span class='jp' style='font-weight:700'>でござる</span>", "= samurai speech",
     "Straight out of a samurai anime. Use it in real life and people will laugh, kindly but loudly.",
-    "CRINGE", 5, say="私 · です", say_note="watashi · desu"))
+    "CRINGE", 5, say="私 · です", say_note="watashi · desu",
+    heard="<div><b>Rurouni Kenshin</b>, Kenshin<br>in every single episode</div>"))
 
 # 9 RECAP
 rows = [("お前・てめえ・貴様", "名前 + さん"), ("俺様・拙者", "私"), ("だぜ・でござる", "です")]
@@ -212,6 +224,9 @@ FURI = [
     ("俺様", "<ruby>俺<rt>おれ</rt>様<rt>さま</rt></ruby>"),
     ("拙者", "<ruby>拙<rt>せっ</rt>者<rt>しゃ</rt></ruby>"),
     ("田中", "<ruby>田<rt>た</rt>中<rt>なか</rt></ruby>"),
+    ("死んで", "<ruby>死<rt>し</rt></ruby>んで"),
+    ("美技", "<ruby>美<rt>び</rt>技<rt>ぎ</rt></ruby>"),
+    ("酔いな", "<ruby>酔<rt>よ</rt></ruby>いな"),
     ("私", "<ruby>私<rt>わたし</rt></ruby>"),
 ]
 body = "".join(slides)
