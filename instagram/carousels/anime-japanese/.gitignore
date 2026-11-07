@@ -1,2 +1,8 @@
 fonts/
 out/
+out_video/
+layers/
+clips/
+seg/
+final-local/
+slides_video.html

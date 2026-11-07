@@ -10,6 +10,16 @@ import os, html
 HERE = os.path.dirname(os.path.abspath(__file__))
 IMG = os.path.join(HERE, "images")
 HANDLE = "@raj_in_jp"
+VIDEO = os.environ.get("VIDEO") == "1"
+# spoken line shown under each video clip
+CLIPCAP = {
+    3: "「お前はもう死んでいる」",
+    4: "「てめぇには関係ねぇ！」",
+    5: "「貴様…」",
+    6: "「ボク様をレベルアップさせろ！」",
+    7: "「やれやれだぜ」",
+    8: "「拙者、無益な…」",
+}
 TOTAL = 11
 
 
@@ -45,6 +55,14 @@ rt{font-family:NotoJP,sans-serif;font-weight:700;font-size:.42em;color:var(--pin
 ruby{ruby-align:center}
 .bubble rt{font-size:.24em}
 /* content slide */
+.vbox{position:absolute;right:-20px;top:0;width:372px;height:492px;border:6px solid var(--ink);border-radius:28px;background:#000;box-shadow:10px 10px 0 var(--pink);z-index:1;overflow:hidden}
+.vcap{white-space:nowrap;position:absolute;left:0;right:0;bottom:0;background:#141414;color:#fff;font-family:NotoJP,sans-serif;font-weight:900;font-size:30px;line-height:1.5;padding:8px 12px 10px;text-align:center}
+.vcap rt{color:#FFD23F}
+.vid .word{font-size:215px}
+.vid .word.long{font-size:158px}
+.vid .head{min-height:510px}
+.head{display:flex;flex-direction:column}
+
 .heard{margin-top:22px;display:flex;align-items:center;gap:18px;font-weight:700;font-size:32px;line-height:1.35}
 .heard span{flex:none;font-family:Archivo,'Noto Color Emoji';font-size:26px;background:var(--ink);color:#fff;border-radius:10px;padding:8px 14px}
 .heard b{font-weight:900}
@@ -96,11 +114,15 @@ def word_slide(n, word, romaji, meaning, desc, mlabel, mval, say=None, say_note=
     heard_html = (f'<div class="heard"><span>🎬 HEARD IN</span>{heard}</div>' if heard else "")
     pic = img(f"s{n:02d}.png")
     pic_html = f'<img class="pic" src="{pic}">' if pic else ""
-    inner = f"""<div class="c">{pic_html}
-<div class="tag">ANIME ONLY ✕</div>
+    if VIDEO and n in CLIPCAP:
+        fs = min(28, int(336 / len(CLIPCAP[n])))
+        pic_html = f'<div class="vbox" id="vbox{n}"><div class="vcap" id="vcap{n}" style="font-size:{fs}px">{CLIPCAP[n]}</div></div>'
+    vid_cls = " vid" if VIDEO and n in CLIPCAP else ""
+    inner = f"""<div class="c{vid_cls}">{pic_html}
+<div class="head"><div class="tag">ANIME ONLY ✕</div>
 <div class="wordrow"><div class="word{' long' if long else ''}">{word}<div class="x">✕</div></div></div>
 <div class="romaji">{romaji}</div>
-<div class="mean"><span>{meaning}</span></div>
+<div class="mean"><span>{meaning}</span></div></div>
 <div class="desc">{desc}</div>
 {meter(mlabel, mval)}
 {heard_html}
@@ -227,6 +249,9 @@ FURI = [
     ("死んで", "<ruby>死<rt>し</rt></ruby>んで"),
     ("美技", "<ruby>美<rt>び</rt>技<rt>ぎ</rt></ruby>"),
     ("酔いな", "<ruby>酔<rt>よ</rt></ruby>いな"),
+    ("ボク様", "ボク<ruby>様<rt>さま</rt></ruby>"),
+    ("関係", "<ruby>関<rt>かん</rt>係<rt>けい</rt></ruby>"),
+    ("無益", "<ruby>無<rt>む</rt>益<rt>えき</rt></ruby>"),
     ("私", "<ruby>私<rt>わたし</rt></ruby>"),
 ]
 body = "".join(slides)
@@ -234,6 +259,6 @@ for k, v in FURI:
     body = body.replace(k, v)
 slides = [body]
 
-with open(os.path.join(HERE, "slides.html"), "w") as f:
+with open(os.path.join(HERE, "slides_video.html" if VIDEO else "slides.html"), "w") as f:
     f.write(f"<!doctype html><html><head><meta charset='utf-8'><style>{CSS}</style></head><body>{''.join(slides)}</body></html>")
 print("wrote slides.html", len(slides), "slides")
