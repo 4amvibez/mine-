@@ -1,0 +1,47 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Archivo;src:url(fonts/ArchivoBlack.ttf)}
+@font-face{font-family:Caveat;src:url(fonts/Caveat.ttf)}
+@font-face{font-family:Kure;src:url(fonts/ZenKurenaido.ttf)}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-900.ttf);font-weight:900}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-700.ttf);font-weight:700}
+:root{--paper:#F3EEE4;--ink:#1B1A18;--red:#D3262E}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1920px;overflow:hidden;font-family:NotoJP,'Noto Color Emoji',sans-serif}
+.c{position:relative;width:1080px;height:1920px;overflow:hidden}
+/* A: dark photo */
+#A{background:#111}
+#A .bg{position:absolute;inset:0;background:url(img/desk.jpg) 30% center/cover;filter:brightness(.35) saturate(.7) blur(2px);transform:scale(1.05)}
+#A .vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 48%,rgba(0,0,0,0) 0%,rgba(0,0,0,.6) 80%)}
+/* B: paper */
+#B{background:var(--paper)}
+#B .rules{position:absolute;inset:0;background-image:repeating-linear-gradient(to bottom,transparent 0 95px,#D9D1C3 95px 97px);opacity:.55}
+#B .margin{position:absolute;top:0;bottom:0;left:120px;width:3px;background:rgba(211,38,46,.35)}
+.stamp{position:absolute;border:12px solid var(--red);border-radius:24px;color:var(--red);display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-9deg)}
+</style></head><body>
+
+<!-- Option A: "1 in 2 FAIL" -->
+<div class="c" id="A">
+ <div class="bg"></div><div class="vig"></div>
+ <div style="position:absolute;top:330px;left:0;right:0;text-align:center;color:#fff;font-weight:900;font-size:62px;letter-spacing:2px">JLPT N5 · DEC 2025</div>
+ <div style="position:absolute;top:420px;left:0;right:0;text-align:center;font-family:Archivo;font-size:330px;line-height:1;color:#FF4A4F;letter-spacing:-8px">1 in 2</div>
+ <div style="position:absolute;top:770px;left:0;right:0;text-align:center;font-family:Archivo;font-size:190px;line-height:1;color:#fff">FAILED</div>
+ <div class="stamp" style="top:1000px;left:300px;width:480px;height:210px;background:rgba(255,255,255,.92)"><div style="font-family:Kure;font-size:100px;line-height:1">不合格</div></div>
+ <div style="position:absolute;top:1300px;left:110px;right:110px;text-align:center;color:#fff;font-weight:900;font-size:58px;line-height:1.2">Don't be one of them.</div>
+ <div style="position:absolute;top:1420px;left:150px;right:150px;background:#FFD23F;color:var(--ink);border-radius:20px;padding:18px 20px;text-align:center;font-weight:900;font-size:44px">+ FREE N5 mock test 🎧</div>
+</div>
+
+<!-- Option B: "Only 80/180" paper style -->
+<div class="c" id="B">
+ <div class="rules"></div><div class="margin"></div>
+ <div style="position:absolute;top:330px;left:150px;font-weight:900;font-size:64px;color:var(--ink)">JLPT N5</div>
+ <div style="position:absolute;top:420px;left:140px;font-family:Archivo;font-size:300px;line-height:.95;color:var(--red);letter-spacing:-8px">80<span style="font-size:150px;color:var(--ink)">/180</span></div>
+ <div style="position:absolute;top:720px;left:150px;font-weight:900;font-size:96px;line-height:1.05;color:var(--ink)">to pass…</div>
+ <div style="position:absolute;top:860px;left:150px;font-family:Caveat;font-size:150px;color:var(--red);transform:rotate(-3deg)">but 1 in 2 fail.</div>
+ <svg style="position:absolute;top:1040px;left:140px" width="760" height="60"><path d="M10 30 C 200 10, 420 48, 740 18" fill="none" stroke="#D3262E" stroke-width="10" stroke-linecap="round"/></svg>
+ <div class="stamp" style="top:1130px;left:560px;width:380px;height:190px"><div style="font-family:Kure;font-size:84px;line-height:1">不合格</div><div style="font-family:Archivo;font-size:44px;letter-spacing:6px">FAIL</div></div>
+ <div style="position:absolute;top:1150px;left:150px;font-weight:900;font-size:50px;line-height:1.3;color:var(--ink)">3 traps<br>+ how to pass</div>
+ <div style="position:absolute;top:1420px;left:150px;right:150px;background:var(--ink);color:#fff;border-radius:20px;padding:18px 20px;text-align:center;font-weight:900;font-size:44px">+ FREE N5 mock test 🎧</div>
+</div>
+</body></html>
