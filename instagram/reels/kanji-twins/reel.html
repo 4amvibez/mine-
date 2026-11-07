@@ -84,9 +84,9 @@ const ROUNDS = [
  {k:[["待","まつ","wait","彳 = going",[18,50,36,96]],["持","もつ","hold","扌 = hand",[18,50,36,96]]]},
  {k:[["大","だい","big","no dot",null],["犬","いぬ","dog","dot top right",[78,20,30,24]],["太","ふと(い)","thick","dot at the bottom",[48,80,30,24]]], boss:true},
 ];
-const HOOK = 2.0, RD = 4.2, BOSS = 5.0, END = 2.6;
-const T_IN = 0.3, CD = 2.4;           // countdown length
-const BOSS_CD = 2.4;
+const HOOK = 2.0, RD = 5.0, BOSS = 6.0, END = 2.6;
+const T_IN = 0.3, CD = 3.0;           // countdown length
+const BOSS_CD = 3.0;
 function starts(){let t=HOOK, s=[]; ROUNDS.forEach(r=>{s.push(t); t+= r.boss?BOSS:RD}); return {s, end:t, total:t+END};}
 const TL = starts();
 window.TOTAL = TL.total;

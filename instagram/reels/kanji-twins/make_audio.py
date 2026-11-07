@@ -4,7 +4,7 @@ and whooshes for the kanji twins reel. Writes audio.wav (44.1 kHz stereo)."""
 import numpy as np, wave, os
 
 SR = 44100
-HOOK, RD, BOSS, END = 2.0, 4.2, 5.0, 2.6
+HOOK, RD, BOSS, END = 2.0, 5.0, 6.0, 2.6
 ROUND_STARTS = [HOOK + i * RD for i in range(4)] + [HOOK + 4 * RD]
 END_T = ROUND_STARTS[-1] + BOSS
 TOTAL = END_T + END
@@ -86,14 +86,14 @@ add(sfx, 0.0, boom(), 0.9)
 for d in (0, .15, .3, .6, .9): add(sfx, d, pop(), 0.35)
 for i, s in enumerate(ROUND_STARTS):
     add(sfx, s, whoosh(), 0.35)
-    for k in range(3): add(sfx, s + 0.3 + k * 0.8, tick(), 0.55)
-    add(sfx, s + 0.3 + 2.4, ding(), 0.5)
+    for k in range(3): add(sfx, s + 0.3 + k * 1.0, tick(), 0.55)
+    add(sfx, s + 0.3 + 3.0, ding(), 0.5)
 add(sfx, END_T, whoosh(), 0.35)
 for d in (0, .1, .3, .6, .9): add(sfx, END_T + d, pop(), 0.3)
 add(sfx, END_T + 0.3, ding(), 0.4)
 
 # duck music slightly under the ticks/dings, fade the ends
-mix = music * 0.8 + sfx
+mix = music * 0.28 + sfx  # music well under the ticks and dings
 mix *= np.minimum(1, t_all / 0.05) * np.minimum(1, (TOTAL - t_all) / 0.6)
 mix /= np.max(np.abs(mix)) * 1.12
 stereo = np.stack([mix, mix], axis=1)
