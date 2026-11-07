@@ -63,6 +63,7 @@ svg.pen path,svg.pen ellipse,svg.pen line{fill:none;stroke:var(--red);stroke-wid
 .chip{display:flex;justify-content:space-between;align-items:center;border:4px solid var(--ink);border-radius:18px;padding:22px 28px;font-weight:900;font-size:46px;background:#fff;margin-top:22px}
 .bub{width:78px;height:78px;border-radius:50%;border:5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:Archivo;font-size:36px}
 .bub.f{background:var(--ink);color:#fff}
+.ripple{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:6px solid var(--red);opacity:0}
 </style></head>
 <body><div id="stage">
  <div class="layer" id="photoL"><div class="layer" id="photo"></div><div id="photo2"></div></div>
@@ -175,11 +176,18 @@ svg.pen path,svg.pen ellipse,svg.pen line{fill:none;stroke:var(--red);stroke-wid
     <div style="font-weight:900;font-size:56px">Comment <span style="font-family:Archivo;font-size:84px;color:#FF5A60">N5</span> 👇</div>
     <div style="font-weight:700;font-size:36px;margin-top:6px;color:#E9E2D6">I'll send you the mock test + listening</div>
   </div>
-  <div id="e4" style="position:absolute;top:1470px;left:0;right:0;text-align:center;font-weight:900;font-size:40px">Follow <span style="color:var(--red)">@raj_in_jp</span> for N4 & N3 next</div>
+  <div id="e4" style="position:absolute;top:1385px;left:0;right:0;display:flex;justify-content:center;gap:34px">
+   <div id="bsave" style="display:flex;align-items:center;gap:16px;background:#fff;border:4px solid var(--ink);border-radius:999px;padding:16px 34px;font-weight:900;font-size:44px;position:relative">
+     <svg width="44" height="54" viewBox="0 0 44 54"><path id="bmk" d="M4 4 H40 V50 L22 37 L4 50 Z" fill="none" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/></svg><span>Save</span>
+     <div class="ripple" id="rs"></div></div>
+   <div id="bfol" style="display:flex;align-items:center;gap:14px;background:var(--red);color:#fff;border:4px solid var(--red);border-radius:999px;padding:16px 34px;font-weight:900;font-size:44px;position:relative">
+     <span id="ftxt">＋ Follow</span><div class="ripple" id="rf"></div></div>
+  </div>
+  <div id="e5" style="position:absolute;top:1505px;left:0;right:0;text-align:center;font-weight:900;font-size:36px;color:var(--soft)">for more JLPT exam tips</div>
  </div>
 </div>
 <script>
-window.T = {s1:0, s2:8.55, s3:12.75, s4:20.15, sS:29.00, w1:38.65, w2:42.75, w3:45.75, s6:51.15, s7:60.44, end:68.24};
+window.T = {s1:0, s2:8.55, s3:12.75, s4:20.15, sS:29.00, w1:38.65, w2:42.75, w3:45.75, s6:51.15, s7:60.44, end:69.84};
 window.TOTAL = T.end;
 const cl = x => Math.min(Math.max(x,0),1);
 const ease = x => 1-Math.pow(1-cl(x),3);
@@ -251,7 +259,14 @@ function render(t){
     pop('e1',lt-0.1,0.35,60);
     [['cp1',0.5,-7],['cp2',0.7,2],['cp3',0.9,8]].forEach(([id,d,r])=>{const p=ease((lt-d)/0.45); const el=$(id); el.style.opacity=lt<d?0:1; el.style.transform=`translateY(${(1-p)*500}px) rotate(${r*p}deg)`;});
     const ep=back((lt-2.5)/0.35); $('e2').style.opacity=lt<2.5?0:1; $('e2').style.transform=`scale(${lt<2.5?0.5:ep})`;
-    pop('e4',lt-4.9);
+    pop('e4',lt-4.6,0.35,60); pop('e5',lt-7.0);
+    const tapS=lt-5.25, tapF=lt-6.1;
+    [['rs',tapS],['rf',tapF]].forEach(([id,tt])=>{const r=$(id); const p=cl(tt/0.5); r.style.opacity=(tt<0||tt>0.5)?0:(1-p); r.style.transform=`scale(${1+5*p})`;});
+    $('bsave').style.transform=`scale(${tapS>0&&tapS<0.25?0.92:1})`;
+    $('bmk').setAttribute('fill', tapS>=0.1?'var(--red)':'none'); $('bmk').setAttribute('stroke', tapS>=0.1?'var(--red)':'var(--ink)');
+    $('bfol').style.transform=`scale(${tapF>0&&tapF<0.25?0.92:1})`;
+    const fol=tapF>=0.1; $('bfol').style.background=fol?'#fff':'var(--red)'; $('bfol').style.color=fol?'var(--ink)':'#fff'; $('bfol').style.borderColor=fol?'var(--ink)':'var(--red)';
+    $('ftxt').textContent = fol?'Following ✓':'＋ Follow';
   }
 }
 window.render = render;

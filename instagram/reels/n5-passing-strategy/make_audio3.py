@@ -2,7 +2,7 @@
 """Original soft lo-fi bed + paper/pen sound effects for the N5 passing-strategy reel."""
 import numpy as np, wave, os
 SR = 44100
-TOTAL = 68.24
+TOTAL = 69.84
 N = int(TOTAL * SR); rng = np.random.default_rng(3)
 
 def env(n, a=0.005, d=0.2):
@@ -104,6 +104,8 @@ for d in (2.2, 5.0, 7.3): add(sfx, T["s6"] + d, pop(), .3); add(sfx, T["s6"] + d
 add(sfx, T["s7"] + 0.2, chime(), .35)
 for d in (0.5, 0.7, 0.9): add(sfx, T["s7"] + d, page_turn(), .2)
 add(sfx, T["s7"] + 2.5, pop(), .45)
+add(sfx, T["s7"] + 4.6, swoosh(.35, 3000), .3)
+for d in (5.25, 6.1): add(sfx, T["s7"] + d, tick(), 1.0); add(sfx, T["s7"] + d + .05, pop(), .45)
 
 t_all = np.arange(N) / SR
 mix = music * 0.22 + sfx * 0.8  # bed sits under the voiceover
