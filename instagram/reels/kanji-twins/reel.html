@@ -1,0 +1,166 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Dela;src:url(fonts/DelaGothicOne.ttf)}
+@font-face{font-family:Archivo;src:url(fonts/ArchivoBlack.ttf)}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-700.ttf);font-weight:700}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-900.ttf);font-weight:900}
+:root{--bg1:#1B1035;--bg2:#3A0F4F;--pink:#FF2E7E;--yellow:#FFD23F;--cyan:#2EE6D6;--cream:#FFF7EE;--ink:#141414;--green:#22C55E}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg1);font-family:NotoJP,'Noto Color Emoji',sans-serif;color:#fff}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden}
+#bg{position:absolute;inset:0}
+#rays{position:absolute;left:50%;top:46%;width:2600px;height:2600px;margin:-1300px 0 0 -1300px;
+  background:repeating-conic-gradient(rgba(255,255,255,.045) 0deg 7deg,transparent 7deg 18deg)}
+#glow{position:absolute;left:50%;top:46%;width:1400px;height:1400px;margin:-700px 0 0 -700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,46,126,.35),rgba(255,46,126,0) 65%)}
+.float{position:absolute;font-family:NotoJP;font-weight:900;color:rgba(255,255,255,.06)}
+#top{position:absolute;top:250px;left:0;right:0;display:flex;justify-content:center;gap:18px;z-index:5}
+.pill{font-family:Archivo;font-size:34px;padding:12px 28px;border-radius:999px}
+#handle{background:#fff;color:var(--ink)}
+#round{background:var(--pink);color:#fff}
+.scene{position:absolute;inset:0;display:none}
+/* hook */
+#hook .l{position:absolute;left:0;right:0;text-align:center;font-family:Dela;line-height:1.05}
+/* round */
+#q{position:absolute;top:400px;left:0;right:0;text-align:center;font-family:Dela;font-size:58px}
+#q span{color:var(--yellow)}
+#cards{z-index:3;position:absolute;top:520px;left:0;right:0;display:flex;justify-content:center;gap:40px}
+.card{position:relative;width:440px;height:560px;background:var(--cream);border-radius:40px;box-shadow:14px 14px 0 var(--pink);color:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:40px}
+.three .card{width:300px;height:520px;box-shadow:10px 10px 0 var(--pink)}
+.k{position:relative;font-family:NotoJP;font-weight:700;font-size:300px;line-height:1;width:300px;height:300px;text-align:center}
+.three .k{font-size:230px;width:230px;height:230px}
+.ring{position:absolute;border:10px solid var(--pink);border-radius:50%;pointer-events:none}
+.rt{opacity:0;text-align:center;margin-top:26px}
+.rt .yomi{font-size:46px;font-weight:900;color:var(--pink)}
+.three .rt .yomi{font-size:38px}
+.rt .mean{font-family:Dela;font-size:48px;line-height:1.1;margin-top:4px}
+.three .rt .mean{font-size:38px}
+.rt .hint{display:inline-block;margin-top:14px;font-size:30px;font-weight:900;background:var(--yellow);padding:4px 14px;border-radius:10px}
+.three .rt .hint{font-size:24px;padding:3px 10px}
+#timer{position:absolute;top:1170px;left:50%;width:240px;height:240px;margin-left:-120px}
+#timer svg{position:absolute;inset:0}
+#tnum{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Archivo;font-size:120px}
+#check{position:absolute;top:1180px;left:0;right:0;text-align:center;font-family:Dela;font-size:66px;color:var(--yellow)}
+/* end */
+#end .l{position:absolute;left:0;right:0;text-align:center}
+</style></head>
+<body><div id="stage">
+<div id="bg"><div id="rays"></div><div id="glow"></div><div id="floats"></div></div>
+<div id="top"><div class="pill" id="handle">@raj_in_jp</div><div class="pill" id="round">KANJI TWINS</div></div>
+
+<div class="scene" id="hook">
+  <div class="l" id="h1" style="top:570px;font-size:104px">CAN YOU</div>
+  <div class="l" id="h2" style="top:690px;font-size:104px;color:var(--yellow)">SPOT THE</div>
+  <div class="l" id="h3" style="top:810px;font-size:96px;color:var(--pink)">DIFFERENCE?</div>
+  <div class="l" id="h4" style="top:1010px;font-size:220px;font-family:NotoJP;font-weight:700">未<span style="color:var(--yellow)">？</span>末</div>
+  <div class="l" id="h5" style="top:1330px;font-family:NotoJP;font-weight:900;font-size:46px">5 kanji twins · 3 seconds each ⏱️</div>
+</div>
+
+<div class="scene" id="rnd">
+  <div id="q">Spot the <span>difference</span> 👀</div>
+  <div id="cards"></div>
+  <div id="timer"><svg viewBox="0 0 240 240"><circle cx="120" cy="120" r="104" fill="rgba(0,0,0,.35)" stroke="rgba(255,255,255,.18)" stroke-width="16"/>
+    <circle id="arc" cx="120" cy="120" r="104" fill="none" stroke="#FFD23F" stroke-width="16" stroke-linecap="round" transform="rotate(-90 120 120)" stroke-dasharray="653.5" stroke-dashoffset="0"/></svg>
+    <div id="tnum">3</div></div>
+  <div id="check">✓</div>
+</div>
+
+<div class="scene" id="end">
+  <div class="l" id="e1" style="top:560px;font-family:Dela;font-size:96px">How many did</div>
+  <div class="l" id="e2" style="top:670px;font-family:Dela;font-size:96px">you get?</div>
+  <div class="l" id="e3" style="top:850px;font-family:Archivo;font-size:300px;color:var(--yellow)">?/5</div>
+  <div class="l" id="e4" style="top:1220px;font-family:Dela;font-size:62px;color:var(--pink)">Comment your score 👇</div>
+  <div class="l" id="e5" style="top:1340px;font-weight:900;font-size:40px">Follow for daily kanji 🇯🇵</div>
+</div>
+</div>
+<script>
+// Rounds. hl: highlight ellipse on each kanji as [cx%, cy%, w%, h%] of the glyph box, or null.
+const ROUNDS = [
+ {k:[["未","み","not yet","short top line",[50,27,70,16]],["末","まつ","end","long top line",[50,27,92,16]]]},
+ {k:[["土","つち","soil","long bottom line",[50,82,94,16]],["士","し","samurai","long top line",[50,38,94,16]]]},
+ {k:[["人","ひと","person","left stroke on top",[38,22,40,26]],["入","にゅう / はい(る)","enter","right stroke on top",[60,22,40,26]]]},
+ {k:[["待","まつ","wait","彳 = going",[18,50,36,96]],["持","もつ","hold","扌 = hand",[18,50,36,96]]]},
+ {k:[["大","だい","big","no dot",null],["犬","いぬ","dog","dot top right",[78,20,30,24]],["太","ふと(い)","thick","dot at the bottom",[48,80,30,24]]], boss:true},
+];
+const HOOK = 2.0, RD = 4.2, BOSS = 5.0, END = 2.6;
+const T_IN = 0.3, CD = 2.4;           // countdown length
+const BOSS_CD = 2.4;
+function starts(){let t=HOOK, s=[]; ROUNDS.forEach(r=>{s.push(t); t+= r.boss?BOSS:RD}); return {s, end:t, total:t+END};}
+const TL = starts();
+window.TOTAL = TL.total;
+
+const ease = x => 1-Math.pow(1-Math.min(Math.max(x,0),1),3);
+const back = x => {x=Math.min(Math.max(x,0),1); const c=1.70158; return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+
+// floating background kanji
+const FL = "未末土士人入待持大犬太字漢語日本".split("");
+const floats = document.getElementById('floats');
+const fls = FL.map((ch,i)=>{const d=document.createElement('div'); d.className='float'; d.textContent=ch;
+  d.style.fontSize=(120+ (i*37)%160)+'px'; floats.appendChild(d); return {d,x:(i*211)%1000, y:(i*397)%1900, sp:20+(i*13)%40};});
+
+let built = -1;
+function buildRound(i){
+  const r = ROUNDS[i]; const c = document.getElementById('cards');
+  c.className = r.boss ? 'three' : '';
+  c.innerHTML = r.k.map(([k,y,m,h,hl])=>`<div class="card"><div class="k">${k}${hl?`<div class="ring" data-hl="${hl.join(',')}"></div>`:''}</div>
+     <div class="rt"><div class="yomi">${y}</div><div class="mean">${m}</div><div class="hint">${h}</div></div></div>`).join('');
+  c.querySelectorAll('.ring').forEach(el=>{const [cx,cy,w,h]=el.dataset.hl.split(',').map(Number);
+     el.style.left=(cx-w/2)+'%'; el.style.top=(cy-h/2)+'%'; el.style.width=w+'%'; el.style.height=h+'%';});
+  built = i;
+}
+
+function render(t){
+  // background motion
+  document.getElementById('rays').style.transform=`rotate(${t*6}deg)`;
+  const beat = (t*2)%1; // 120 bpm
+  document.getElementById('glow').style.transform=`scale(${1+0.06*Math.exp(-beat*6)})`;
+  fls.forEach(f=>{const y=((f.y - t*f.sp)%2100+2100)%2100-150; f.d.style.transform=`translate(${f.x}px,${y}px)`;});
+  const show = id => ['hook','rnd','end'].forEach(s=>document.getElementById(s).style.display = s===id?'block':'none');
+  const rp = document.getElementById('round');
+  if (t < HOOK){
+    show('hook'); rp.textContent='KANJI TWINS';
+    [['h1',0],['h2',0.15],['h3',0.3],['h4',0.6],['h5',0.9]].forEach(([id,d])=>{
+      const p=back((t-d)/0.35); const el=document.getElementById(id);
+      el.style.opacity = t<d?0:1; el.style.transform=`scale(${0.4+0.6*p})`;});
+    return;
+  }
+  if (t >= TL.end){
+    show('end'); rp.textContent='YOUR SCORE?';
+    const lt=t-TL.end;
+    [['e1',0],['e2',0.1],['e3',0.3],['e4',0.6],['e5',0.9]].forEach(([id,d])=>{
+      const p=back((lt-d)/0.35); const el=document.getElementById(id);
+      el.style.opacity = lt<d?0:1; el.style.transform=`scale(${0.4+0.6*p})`;});
+    return;
+  }
+  show('rnd');
+  let i = TL.s.length-1; while (TL.s[i] > t) i--;
+  if (built!==i) buildRound(i);
+  const r = ROUNDS[i], lt = t - TL.s[i], dur = r.boss?BOSS:RD, cd = r.boss?BOSS_CD:CD;
+  rp.textContent = r.boss ? 'BOSS ROUND 🔥' : `ROUND ${i+1}/5`;
+  rp.style.background = r.boss ? 'var(--yellow)' : 'var(--pink)'; rp.style.color = r.boss ? 'var(--ink)' : '#fff';
+  const q = document.getElementById('q'); q.innerHTML = r.boss ? 'Boss round: <span>3 twins</span> 😈' : 'Spot the <span>difference</span> 👀';
+  // cards slide in
+  document.querySelectorAll('.card').forEach((c,j)=>{const p=ease((lt-j*0.06)/T_IN);
+     c.style.transform=`translateY(${(1-p)*900}px) rotate(${(1-p)*(j%2?8:-8)}deg)`;});
+  const revealT = T_IN + cd;
+  const rv = lt >= revealT;
+  const rpgr = ease((lt-revealT)/0.3);
+  document.querySelectorAll('.rt').forEach(e=>{e.style.opacity = rv?rpgr:0; e.style.transform=`translateY(${(1-rpgr)*30}px)`;});
+  document.querySelectorAll('.ring').forEach(e=>{const pulse = 1+0.08*Math.sin((lt-revealT)*10);
+     e.style.opacity = rv?1:0; e.style.transform=`scale(${rv?(0.3+0.7*back((lt-revealT)/0.3))*pulse:0})`;});
+  // timer
+  const tm=document.getElementById('timer'), ck=document.getElementById('check');
+  const left = Math.max(0, revealT - Math.max(lt,T_IN));
+  tm.style.display = rv?'none':'block'; ck.style.display = rv?'block':'none';
+  ck.style.transform=`scale(${back((lt-revealT)/0.3)})`; ck.textContent = r.boss ? 'Got all 3? 😈' : 'Did you get it? 😏';
+  document.getElementById('tnum').textContent = Math.max(1, Math.ceil(left / (cd/3)));
+  document.getElementById('arc').setAttribute('stroke-dashoffset', 653.5*(1-left/cd));
+  document.getElementById('arc').setAttribute('stroke', left < cd/3 ? '#FF2E7E' : '#FFD23F');
+  const tickP = ((cd - left) % (cd/3)) / (cd/3);
+  document.getElementById('tnum').style.transform = `scale(${1 + 0.25*Math.exp(-tickP*8)})`;
+}
+window.render = render;
+</script>
+</body></html>
