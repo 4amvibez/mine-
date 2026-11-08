@@ -105,8 +105,8 @@ svg.pen path,svg.pen ellipse,svg.pen line{fill:none;stroke:var(--red);stroke-wid
   <div class="row" id="r1" style="top:640px"><div class="n">1</div><div class="t"><b>Vocabulary</b><span>4 question types</span></div><div class="m"><span id="m1">0</span><small>min</small></div></div>
   <div class="row" id="r2" style="top:820px"><div class="n">2</div><div class="t"><b>Grammar + Reading</b><span>6 question types</span></div><div class="m"><span id="m2">0</span><small>min</small></div></div>
   <div class="row" id="r3" style="top:1000px"><div class="n">3</div><div class="t"><b>Listening</b><span>4 question types</span></div><div class="m"><span id="m3">0</span><small>min</small></div></div>
-  <div id="kwbox" style="position:absolute;top:1190px;left:130px;width:820px;height:430px;border-radius:24px;overflow:hidden;border:6px solid var(--ink);box-shadow:0 18px 40px rgba(0,0,0,.25)"><img id="kwv" src="img/kw/0001.jpg" style="width:100%;height:100%;display:block"><div style="position:absolute;left:16px;bottom:14px;background:rgba(0,0,0,.65);color:#fff;font-weight:900;font-size:28px;padding:6px 14px;border-radius:10px">✍️ my kanji practice</div></div>
-  
+  <div class="pages" style="top:1200px"><img class="pg" id="pg1" src="img/paper2-02_s.png" style="left:150px"><img class="pg" id="pg2" src="img/paper6-06_s.png" style="left:415px"><img class="pg" id="pg3" src="img/paper18-18_s.png" style="left:680px"></div>
+  <div style="position:absolute;top:1600px;left:160px;font-size:24px;color:var(--soft);font-weight:700">Official N5 sample questions · jlpt.jp</div>
   <div id="n3" class="hand" style="position:absolute;top:1100px;left:160px;font-size:56px;white-space:nowrap;transform:rotate(-2deg)">4 options each (some listening: 3)</div>
  </div>
 
@@ -203,7 +203,7 @@ svg.pen path,svg.pen ellipse,svg.pen line{fill:none;stroke:var(--red);stroke-wid
  </div>
 </div>
 <script>
-window.T = {s1:0, s2:999, sC:999, s3:12.30, s4:19.70, sS:28.55, w1:38.20, w2:52.80, w3:55.80, s6:61.20, s7:70.49, end:79.89};
+window.T = {s1:0, s2:999, s3:12.30, s4:19.70, sS:28.55, w1:38.20, w2:52.80, w3:55.80, s6:61.20, s7:70.49, end:79.89};
 window.TOTAL = T.end;
 const cl = x => Math.min(Math.max(x,0),1);
 const ease = x => 1-Math.pow(1-cl(x),3);
@@ -212,7 +212,7 @@ const $ = id => document.getElementById(id);
 function pop(id, t, d=0.35, dy=40){ const el=$(id); const p=ease(t/d); el.style.opacity = t<0?0:p; el.style.transform = `translateY(${(1-p)*dy}px)` + (el.dataset.rot?` rotate(${el.dataset.rot})`:''); }
 function draw(id, t, d=0.5){ const el=$(id); const p=cl(t/d); el.querySelectorAll('path,ellipse,line').forEach(s=>{s.style.strokeDasharray=1; s.style.strokeDashoffset=1-p;}); el.style.opacity = t<0?0:1; }
 function slideIn(id,t,d=0.4){ const el=$(id); const p=ease(t/d); el.style.opacity=t<0?0:1; el.style.transform=`translateX(${(1-p)*-1100}px)`; }
-function renderSync(t){
+function render(t){
   const sc=['s1','s3','s4','sS','w1','w2','w3','s6','s7']; let cur='s1';
   sc.forEach(s=>{ if(t>=T[s]) cur=s; });
   sc.forEach(s=>$(s).style.display = s===cur?'block':'none');
@@ -245,7 +245,7 @@ function renderSync(t){
     pop('t3',lt-0.1);
     [['r1','m1',20,2.1],['r2','m2',40,4.1],['r3','m3',30,5.95]].forEach(([r,m,v,d])=>{ slideIn(r,lt-d); $(m).textContent=Math.round(v*ease((lt-d-0.2)/0.6)); });
     $('n3').dataset.rot='-2deg'; pop('n3',lt-6.6);
-    {const p=ease((lt-0.3)/0.45); const k=$('kwbox'); k.style.opacity=lt<0.3?0:1; k.style.transform=`translateY(${(1-p)*600}px)`;}
+    [['pg1',2.1,-7],['pg2',4.1,2],['pg3',5.95,8]].forEach(([id,d,r])=>{const p=ease((lt-d)/0.45); const el=$(id); el.style.opacity=lt<d?0:1; el.style.transform=`translateY(${(1-p)*500}px) rotate(${r*p}deg)`;});
   }
   if(cur==='s4'){
     pop('t4',lt-0.1);
@@ -294,7 +294,5 @@ function renderSync(t){
     $('ftxt').textContent = fol?'Following ✓':'＋ Follow';
   }
 }
-window.render = async (t)=>{ renderSync(t);
-  if(t>=T.s3 && t<T.s4){ const i=Math.min(225, Math.floor((t-T.s3)*30)+1); const el=$('kwv'); const src='img/kw/'+String(i).padStart(4,'0')+'.jpg';
-    if(!el.src.endsWith(src)){ el.src=src; try{ await el.decode(); }catch(e){} } } };
+window.render = render;
 </script></body></html>
