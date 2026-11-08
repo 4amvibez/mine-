@@ -149,7 +149,6 @@ svg.pen path,svg.pen ellipse,svg.pen line{fill:none;stroke:var(--red);stroke-wid
    <div class="ln"><span>Vocab · Grammar · Reading <small>(min 38)</small></span><span>60 <i class="ok">✓</i></span></div>
    <div class="ln"><span>Listening <small>(min 19)</small></span><span>25 <i class="ok">✓</i></span></div>
    <div class="ln tot"><span>Total 85</span><span class="tag" id="sAt" style="background:#1F8A4C">PASS</span></div></div>
-  <img id="cert1" src="img/cert.jpg" style="position:absolute;top:1375px;right:110px;width:360px;border-radius:12px;border:8px solid #fff;box-shadow:0 20px 44px rgba(0,0,0,.3)">
  </div>
  <!-- WAY 2 -->
  <div class="scene" id="w2">
@@ -182,7 +181,7 @@ svg.pen path,svg.pen ellipse,svg.pen line{fill:none;stroke:var(--red);stroke-wid
   <div class="check" id="k1" style="top:640px"><div class="box"><svg class="pen" style="left:-6px;top:-24px" width="90" height="90"><path d="M10 50 L35 75 L85 8" pathLength="1"/></svg></div><div class="txt"><b>Don't count answers</b><span>Scores are scaled, not raw</span></div></div>
   <div class="check" id="k2" style="top:850px"><div class="box"><svg class="pen" style="left:-6px;top:-24px" width="90" height="90"><path d="M10 50 L35 75 L85 8" pathLength="1"/></svg></div><div class="txt"><b>Aim ~60% everywhere</b><span>Buffer above every minimum</span></div></div>
   <div class="check" id="k4" style="top:1060px"><div class="box"><svg class="pen" style="left:-6px;top:-24px" width="90" height="90"><path d="M10 50 L35 75 L85 8" pathLength="1"/></svg></div><div class="txt"><b>Listening every day</b><span>Audio plays <em style="font-style:normal;color:var(--red)">once</em>. No replays.</span></div></div>
-  <div id="goal" style="position:absolute;top:1270px;left:160px;right:110px;display:flex;align-items:center;gap:30px"><img src="img/cert.jpg" style="width:330px;border-radius:10px;border:7px solid #fff;box-shadow:0 16px 36px rgba(0,0,0,.25);transform:rotate(-4deg)"><div style="font-weight:900;font-size:50px;line-height:1.15">The goal:<br><span style="font-family:Kure;font-size:84px;color:var(--red)">合格</span><br><span style="font-size:34px;color:var(--soft)">(Passed)</span></div></div>
+  
  </div>
  <!-- 7 CTA -->
  <div class="scene" id="s7">
@@ -212,7 +211,7 @@ const $ = id => document.getElementById(id);
 function pop(id, t, d=0.35, dy=40){ const el=$(id); const p=ease(t/d); el.style.opacity = t<0?0:p; el.style.transform = `translateY(${(1-p)*dy}px)` + (el.dataset.rot?` rotate(${el.dataset.rot})`:''); }
 function draw(id, t, d=0.5){ const el=$(id); const p=cl(t/d); el.querySelectorAll('path,ellipse,line').forEach(s=>{s.style.strokeDasharray=1; s.style.strokeDashoffset=1-p;}); el.style.opacity = t<0?0:1; }
 function slideIn(id,t,d=0.4){ const el=$(id); const p=ease(t/d); el.style.opacity=t<0?0:1; el.style.transform=`translateX(${(1-p)*-1100}px)`; }
-function render(t){
+function renderSync(t){
   const sc=['s1','s3','s4','sS','w1','w2','w3','s6','s7']; let cur='s1';
   sc.forEach(s=>{ if(t>=T[s]) cur=s; });
   sc.forEach(s=>$(s).style.display = s===cur?'block':'none');
@@ -265,7 +264,6 @@ function render(t){
     const fl=lt>=4.7&&lt<4.7+1.2; $('sBl').style.background = fl?'#FFE3E1':'transparent';
     const tb=$('sBt'); const p1=back((lt-7.9)/0.3); tb.style.display='inline-block'; tb.style.transform=`scale(${lt<7.9?0:p1})`;
     pop('sA',lt-8.8,0.35,60);
-    { const c=$('cert1'); const p=back((lt-13.0)/0.4); c.style.opacity=lt<13.0?0:1; c.style.transform=`rotate(${-8+4*cl((lt-13.0)/0.4)}deg) scale(${lt<13.0?0.3:p})`; }
     const ta=$('sAt'); const p2=back((lt-12.85)/0.3); ta.style.display='inline-block'; ta.style.transform=`scale(${lt<12.85?0:p2})`;
   }
   if(cur==='w2'){
@@ -277,7 +275,7 @@ function render(t){
   }
   if(cur==='s6'){
     { const ph=$('s6ph'); const up=ease((lt-2.05)/0.45); ph.style.transform=`translateY(${-up*1920}px) scale(${1.08-0.06*cl(lt/2)})`; ph.style.display = lt>2.6?'none':'block'; pop('s6pt',lt-0.1,0.35,60); }
-    pop('t6',lt-2.2,0.35,50); pop('goal',lt-8.3,0.4,80);
+    pop('t6',lt-2.2,0.35,50);
     [['k1',2.2],['k2',5.0],['k4',7.3]].forEach(([k,d])=>{ pop(k,lt-d); const svg=$(k).querySelector('svg'); svg.id=svg.id||k+'p'; draw(svg.id,lt-d-0.4,0.35); });
   }
   if(cur==='s7'){
@@ -294,5 +292,14 @@ function render(t){
     $('ftxt').textContent = fol?'Following ✓':'＋ Follow';
   }
 }
-window.render = render;
+(function(){
+ const SEG=[[0,12.3,1],[19.7,28.55,1.08],[28.55,38.2,1.08],[38.2,61.2,1.08],[70.49,79.89,1.08]];
+ let acc=0; const NS=SEG.map(([a,b,sp])=>{const n=[acc,a,sp]; acc+=(b-a)/sp; return n;});
+ window.TOTAL=acc; const CTA=NS[4][0];
+ window.render=function(t){
+   let k=NS.length-1; while(k>0 && NS[k][0]>t) k--;
+   const [ns,os,sp]=NS[k]; renderSync((t-ns)*sp+os);
+   const pr=Math.min(Math.max(t/CTA,0),1); $('pfi').style.width=(pr*100)+'%'; $('ppct').textContent=Math.round(pr*100)+'%';
+ };
+})();
 </script></body></html>
