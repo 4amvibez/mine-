@@ -98,6 +98,7 @@ add(sfx, T["w1"] + 0.4, page_turn(), .3)
 add(sfx, T["w1"] + 7.9, thud(), .9)                       # FAIL tag
 add(sfx, T["w1"] + 8.8, page_turn(), .3)
 add(sfx, T["w1"] + 12.85, ding(), .4)                     # PASS tag
+add(sfx, T["w1"] + 13.0, thud(), .7)                      # 合格 stamp
 # way 2, 3
 add(sfx, T["w2"] - 0.05, swoosh(.4, 2600), .5); add(sfx, T["w2"] + .05, pop(), .4); add(sfx, T["w2"] + 1.7, thud(), .9)
 add(sfx, T["w3"] - 0.05, swoosh(.4, 2600), .5); add(sfx, T["w3"] + .05, pop(), .4); add(sfx, T["w3"] + .6, page_turn(), .3)
