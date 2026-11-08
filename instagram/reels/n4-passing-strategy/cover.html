@@ -1,0 +1,34 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Archivo;src:url(fonts/ArchivoBlack.ttf)}
+@font-face{font-family:Caveat;src:url(fonts/Caveat.ttf)}
+@font-face{font-family:Kure;src:url(fonts/ZenKurenaido.ttf)}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-900.ttf);font-weight:900}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-700.ttf);font-weight:700}
+:root{--paper:#F3EEE4;--ink:#1B1A18;--red:#D3262E;--green:#1F8A4C;--soft:#6B655C}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1920px;overflow:hidden;font-family:NotoJP,'Noto Color Emoji',sans-serif;background:var(--paper);position:relative}
+.rules{position:absolute;inset:0;background-image:repeating-linear-gradient(to bottom,transparent 0 95px,#D9D1C3 95px 97px);opacity:.55}
+.margin{position:absolute;top:0;bottom:0;left:120px;width:3px;background:rgba(211,38,46,.35)}
+.card{position:absolute;top:700px;width:440px;height:520px;background:#fff;border:6px solid var(--ink);border-radius:30px;text-align:center;padding-top:34px;box-shadow:0 26px 56px rgba(0,0,0,.18)}
+.card .nm{font-weight:900;font-size:46px}
+.card .sc{font-family:Archivo;font-size:170px;line-height:1.05}
+.card .of{font-weight:700;font-size:38px;color:var(--soft)}
+.st{position:absolute;left:50%;bottom:-60px;width:330px;height:150px;margin-left:-165px;border:11px solid;border-radius:22px;background:rgba(255,255,255,.95);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.st .j{font-family:Kure;font-size:66px;line-height:1}
+.st .e{font-family:Archivo;font-size:36px;letter-spacing:5px}
+</style></head><body>
+<div class="rules"></div><div class="margin"></div>
+<div style="position:absolute;top:270px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:30px">
+  <div style="font-family:Archivo;font-size:120px;line-height:1">JLPT</div>
+  <div style="width:250px;height:250px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Archivo;font-size:130px;box-shadow:0 14px 34px rgba(211,38,46,.35)">N4</div>
+</div>
+<div style="position:absolute;top:545px;left:0;right:0;text-align:center;font-family:Archivo;font-size:100px;line-height:1">SAME <span style="color:var(--red)">85?</span></div>
+<div class="card" style="left:75px;transform:rotate(-3deg)"><div class="nm">on N5</div><div class="sc">85</div><div class="of">/180</div>
+  <div class="st" style="border-color:var(--green);color:var(--green);transform:rotate(-7deg)"><div class="j">合格</div><div class="e">PASSED</div></div></div>
+<div class="card" style="right:75px;transform:rotate(3deg)"><div class="nm">on N4</div><div class="sc">85</div><div class="of">/180</div>
+  <div class="st" style="border-color:var(--red);color:var(--red);transform:rotate(7deg)"><div class="j">不合格</div><div class="e">FAILED</div></div></div>
+<div style="position:absolute;top:1330px;left:0;right:0;text-align:center;font-family:Caveat;font-size:88px;color:var(--red);transform:rotate(-2deg)">N4 needs 90, not 80 😳</div>
+<div style="position:absolute;top:1470px;left:190px;right:190px;background:var(--ink);color:#fff;border-radius:20px;padding:18px;text-align:center;font-weight:900;font-size:42px">+ FREE N4 mock test 🎧</div>
+</body></html>
