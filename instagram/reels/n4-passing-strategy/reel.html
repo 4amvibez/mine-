@@ -144,8 +144,7 @@ svg.pen path,svg.pen ellipse,svg.pen line{fill:none;stroke:var(--red);stroke-wid
   <div id="e1" style="position:absolute;top:430px;left:160px;font-weight:900;font-size:62px;line-height:1.15">Want the full<br>N4 mock test 🎧<br><span style="color:var(--soft);font-size:48px">with listening?</span></div>
   <div class="pages" style="top:760px"><img class="pg" id="cp1" src="img/pg2-02_s.png" style="left:180px"><img class="pg" id="cp2" src="img/pg7-07_s.png" style="left:420px"><img class="pg" id="cp3" src="img/pg19-19_s.png" style="left:660px"></div>
   <div id="e2" style="position:absolute;top:1200px;left:90px;right:90px;background:var(--ink);color:#fff;border-radius:28px;padding:30px 36px;text-align:center;box-shadow:0 16px 34px rgba(0,0,0,.3)">
-    <div style="font-weight:900;font-size:56px">Comment <span style="font-family:Archivo;font-size:84px;color:#FF5A60">N4</span> 👇</div>
-    <div style="font-weight:700;font-size:36px;margin-top:6px;color:#E9E2D6">I'll send you the mock test + listening</div></div>
+    <div style="font-weight:900;font-size:60px">🔗 Link in <span style="color:#FF5A60">bio</span> 👆</div><div style="font-weight:700;font-size:38px;margin-top:6px;color:#E9E2D6">FREE N4 mock test + listening</div></div>
   <div id="e4" style="position:absolute;top:1385px;left:0;right:0;display:flex;justify-content:center;gap:34px">
    <div id="bsave" style="display:flex;align-items:center;gap:16px;background:#fff;border:4px solid var(--ink);border-radius:999px;padding:16px 34px;font-weight:900;font-size:44px;position:relative">
      <svg width="44" height="54" viewBox="0 0 44 54"><path id="bmk" d="M4 4 H40 V50 L22 37 L4 50 Z" fill="none" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/></svg><span>Save</span><div class="ripple" id="rs"></div></div>
@@ -184,9 +183,9 @@ function renderSync(t){
   if(cur==='w3'){ pop('b3',lt,0.3,60); pop('w3r',lt-0.5,0.35,50); pop('w3n',lt-1.8); }
   if(cur==='s7'){ pop('e1',lt-0.1,0.35,60);
     [['cp1',0.5,-7],['cp2',0.7,2],['cp3',0.9,8]].forEach(([id,d,r])=>{const p=ease((lt-d)/0.45); const el=$(id); el.style.opacity=lt<d?0:1; el.style.transform=`translateY(${(1-p)*500}px) rotate(${r*p}deg)`;});
-    const ep=back((lt-2.6)/0.35); $('e2').style.opacity=lt<2.6?0:1; $('e2').style.transform=`scale(${lt<2.6?0.5:ep})`;
-    pop('e4',lt-4.4,0.35,60); pop('e5',lt-6.4);
-    const tS=lt-4.8, tF=lt-5.6;
+    const ep=back((lt-3.6)/0.35); $('e2').style.opacity=lt<3.6?0:1; $('e2').style.transform=`scale(${lt<3.6?0.5:ep})`;
+    pop('e4',lt-4.6,0.35,60); pop('e5',lt-6.6);
+    const tS=lt-5.05, tF=lt-5.9;
     [['rs',tS],['rf',tF]].forEach(([id,tt])=>{const r=$(id); const p=cl(tt/0.5); r.style.opacity=(tt<0||tt>0.5)?0:(1-p); r.style.transform=`scale(${1+5*p})`;});
     $('bmk').setAttribute('fill',tS>=0.1?'var(--red)':'none'); $('bmk').setAttribute('stroke',tS>=0.1?'var(--red)':'var(--ink)');
     const fo=tF>=0.1; $('bfol').style.background=fo?'#fff':'var(--red)'; $('bfol').style.color=fo?'var(--ink)':'#fff'; $('bfol').style.borderColor=fo?'var(--ink)':'var(--red)'; $('ftxt').textContent=fo?'Following ✓':'＋ Follow'; }

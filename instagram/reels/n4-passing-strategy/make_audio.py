@@ -91,8 +91,8 @@ add(sfx, T["w2"] + 5.2, thud(), 1.0)
 add(sfx, T["w3"] + .5, page_turn(), .3)
 add(sfx, T["s7"] + 0.2, chime(), .35)
 for d in (0.5, 0.7, 0.9): add(sfx, T["s7"] + d, page_turn(), .2)
-add(sfx, T["s7"] + 2.6, pop(), .45); add(sfx, T["s7"] + 4.4, swoosh(.35, 3000), .3)
-for d in (4.8, 5.6): add(sfx, T["s7"] + d, tick(), 1.0); add(sfx, T["s7"] + d + .05, pop(), .45)
+add(sfx, T["s7"] + 3.6, pop(), .45); add(sfx, T["s7"] + 4.6, swoosh(.35, 3000), .3)
+for d in (5.05, 5.9): add(sfx, T["s7"] + d, tick(), 1.0); add(sfx, T["s7"] + d + .05, pop(), .45)
 
 t_all = np.arange(N) / SR
 mix = music * 0.0 + sfx * 0.8  # bed sits under the voiceover
