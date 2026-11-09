@@ -2,7 +2,7 @@
 """Original soft lo-fi bed + paper/pen sound effects for the simple は = wa reel."""
 import numpy as np, wave, os
 SR = 44100
-TOTAL = 41.6
+TOTAL = 49.6
 N = int(TOTAL * SR); rng = np.random.default_rng(3)
 
 def env(n, a=0.005, d=0.2):
@@ -55,13 +55,13 @@ def thud():
 def ding():
     n = int(1.0 * SR); t = np.arange(n) / SR
     return (np.sin(2*np.pi*1318.5*t) + .6*np.sin(2*np.pi*1975.5*t)) * env(n, .002, .35)
-T = dict(s2=4.6, s3=10.15, s4=16.1, s5=21.25, s6=30.05, s7=35.4)
+T = dict(s2=4.6, s3=10.15, s4=16.1, s5=21.25, s6=30.05, s7=35.4, s8=39.05, s9=44.85)
 for s in T.values(): add(sfx, s - 0.25, swoosh(.5, 2600), .45)
-for c in (0.15, 0.8, 4.7, 5.6, 5.8, 6.7, 8.1, 10.25, 13.1, 14.45, 16.15, 17.0, 18.8, 23.3, 26.3, 30.1, 30.85, 31.2, 33.65, 35.5, 37.5, 39.2): add(sfx, c, pop(), .3)
+for c in (0.15, 0.8, 4.7, 5.6, 5.8, 6.7, 8.1, 10.25, 13.1, 14.45, 16.15, 17.0, 18.8, 23.3, 26.3, 30.1, 30.85, 31.2, 33.65, 35.5, 37.5, 39.1, 39.6, 41.1, 42.7, 43.6, 45.4, 45.8, 46.3): add(sfx, c, pop(), .3)
 add(sfx, 3.4, thud(), .7); add(sfx, 9.25, ding(), .3); add(sfx, 19.7, pen(.4), .4)
 add(sfx, 21.75, thud(), 1.0); add(sfx, 28.0, thud(), .8); add(sfx, 32.45, ding(), .3)
 add(sfx, 36.55, ding(), .28); add(sfx, 38.65, ding(), .28)
-for d in (39.7, 40.5): add(sfx, d, tick(), 1.0); add(sfx, d + .05, pop(), .45)
+add(sfx, 44.9, ding(), .3); add(sfx, 47.15, tick(), 1.0); add(sfx, 47.2, pop(), .45); add(sfx, 47.3, ding(), .22)
 
 t_all = np.arange(N) / SR
 mix = music * 0.0 + sfx * 0.8  # bed sits under the voiceover
