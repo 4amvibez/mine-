@@ -2,7 +2,7 @@
 """Original soft lo-fi bed + paper/pen sound effects for the simple は = wa reel."""
 import numpy as np, wave, os
 SR = 44100
-TOTAL = 58.8
+TOTAL = 58.65
 N = int(TOTAL * SR); rng = np.random.default_rng(3)
 
 def env(n, a=0.005, d=0.2):
@@ -62,11 +62,12 @@ add(sfx, 21.75, thud(), 1.0); add(sfx, 28.0, thud(), .8); add(sfx, 32.45, ding()
 add(sfx, 40.25, ding(), .28); add(sfx, 42.85, ding(), .28); add(sfx, 49.75, ding(), .3)
 for d in (50.15, 50.7, 51.2): add(sfx, d, tick(), 1.0); add(sfx, d + .05, pop(), .45)
 
-# insert a 0.45s pause after each topic (same as the video), swoosh plays in the pause
-BS=[4.22, 9.8, 15.91, 21.01, 29.82, 35.64, 43.5, 49.44]; G=0.45; parts=[]; prev=0
+# 3 s thinking pause after the quiz question (same as the video)
+BS=[49.44]; G=3.45; parts=[]; prev=0
 for b in BS: i=int(b*SR); parts += [sfx[prev:i], np.zeros(int(G*SR))]; prev=i
 parts.append(sfx[prev:]); sfx=np.concatenate(parts)[:N]
-for k,b in enumerate(BS): add(sfx, b + G*k, swoosh(G, 2600), .45)
+add(sfx, 49.44 + G - 0.45, swoosh(.45, 2600), .45)  # only wipe: quiz -> CTA
+for k in range(3): add(sfx, 49.44 + k, tick(), .8)  # countdown 3-2-1
 t_all = np.arange(N) / SR
 mix = music * 0.0 + sfx * 0.8  # bed sits under the voiceover
 mix *= np.minimum(1, t_all / .05) * np.minimum(1, (TOTAL - t_all) / 1.2)

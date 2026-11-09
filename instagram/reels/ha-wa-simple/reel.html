@@ -86,6 +86,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:
  <div class="row" style="top:640px;gap:22px" id="q2"><span class="tile" style="font-size:110px;height:200px;padding:0 24px;min-width:170px">はは</span><span class="tile" style="font-size:110px;height:200px;padding:0 24px;min-width:170px">は</span><span class="tile" style="font-size:110px;height:200px;padding:0 24px;min-width:170px">げんき</span></div>
  <div class="hd c" id="q3" style="top:960px;font-size:60px">= "My mother is well."</div>
  <div class="hd c o" id="q4" style="top:1110px;font-size:72px;white-space:nowrap">How do you read it?</div>
+ <div id="cd" style="position:absolute;top:1440px;left:470px;width:140px;height:140px;opacity:0"><div id="cdr" style="position:absolute;inset:0;border-radius:50%"></div><div style="position:absolute;inset:12px;border-radius:50%;background:var(--card);border:5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:72px" id="cdn">3</div></div>
  <div class="row" style="top:1300px" id="q5"><span class="bub" style="position:relative;font-size:50px;border-color:var(--acc);background:var(--acc);color:#fff">💬 Comment your answer 👇</span></div>
 </div>
 
@@ -102,9 +103,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:
 <div id="wipe"></div>
 <script>
 // cue times (s) synced to the voiceover word timings
-window.T={s1:0,s2:4.22,s3:9.80,s4:15.91,s5:21.01,s6:29.82,s7:35.64,s8:43.50,s9:49.44,end:58.8}; window.TOTAL=T.end;
+window.T={s1:0,s2:4.6,s3:10.15,s4:16.1,s5:21.25,s6:30.05,s7:35.85,s8:43.9,s9:49.44,end:58.65}; window.TOTAL=T.end;
 // a short pause is inserted after each topic; the wipe plays only in that pause, after the speech is finished
-const GAP=0.45, GB=['s2','s3','s4','s5','s6','s7','s8','s9'];
+const GAPS=[['s9',3.45]], WIPE=0.45; // 3 s thinking time after the quiz question, then the only wipe (quiz -> CTA)
 const cl=x=>Math.min(Math.max(x,0),1);
 const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
 const $=id=>document.getElementById(id);
@@ -114,11 +115,11 @@ function stamp(id,at,t,r){ const el=base(id), p=cl((t-at)/0.16); el.style.opacit
 const sc=['s1','s2','s3','s4','s5','s6','s7','s8','s9'];
 function renderSync(t0){
   let off=0, gp=null;
-  for(const g of GB){ const gs=T[g]+off; if(t0<gs) break; if(t0<gs+GAP){ gp={p:(t0-gs)/GAP,s:g}; break; } off+=GAP; }
-  const t = gp ? T[gp.s] : t0-off;
-  let cur='s1'; const tc = gp&&gp.p<0.5 ? t-0.001 : t; sc.forEach(s=>{if(tc>=T[s]) cur=s;}); sc.forEach(s=>$(s).style.display=s===cur?'block':'none');
+  for(const [g,d] of GAPS){ const gs=T[g]+off; if(t0<gs) break; if(t0<gs+d){ gp={e:t0-gs,d,s:g,p:cl((t0-gs-(d-WIPE))/WIPE)}; break; } off+=d; }
+  const t = gp ? T[gp.s]-0.001 : t0-off;
+  let cur='s1'; const tc = gp&&gp.p>=0.5 ? T[gp.s] : t; sc.forEach(s=>{if(tc>=T[s]) cur=s;}); sc.forEach(s=>$(s).style.display=s===cur?'block':'none');
   // clean wipe between scenes (no shake, no flicker)
-  $('wipe').style.left=(gp? -1300+gp.p*2700 : -1400)+'px';
+  $('wipe').style.left=(gp&&gp.p>0? -1300+gp.p*2700 : -1400)+'px';
   if(cur==='s1'){ pop('a1',0,t); pop('a2',0.15,t,0.4); pop('a3',0.8,t); pop('a4',3.4,t); pop('a5',3.7,t); }
   if(cur==='s2'){ pop('b1',4.7,t); pop('b2',5.6,t); pop('b3',5.8,t); pop('b5',6.7,t); pop('b6',8.1,t); pop('b4',9.25,t,0.28); }
   if(cur==='s3'){ pop('c1',10.25,t); pop('c2',13.1,t); pop('c3',14.45,t); pop('c4',15.2,t); }
@@ -128,7 +129,8 @@ function renderSync(t0){
   if(cur==='s7'){ pop('g0',35.9,t); pop('g1',37.9,t); pop('g3',39.0,t); pop('g2',40.25,t,0.28);
     pop('g4',41.55,t); pop('g6',41.75,t); pop('g5',42.85,t,0.28); }
   if(cur==='s8'){ pop('q1',43.95,t); pop('q2',44.4,t); pop('q3',45.8,t); pop('q4',47.55,t);
-    pop('q5',48.5,t); if(t>48.85){ $('q5').style.transform=`scale(${1+0.035*Math.sin((t-48.85)*5)})`; } }
+    pop('q5',48.5,t); if(t0>48.85){ $('q5').style.transform=`scale(${1+0.035*Math.sin((t0-48.85)*5)})`; }
+    const cd=$('cd'); if(gp&&gp.e<3){ cd.style.opacity=1; $('cdn').textContent=3-Math.floor(gp.e); const fr=gp.e%1; cd.style.transform=`scale(${fr<0.2?0.8+back(fr/0.2)*0.2:1})`; $('cdr').style.background=`conic-gradient(var(--acc) ${(1-gp.e/3)*360}deg, rgba(43,33,24,.12) 0)`; } else cd.style.opacity=0; }
   if(cur==='s9'){ const lp=cl((t-49.75)/0.5); $('lg').style.opacity=t<49.75?0:1; $('lg').style.transform=`scale(${0.6+0.4*back(lp)}) rotate(${(1-lp)*-12}deg)`;
     pop('p3',49.8,t); pop('p1',51.2,t); pop('p2',51.75,t);
     const B=['bl','bs','bfol'].map(id=>{const r=$(id).getBoundingClientRect(); return [r.left+r.width/2-30, r.top+r.height/2-10];});
