@@ -74,9 +74,11 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:
 </div>
 
 <div class="scene" id="s7">
- <div class="hd c" id="g0" style="top:420px">Remember:</div>
- <div class="row" style="top:560px" id="g1"><span class="bub" style="position:relative;font-size:58px">after a word</span><span style="font-size:70px">→</span><span class="tile hl" id="g2" style="font-family:Archivo;font-size:96px;height:170px">wa</span></div>
- <div class="row" style="top:800px" id="g3"><span class="bub" style="position:relative;font-size:58px">inside a word</span><span style="font-size:70px">→</span><span class="tile" id="g4" style="font-family:Archivo;font-size:96px;height:170px;color:var(--acc2);border-color:var(--acc2)">ha</span></div>
+ <div class="hd c" id="g0" style="top:420px;font-size:58px;white-space:nowrap">💡 Quick tip to remember</div>
+ <div class="row" style="top:720px" id="g1"><span class="tile" style="font-size:110px;height:200px">わたし</span><span class="tile hl" style="font-size:110px;height:200px">は<span class="lab" id="g2">wa</span></span></div>
+ <div class="hd c" id="g3" style="top:960px;font-size:46px;white-space:nowrap">は <span class="o">alone, after a word</span> → "wa"</div>
+ <div class="row" style="top:1170px" id="g4"><span class="tile" style="font-size:110px;height:200px"><span class="g" style="position:relative">は<span class="lab" id="g5" style="color:var(--acc2);top:-150px">ha</span></span>な</span></div>
+ <div class="hd c" id="g6" style="top:1410px;font-size:46px;white-space:nowrap">は <span class="g">part of a word</span> → "ha"</div>
 </div>
 
 <div class="scene" id="s8">
@@ -88,16 +90,19 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:
 </div>
 
 <div class="scene" id="s9">
- <div style="position:absolute;top:400px;left:0;right:0;display:flex;justify-content:center"><div id="lg" style="width:500px;height:500px;border-radius:50%;overflow:hidden;border:8px solid var(--ink);box-shadow:16px 16px 0 var(--ink);background:#fff"><img src="logo.png" style="width:100%;height:100%;transform:scale(1.03)"></div></div>
- <div class="hd c" id="p1" style="top:960px;font-size:70px">@raj_in_jp</div>
- <div class="hd c" id="p2" style="top:1060px;font-size:52px">Japanese mysteries,<br><span class="o">one step at a time <span class="jp">一歩</span></span></div>
- <div class="row" style="top:1280px" id="p3"><div class="btn" id="bfol" style="background:var(--acc);color:#fff;font-size:58px;padding:22px 60px"><span id="ftxt">＋ Follow</span><div class="ripple" id="rf"></div></div></div>
- <div id="fing" style="position:absolute;font-size:110px;left:640px;top:1500px;opacity:0">👆</div>
+ <div style="position:absolute;top:380px;left:0;right:0;display:flex;justify-content:center"><div id="lg" style="width:420px;height:420px;border-radius:50%;overflow:hidden;border:8px solid var(--ink);box-shadow:14px 14px 0 var(--ink);background:#fff"><img src="logo.png" style="width:100%;height:100%;transform:scale(1.03)"></div></div>
+ <div class="hd c" id="p1" style="top:850px;font-size:66px">@raj_in_jp</div>
+ <div class="hd c" id="p2" style="top:950px;font-size:50px">Japanese mysteries,<br><span class="o">one step at a time <span class="jp">一歩</span></span></div>
+ <div class="row" style="top:1180px;gap:22px" id="p3">
+  <div class="btn" id="bl" style="font-size:40px;padding:16px 24px"><span id="lt">♡ Like</span><div class="ripple" id="rl"></div></div>
+  <div class="btn" id="bs" style="font-size:40px;padding:16px 24px"><span id="st">↗ Share</span><div class="ripple" id="rsh"></div></div>
+  <div class="btn" id="bfol" style="background:var(--acc);color:#fff;font-size:40px;padding:16px 24px"><span id="ftxt">＋ Follow</span><div class="ripple" id="rf"></div></div></div>
+ <div id="fing" style="position:absolute;font-size:100px;left:0;top:0;opacity:0">👆</div>
 </div>
 <div id="wipe"></div>
 <script>
 // cue times (s) synced to the voiceover word timings
-window.T={s1:0,s2:4.6,s3:10.15,s4:16.1,s5:21.25,s6:30.05,s7:35.4,s8:39.05,s9:44.85,end:49.6}; window.TOTAL=T.end;
+window.T={s1:0,s2:4.6,s3:10.15,s4:16.1,s5:21.25,s6:30.05,s7:35.85,s8:43.9,s9:49.75,end:55.2}; window.TOTAL=T.end;
 const cl=x=>Math.min(Math.max(x,0),1);
 const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
 const $=id=>document.getElementById(id);
@@ -106,25 +111,32 @@ function pop(id,at,t,d=0.32){ const el=base(id), lt=t-at; el.style.opacity=lt<0?
 function stamp(id,at,t,r){ const el=base(id), p=cl((t-at)/0.16); el.style.opacity=t<at?0:1; el.style.transform=`rotate(${r}deg) scale(${2-p})`; }
 const sc=['s1','s2','s3','s4','s5','s6','s7','s8','s9'];
 function renderSync(t){
-  let cur='s1'; sc.forEach(s=>{if(t>=T[s]) cur=s;}); sc.forEach(s=>$(s).style.display=s===cur?'block':'none');
+  let cur='s1'; sc.forEach(s=>{if(t+0.25>=T[s]) cur=s;}); sc.forEach(s=>$(s).style.display=s===cur?'block':'none');
   // clean wipe between scenes (no shake, no flicker)
   const w=$('wipe'); let wx=-1400;
-  sc.slice(1).forEach(s=>{ const lt=t-T[s]; if(lt>-0.25&&lt<0.25){ wx=-1300+((lt+0.25)/0.5)*2700; } }); w.style.left=wx+'px';
+  sc.slice(1).forEach(s=>{ const lt=t-T[s]; if(lt>-0.5&&lt<0){ wx=-1300+((lt+0.5)/0.5)*2700; } }); w.style.left=wx+'px';
   if(cur==='s1'){ pop('a1',0,t); pop('a2',0.15,t,0.4); pop('a3',0.8,t); pop('a4',3.4,t); pop('a5',3.7,t); }
   if(cur==='s2'){ pop('b1',4.7,t); pop('b2',5.6,t); pop('b3',5.8,t); pop('b5',6.7,t); pop('b6',8.1,t); pop('b4',9.25,t,0.28); }
   if(cur==='s3'){ pop('c1',10.25,t); pop('c2',13.1,t); pop('c3',14.45,t); pop('c4',15.2,t); }
   if(cur==='s4'){ pop('d1',16.15,t); pop('d2',17.0,t); pop('d3',18.8,t); pop('d4',19.7,t); }
   if(cur==='s5'){ stamp('e1',21.75,t,-6); pop('e2',23.3,t); pop('e3',26.3,t); stamp('e4',28.0,t,-4); pop('e5',28.95,t); }
   if(cur==='s6'){ pop('f1',30.1,t); pop('f2',30.85,t); pop('f4',31.2,t); const h=t>=32.45; $('f3').classList.toggle('hl',h); pop('f5',33.65,t); }
-  if(cur==='s7'){ pop('g0',35.45,t); pop('g1',35.5,t); pop('g2',36.55,t,0.28); pop('g3',37.5,t); pop('g4',38.65,t,0.28); }
-  if(cur==='s8'){ pop('q1',39.1,t); pop('q2',39.6,t); pop('q3',41.1,t); pop('q4',42.7,t);
-    pop('q5',43.6,t); if(t>43.95){ const el=$('q5'); el.style.transform=`scale(${1+0.035*Math.sin((t-43.95)*5)})`; } }
-  if(cur==='s9'){ const lp=cl((t-44.9)/0.5); $('lg').style.opacity=t<44.9?0:1; $('lg').style.transform=`scale(${0.6+0.4*back(lp)}) rotate(${(1-lp)*-12}deg)`;
-    pop('p1',45.4,t); pop('p2',45.8,t); pop('p3',46.3,t);
-    const f=$('fing'), fp=cl((t-46.5)/0.6); f.style.opacity=t<46.5?0:(t>48.2?1-cl((t-48.2)/0.3):1);
-    f.style.transform=`translate(${-60*fp}px,${-130*fp}px) scale(${t>47.1&&t<47.3?0.85:1})`;
-    const tF=t-47.15, r=$('rf'), p=cl(tF/0.5); r.style.opacity=(tF<0||tF>0.5)?0:(1-p); r.style.transform=`scale(${1+6*p})`;
-    const fo=tF>=0.05, b=$('bfol'); b.style.background=fo?'var(--card)':'var(--acc)'; b.style.color=fo?'var(--ink)':'#fff'; $('ftxt').textContent=fo?'Following ✓':'＋ Follow'; }
+  if(cur==='s7'){ pop('g0',35.9,t); pop('g1',37.9,t); pop('g3',39.0,t); pop('g2',40.25,t,0.28);
+    pop('g4',41.55,t); pop('g6',41.75,t); pop('g5',42.85,t,0.28); }
+  if(cur==='s8'){ pop('q1',43.95,t); pop('q2',44.4,t); pop('q3',45.8,t); pop('q4',47.55,t);
+    pop('q5',48.5,t); if(t>48.85){ $('q5').style.transform=`scale(${1+0.035*Math.sin((t-48.85)*5)})`; } }
+  if(cur==='s9'){ const lp=cl((t-49.75)/0.5); $('lg').style.opacity=t<49.75?0:1; $('lg').style.transform=`scale(${0.6+0.4*back(lp)}) rotate(${(1-lp)*-12}deg)`;
+    pop('p3',49.8,t); pop('p1',51.2,t); pop('p2',51.75,t);
+    const B=['bl','bs','bfol'].map(id=>{const r=$(id).getBoundingClientRect(); return [r.left+r.width/2-30, r.top+r.height/2-10];});
+    const taps=[50.15,50.7,51.2]; let fx=B[0][0], fy=B[0][1]+120;
+    if(t>=49.9){ const k=(t<taps[0])?0:(t<taps[1]?1:2); const prev=k?B[k-1]:[B[0][0],B[0][1]+120], st=k?taps[k-1]+0.1:49.9, en=taps[k]-0.03, p=cl((t-st)/Math.max(en-st,0.01)), e=1-Math.pow(1-p,3);
+      fx=prev[0]+(B[k][0]-prev[0])*e; fy=prev[1]+(B[k][1]-prev[1])*e; }
+    const f=$('fing'); f.style.opacity=t<49.9?0:(t>52.6?1-cl((t-52.6)/0.3):1); const press=taps.some(x=>t>x&&t<x+0.15);
+    f.style.left=fx+'px'; f.style.top=fy+'px'; f.style.transform=`scale(${press?0.85:1})`;
+    [['rl',taps[0]],['rsh',taps[1]],['rf',taps[2]]].forEach(([id,x])=>{const tt=t-x, r=$(id), p=cl(tt/0.5); r.style.opacity=(tt<0||tt>0.5)?0:(1-p); r.style.transform=`scale(${1+6*p})`;});
+    const L=t>=taps[0]+0.05; $('lt').textContent=L?'❤️ Liked':'♡ Like'; $('bl').style.color=L?'var(--acc)':'';
+    const S=t>=taps[1]+0.05; $('st').textContent=S?'✓ Shared':'↗ Share'; $('bs').style.color=S?'var(--acc2)':'';
+    const fo=t>=taps[2]+0.05, b=$('bfol'); b.style.background=fo?'var(--card)':'var(--acc)'; b.style.color=fo?'var(--ink)':'#fff'; $('ftxt').textContent=fo?'Following ✓':'＋ Follow'; }
 }
 window.render=renderSync;
 </script></body></html>
