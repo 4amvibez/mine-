@@ -1,0 +1,180 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Archivo;src:url(fonts/ArchivoBlack.ttf)}
+@font-face{font-family:Brush;src:url(fonts/YujiSyuku.ttf)}
+@font-face{font-family:Kure;src:url(fonts/ZenKurenaido.ttf)}
+@font-face{font-family:Caveat;src:url(fonts/Caveat.ttf)}
+@font-face{font-family:Mincho;src:url(fonts/ShipporiMinchoB1.ttf)}
+@font-face{font-family:Corm;src:url(fonts/CormorantGaramond.ttf)}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-900.ttf);font-weight:900}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-700.ttf);font-weight:700}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+body.A{--bg:#EFE6D2;--ink:#141414;--acc:#B3241D;--acc2:#2E5E4E;--muted:#6A5D4A;--card:rgba(255,250,240,.75);--fJ:Brush;--fH:Mincho;--fHand:Brush}
+body.B{--bg:#F1E3C2;--ink:#2B2118;--acc:#D9572B;--acc2:#1F6F78;--muted:#6E5B44;--card:#FFF6E0;--fJ:NotoJP;--fH:Archivo;--fHand:Archivo}
+body.C{--bg:#0E0C0A;--ink:#F3E2BF;--acc:#E6A23C;--acc2:#7FC4B6;--muted:#9C8455;--card:rgba(255,235,200,.06);--fJ:Mincho;--fH:Corm;--fHand:Corm}
+body.D{--bg:#F3EEE4;--ink:#1B1A18;--acc:#D3262E;--acc2:#1F8A4C;--muted:#6B655C;--card:#fff;--fJ:NotoJP;--fH:NotoJP;--fHand:Caveat}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;color:var(--ink)}
+.bgl{position:absolute;inset:0;display:none}
+body.A #bgA,body.B #bgB,body.C #bgC,body.D #bgD{display:block}
+.grain{position:absolute;inset:0;mix-blend-mode:multiply;opacity:.45;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .40  0 0 0 0 .32  0 0 0 .6 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
+.top{position:absolute;top:250px;left:110px;right:110px;display:flex;justify-content:space-between;font-family:var(--fH);font-weight:900;font-size:32px;z-index:20}
+.top .t{color:var(--acc)}
+body.C .top{font-size:36px;letter-spacing:3px}
+.scene{position:absolute;inset:0;display:none}
+.big{position:absolute;left:0;right:0;text-align:center;font-family:var(--fJ);line-height:1}
+.hd{position:absolute;left:110px;right:110px;font-family:var(--fH);font-weight:900;font-size:62px;line-height:1.15}
+body.C .hd{font-size:74px;font-weight:600}
+.bub{position:absolute;padding:14px 40px;border-radius:999px;font-family:var(--fH);font-weight:900;font-size:96px;line-height:1.1;background:var(--card);border:6px solid var(--ink)}
+body.A .bub{border:none;background:none;font-family:Brush;font-size:130px;padding:0}
+body.B .bub{border-radius:0;box-shadow:12px 12px 0 var(--ink)}
+body.C .bub{border:2px solid var(--acc);color:var(--acc);font-weight:600;font-size:110px;text-shadow:0 0 30px rgba(230,162,60,.6)}
+.hand{position:absolute;font-family:var(--fHand);color:var(--acc)}
+body.D .hand{font-size:84px}
+.tl{position:absolute;left:110px;right:110px;top:1200px;height:8px;background:var(--ink);border-radius:4px}
+body.A .tl{height:10px;background:linear-gradient(90deg,transparent,var(--ink) 10%,var(--ink) 90%,transparent);opacity:.8}
+body.C .tl{height:3px;background:linear-gradient(90deg,transparent,var(--acc),transparent)}
+.dot{position:absolute;top:-16px;width:40px;height:40px;border-radius:50%;background:var(--acc);margin-left:-20px}
+.era{position:absolute;top:44px;transform:translateX(-50%);font-family:var(--fH);font-weight:900;font-size:40px;white-space:nowrap;color:var(--muted)}
+.tile{display:inline-flex;align-items:center;justify-content:center;width:230px;height:250px;margin:0 10px;border:6px solid var(--ink);border-radius:26px;background:var(--card);font-family:var(--fJ);font-size:170px;position:relative}
+body.A .tile{border:none;background:none}
+body.B .tile{border-radius:0;box-shadow:10px 10px 0 var(--ink)}
+body.C .tile{border:2px solid var(--muted)}
+.tile.hl{border-color:var(--acc);color:var(--acc)}
+.snd{position:absolute;left:50%;top:-110px;transform:translateX(-50%);font-family:var(--fH);font-weight:900;font-size:62px;color:var(--acc);white-space:nowrap}
+.stamp{position:absolute;border:12px solid var(--acc);color:var(--acc);border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--fH);font-weight:900}
+body.A .stamp{background:var(--acc);color:#F3E7D3;border-color:var(--acc);border-radius:14px}
+body.B .stamp{border-radius:0}
+body.C .stamp{border-width:3px;border-radius:999px}
+.kept{display:inline-flex;flex-direction:column;align-items:center;margin:0 26px}
+.kept .k{font-family:var(--fJ);font-size:170px;line-height:1.05}
+.kept .s{margin-top:12px;padding:6px 18px;border:6px solid var(--acc2);color:var(--acc2);font-family:var(--fH);font-weight:900;font-size:40px;border-radius:12px;transform:rotate(-6deg)}
+.btn{display:flex;align-items:center;gap:16px;border:4px solid var(--ink);border-radius:999px;padding:16px 34px;font-family:var(--fH);font-weight:900;font-size:44px;position:relative;background:var(--card)}
+.ripple{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:6px solid var(--acc);opacity:0}
+#blob{position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%;background:#111;filter:blur(40px);opacity:0;z-index:30;pointer-events:none}
+#flick{position:absolute;inset:0;background:#000;opacity:0;z-index:31;pointer-events:none}
+.parts i{position:absolute;width:6px;height:6px;border-radius:50%;background:#E6A23C;opacity:.5}
+</style></head><body><div id="stage">
+<div class="bgl" id="bgA"><div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,.45),rgba(120,95,60,.28) 85%)"></div>
+ <svg id="smear" style="position:absolute;top:420px;left:-120px;opacity:.13" width="1320" height="600"><defs><filter id="b"><feGaussianBlur stdDeviation="20"/></filter></defs><path d="M0 420 C 220 280, 380 520, 600 330 S 950 220, 1320 380" stroke="#1a1a1a" stroke-width="120" fill="none" stroke-linecap="round" filter="url(#b)"/></svg>
+ <div class="grain"></div>
+ <div style="position:absolute;top:1640px;right:110px;width:120px;height:120px;background:#B3241D;color:#F3E7D3;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:Brush;font-size:58px;line-height:1;text-align:center;transform:rotate(-6deg)">歴<br>史</div></div>
+<div class="bgl" id="bgB"><div style="position:absolute;inset:0;background-image:radial-gradient(rgba(60,40,20,.18) 2px,transparent 2.5px);background-size:16px 16px;opacity:.55"></div><div class="grain"></div>
+ <div style="position:absolute;top:1600px;left:70px;right:70px;border:8px double #2B2118;padding:14px;text-align:center;font-family:Archivo;font-size:44px;letter-spacing:4px">NIHONGO MYSTERY · No.1</div></div>
+<div class="bgl" id="bgC"><div id="spot" style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,rgba(220,170,90,.26),rgba(0,0,0,0) 55%)"></div><div class="parts" id="parts"></div>
+ <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.7) 100%)"></div></div>
+<div class="bgl" id="bgD"><div style="position:absolute;inset:0;background-image:repeating-linear-gradient(to bottom,transparent 0 95px,#D9D1C3 95px 97px);opacity:.55"></div><div style="position:absolute;top:0;bottom:0;left:120px;width:3px;background:rgba(211,38,46,.35)"></div></div>
+<div class="top"><span>@raj_in_jp</span><span class="t" id="toptag">は = WA?!</span></div>
+<div id="content">
+
+<div class="scene" id="s1">
+ <div class="big" id="h_ha" style="top:500px;font-size:560px">は</div>
+ <div class="bub" id="b_ha" style="top:1120px;left:140px">"ha"</div>
+ <div class="bub" id="b_wa" style="top:1120px;right:140px;border-color:var(--acc);color:var(--acc)">"wa"?</div>
+ <div class="hd" id="h_t" style="top:1360px;text-align:center">Japanese changed.<br><span style="color:var(--acc)">The spelling didn't.</span></div>
+</div>
+
+<div class="scene" id="s2">
+ <div class="hd" id="s2t" style="top:430px">Long, long ago…</div>
+ <div class="big" id="s2ha" style="top:560px;font-size:420px">は</div>
+ <div class="bub" id="s2s" style="top:1000px;left:50%;transform:translateX(-50%)">"pa"</div>
+ <div class="tl" id="tl2"><div class="dot" id="d1" style="left:10%"></div><div class="era" style="left:10%">Old Japanese</div><div class="dot" id="d2" style="left:50%"></div><div class="era" style="left:50%">later</div><div class="dot" id="d3" style="left:90%;opacity:.25"></div><div class="era" style="left:90%">today</div></div>
+ <div class="hand" id="s2n" style="top:1360px;left:110px;right:110px;text-align:center;font-size:70px">pa → fa</div>
+</div>
+
+<div class="scene" id="s3">
+ <div class="hd" id="s3t" style="top:430px">~1,000 years ago,<br><span style="color:var(--acc)">in the middle of words…</span></div>
+ <div style="position:absolute;top:780px;left:0;right:0;text-align:center"><span class="tile" id="t3a">か</span><span class="tile" id="t3b">は<div class="snd" id="t3s">fa</div></span></div>
+ <div class="hd" id="s3w" style="top:1130px;text-align:center;font-size:76px">kafa → <span style="color:var(--acc)">kawa</span></div>
+ <div class="hd" id="s3r" style="top:1260px;text-align:center;font-weight:700;font-size:56px;color:var(--muted)">かは = 川 · river</div>
+</div>
+
+<div class="scene" id="s4">
+ <div class="hd" id="s4t" style="top:430px">The topic particle<br><span style="color:var(--acc)">always follows a word</span></div>
+ <div style="position:absolute;top:780px;left:0;right:0;text-align:center"><span class="tile" style="width:440px;font-size:120px;white-space:nowrap" id="t4a">わたし</span><span class="tile hl" id="t4b">は<div class="snd" id="t4s">fa</div></span></div>
+ <div class="hand" id="s4arr" style="top:1065px;left:0;right:0;text-align:center;font-size:56px;padding-left:440px">↑ after a word</div>
+ <div class="hd" id="s4h" style="top:1240px;text-align:center;font-size:46px;font-weight:700;white-space:nowrap"><span style="font-family:var(--fJ);font-size:96px">はな</span> &nbsp;start of a word → <span style="color:var(--acc)" id="s4hs">"fa"</span></div>
+</div>
+
+<div class="scene" id="s5">
+ <div class="stamp" id="st46" style="top:420px;left:290px;width:500px;height:200px;font-size:120px">1946</div>
+ <div class="hd" id="s5t" style="top:690px;text-align:center;font-size:46px;white-space:nowrap">Spelling updated to match speech</div>
+ <div class="hd" id="s5r" style="top:800px;text-align:center;font-size:96px"><span style="font-family:var(--fJ)" id="s5old">かは</span> → <span style="font-family:var(--fJ);color:var(--acc)" id="s5new">かわ</span></div>
+ <div class="hd" id="s5b" style="top:990px;text-align:center;font-size:56px">But 3 particles…</div>
+ <div style="position:absolute;top:1100px;left:0;right:0;text-align:center"><span class="kept" id="k1"><span class="k">は</span><span class="s">KEPT</span></span><span class="kept" id="k2"><span class="k">へ</span><span class="s">KEPT</span></span><span class="kept" id="k3"><span class="k">を</span><span class="s">KEPT</span></span></div>
+</div>
+
+<div class="scene" id="s6">
+ <div class="hd" id="s6t" style="top:430px;text-align:center">That's why…</div>
+ <div class="big" id="s6w" style="top:640px;font-size:210px">こんにち<span id="s6ha">は</span></div>
+ <div class="big" id="s6k" style="top:960px;font-size:180px">今日<span style="color:var(--acc)">は</span>…</div>
+ <div class="hd" id="s6m" style="top:1220px;text-align:center;font-size:84px">= "<span style="color:var(--acc)">today is…</span>"</div>
+</div>
+
+<div class="scene" id="s7">
+ <div class="big" style="top:480px;font-size:300px">は<span style="font-family:var(--fH);font-size:140px;color:var(--acc)"> = wa</span></div>
+ <div class="hd" id="e1" style="top:900px;text-align:center">Japanese, <span style="color:var(--acc)">explained.</span></div>
+ <div id="e4" style="position:absolute;top:1100px;left:0;right:0;display:flex;justify-content:center;gap:34px">
+  <div class="btn" id="bsave"><svg width="44" height="54" viewBox="0 0 44 54"><path id="bmk" d="M4 4 H40 V50 L22 37 L4 50 Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/></svg><span>Save</span><div class="ripple" id="rs"></div></div>
+  <div class="btn" id="bfol" style="background:var(--acc);border-color:var(--acc);color:#fff"><span id="ftxt">＋ Follow</span><div class="ripple" id="rf"></div></div></div>
+</div>
+</div>
+<div id="blob"></div><div id="flick"></div>
+</div>
+<script>
+const TH=(location.hash||'#D').slice(1); document.body.className=TH;
+window.T={s1:0,s2:8.0,s3:13.9,s4:22.7,s5:31.4,s6:40.6,s7:45.8,end:50.6}; window.TOTAL=T.end;
+const cl=x=>Math.min(Math.max(x,0),1), ease=x=>1-Math.pow(1-cl(x),3);
+const back=x=>{x=cl(x);const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+const $=id=>document.getElementById(id);
+const base=id=>{const el=$(id); if(el.dataset.base===undefined) el.dataset.base=el.style.transform||''; return el;};
+// theme-specific reveal
+function rev(id,t,d=0.45){ const el=base(id); const b=el.dataset.base; const p=ease(t/d);
+  el.style.opacity=t<0?0:1;
+  if(TH==='A'){ el.style.clipPath= t>=d*1.6 ? 'none' : `inset(-200px -200px ${(1-cl(t/(d*1.6)))*100}% -200px)`; el.style.filter=`blur(${(1-p)*10}px)`; el.style.transform=b; }
+  else if(TH==='B'){ const q=back(t/(d*.8)); el.style.transform=`${b} scale(${t<0?0.6:0.6+0.4*q})`; el.style.filter=''; }
+  else if(TH==='C'){ el.style.opacity=t<0?0:p; el.style.transform=`${b} scale(${1.06-0.06*p})`; el.style.filter=`blur(${(1-p)*6}px)`; }
+  else { el.style.transform=`${b} translateY(${(1-p)*40}px)`; el.style.opacity=t<0?0:p; } }
+function stampIn(id,t,r=-8){ const el=base(id); const p=cl(t/0.18); el.style.opacity=t<0?0:1; el.style.transform=`${el.dataset.base} rotate(${r}deg) scale(${2.2-1.2*p})`; }
+function morph(id,t,txt){ // swap text with a blur pulse at time t
+  const el=$(id); if(t>=0 && el.dataset.cur!==txt){} }
+// particles for C
+if(TH==='C'){ const P=$('parts'); for(let i=0;i<40;i++){const e=document.createElement('i'); e.dataset.x=(i*263)%1080; e.dataset.y=(i*577)%1920; e.dataset.s=8+(i*7)%20; P.appendChild(e);} }
+const sc=['s1','s2','s3','s4','s5','s6','s7'];
+function render(t){
+  let cur='s1'; sc.forEach(s=>{if(t>=T[s]) cur=s;}); sc.forEach(s=>$(s).style.display=s===cur?'block':'none');
+  const lt=t-T[cur], st=T[cur];
+  // global theme motion
+  const ci=$('content');
+  if(TH==='B'){ const f=Math.floor(t*12); ci.style.transform=`translate(${((f*37)%5)-2}px,${((f*53)%5)-2}px)`; $('flick').style.opacity=0.03+0.03*((f*17)%3)/2; }
+  else if(TH==='C'){ ci.style.transform=`scale(${1+0.035*cl(lt/8)})`; $('spot').style.transform=`translateX(${Math.sin(t*0.4)*40}px)`;
+    document.querySelectorAll('#parts i').forEach(e=>{const y=((+e.dataset.y - t*e.dataset.s)%2000+2000)%2000-40; e.style.transform=`translate(${e.dataset.x}px,${y}px)`;}); }
+  else if(TH==='A'){ $('smear').style.transform=`translateX(${Math.sin(t*0.25)*60}px)`; }
+  // scene transition overlay
+  const tr=lt; const bl=$('blob');
+  if(TH==='A' && st>0){ const p=cl(tr/0.6); bl.style.opacity=tr<0.6?(1-p)*0.9:0; bl.style.transform=`scale(${1+p*12})`; } else bl.style.opacity=0;
+  if(cur==='s1'){ rev('h_ha',lt,0.7); rev('b_ha',lt-1.0,0.35); rev('b_wa',lt-3.4,0.35); rev('h_t',lt-4.4,0.45);
+    const sh=lt>3.4&&lt<4.0?Math.sin(lt*60)*8:0; $('h_ha').style.translate=`${sh}px 0`; }
+  if(cur==='s2'){ rev('s2t',lt,0.4); rev('s2ha',lt-0.3,0.6); rev('tl2',lt-0.6,0.5);
+    const s=$('s2s'); s.textContent = lt<5.0?'"pa"':'"fa"'; rev('s2s', lt<5.0?lt-2.2:lt-5.0, 0.35);
+    $('d2').style.opacity=lt<5.0?0.25:1; rev('s2n',lt-5.4,0.4); }
+  if(cur==='s3'){ rev('s3t',lt,0.45); rev('t3a',lt-1.8,0.35); rev('t3b',lt-2.0,0.35);
+    const sw=lt>=5.2; $('t3s').textContent=sw?'wa':'fa'; $('t3b').classList.toggle('hl',lt>=2.0);
+    $('t3s').style.transform=`translateX(-50%) scale(${sw?back((lt-5.2)/0.3):1})`;
+    rev('s3w',lt-6.3,0.4); rev('s3r',lt-8.0,0.4); }
+  if(cur==='s4'){ rev('s4t',lt,0.45); rev('t4a',lt-0.5,0.35); rev('t4b',lt-0.7,0.35); rev('s4arr',lt-1.8,0.35);
+    const w=lt>=4.0; $('t4s').textContent=w?'wa':'fa'; $('t4s').style.transform=`translateX(-50%) scale(${w?back((lt-4.0)/0.3):1})`;
+    rev('s4h',lt-5.2,0.4); $('s4hs').textContent=lt>=7.9?'"ha"':'"fa"'; }
+  if(cur==='s5'){ stampIn('st46',lt-0.3,-6); rev('s5t',lt-1.6,0.4); rev('s5r',lt-2.7,0.4);
+    $('s5old').style.textDecoration=lt>=3.3?'line-through':'none'; $('s5old').style.textDecorationColor='var(--acc)';
+    rev('s5b',lt-4.5,0.35); [['k1',5.9],['k2',6.5],['k3',7.1]].forEach(([k,d])=>{ rev(k,lt-d,0.3); const s=$(k).querySelector('.s'); s.style.opacity=lt<d+0.3?0:1; s.style.transform=`rotate(-6deg) scale(${lt<d+0.3?2:2-cl((lt-d-0.3)/0.15)})`; }); }
+  if(cur==='s6'){ rev('s6t',lt,0.35); rev('s6w',lt-0.6,0.5);
+    const g=lt>=2.2; $('s6ha').style.color=g?'var(--acc)':''; $('s6ha').style.textShadow=g&&TH==='C'?'0 0 40px rgba(230,162,60,.8)':'';
+    rev('s6k',lt-3.0,0.45); rev('s6m',lt-3.8,0.4); }
+  if(cur==='s7'){ rev('e1',lt,0.4); rev('e4',lt-0.2,0.35);
+    const tS=lt-0.3, tF=lt-1.15;
+    [['rs',tS],['rf',tF]].forEach(([id,tt])=>{const r=$(id); const p=cl(tt/0.5); r.style.opacity=(tt<0||tt>0.5)?0:(1-p); r.style.transform=`scale(${1+5*p})`;});
+    $('bmk').setAttribute('fill',tS>=0.1?'var(--acc)':'none'); $('bmk').style.color=tS>=0.1?'var(--acc)':'';
+    const fo=tF>=0.1; const b=$('bfol'); b.style.background=fo?'var(--card)':'var(--acc)'; b.style.color=fo?'var(--ink)':'#fff'; b.style.borderColor=fo?'var(--ink)':'var(--acc)'; $('ftxt').textContent=fo?'Following ✓':'＋ Follow'; }
+}
+window.render=render;
+</script></body></html>
