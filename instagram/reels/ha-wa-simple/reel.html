@@ -102,7 +102,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:
 <div id="wipe"></div>
 <script>
 // cue times (s) synced to the voiceover word timings
-window.T={s1:0,s2:4.6,s3:10.15,s4:16.1,s5:21.25,s6:30.05,s7:35.85,s8:43.9,s9:49.75,end:55.2}; window.TOTAL=T.end;
+window.T={s1:0,s2:4.22,s3:9.80,s4:15.91,s5:21.01,s6:29.82,s7:35.64,s8:43.50,s9:49.44,end:58.8}; window.TOTAL=T.end;
+// a short pause is inserted after each topic; the wipe plays only in that pause, after the speech is finished
+const GAP=0.45, GB=['s2','s3','s4','s5','s6','s7','s8','s9'];
 const cl=x=>Math.min(Math.max(x,0),1);
 const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
 const $=id=>document.getElementById(id);
@@ -110,11 +112,13 @@ const base=id=>{const el=$(id); if(el.dataset.base===undefined) el.dataset.base=
 function pop(id,at,t,d=0.32){ const el=base(id), lt=t-at; el.style.opacity=lt<0?0:1; el.style.transform=`${el.dataset.base} scale(${lt<0?0.6:0.6+0.4*back(lt/d)})`; }
 function stamp(id,at,t,r){ const el=base(id), p=cl((t-at)/0.16); el.style.opacity=t<at?0:1; el.style.transform=`rotate(${r}deg) scale(${2-p})`; }
 const sc=['s1','s2','s3','s4','s5','s6','s7','s8','s9'];
-function renderSync(t){
-  let cur='s1'; sc.forEach(s=>{if(t+0.25>=T[s]) cur=s;}); sc.forEach(s=>$(s).style.display=s===cur?'block':'none');
+function renderSync(t0){
+  let off=0, gp=null;
+  for(const g of GB){ const gs=T[g]+off; if(t0<gs) break; if(t0<gs+GAP){ gp={p:(t0-gs)/GAP,s:g}; break; } off+=GAP; }
+  const t = gp ? T[gp.s] : t0-off;
+  let cur='s1'; const tc = gp&&gp.p<0.5 ? t-0.001 : t; sc.forEach(s=>{if(tc>=T[s]) cur=s;}); sc.forEach(s=>$(s).style.display=s===cur?'block':'none');
   // clean wipe between scenes (no shake, no flicker)
-  const w=$('wipe'); let wx=-1400;
-  sc.slice(1).forEach(s=>{ const lt=t-T[s]; if(lt>-0.5&&lt<0){ wx=-1300+((lt+0.5)/0.5)*2700; } }); w.style.left=wx+'px';
+  $('wipe').style.left=(gp? -1300+gp.p*2700 : -1400)+'px';
   if(cur==='s1'){ pop('a1',0,t); pop('a2',0.15,t,0.4); pop('a3',0.8,t); pop('a4',3.4,t); pop('a5',3.7,t); }
   if(cur==='s2'){ pop('b1',4.7,t); pop('b2',5.6,t); pop('b3',5.8,t); pop('b5',6.7,t); pop('b6',8.1,t); pop('b4',9.25,t,0.28); }
   if(cur==='s3'){ pop('c1',10.25,t); pop('c2',13.1,t); pop('c3',14.45,t); pop('c4',15.2,t); }
