@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+/* NIHONGO MYSTERY series cover. Change EP below for each episode. Key content stays inside the 3:4 grid crop (y 240-1680). */
+@font-face{font-family:Archivo;src:url(fonts/ArchivoBlack.ttf)}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-900.ttf);font-weight:900}
+:root{--bg:#F1E3C2;--ink:#2B2118;--acc:#D9572B;--acc2:#1F6F78;--card:#FFF6E0}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Archivo,NotoJP,'Noto Color Emoji',sans-serif;position:relative}
+.dots{position:absolute;inset:0;background-image:radial-gradient(rgba(60,40,20,.18) 2px,transparent 2.5px);background-size:16px 16px;opacity:.55}
+.grain{position:absolute;inset:0;mix-blend-mode:multiply;opacity:.4;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .40  0 0 0 0 .32  0 0 0 .6 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
+.rays{position:absolute;left:540px;top:830px;width:2400px;height:2400px;margin:-1200px 0 0 -1200px;background:repeating-conic-gradient(rgba(217,87,43,.13) 0 8deg,transparent 8deg 16deg);border-radius:50%;-webkit-mask:radial-gradient(circle,#000 25%,transparent 60%)}
+.series{position:absolute;top:290px;left:90px;right:90px;display:flex;align-items:stretch;border:8px double var(--ink);background:var(--card)}
+.series .t{flex:1;text-align:center;font-size:56px;letter-spacing:4px;padding:18px 0;white-space:nowrap}
+.series .n{background:var(--acc);color:#fff;font-size:56px;padding:18px 28px;border-left:6px solid var(--ink)}
+.circle{position:absolute;top:510px;left:240px;width:600px;height:600px;border-radius:50%;background:var(--acc);color:var(--bg);font-family:NotoJP;font-weight:900;font-size:430px;line-height:590px;text-align:center;box-shadow:18px 18px 0 var(--ink)}
+.bub{position:absolute;padding:12px 38px;border:7px solid var(--ink);background:var(--card);box-shadow:12px 12px 0 var(--ink);font-size:96px;line-height:1.1;white-space:nowrap}
+.hd{position:absolute;left:0;right:0;text-align:center;line-height:1.02}
+.logo{position:absolute;bottom:110px;right:90px;width:170px;height:170px;border-radius:50%;overflow:hidden;border:6px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
+</style></head><body>
+<div class="dots"></div><div class="rays"></div><div class="grain"></div>
+<div class="series"><div class="t">NIHONGO MYSTERY</div><div class="n" id="ep">#1</div></div>
+<div class="circle">は</div>
+<div class="bub" style="top:1000px;left:70px;transform:rotate(-7deg)">"ha"</div>
+<div class="bub" style="top:960px;right:60px;transform:rotate(6deg);border-color:var(--acc);color:var(--acc)">"wa"?!</div>
+<div class="hd" style="top:1235px;font-size:118px">WHY IS <span style="font-family:NotoJP;font-weight:900;color:var(--acc)">は</span></div>
+<div class="hd" style="top:1365px;font-size:118px">READ <span style="color:var(--acc)">"WA"?</span></div>
+<div class="hd" style="top:1530px;font-size:46px;color:#6E5B44">a 1946 spelling rule explains it 📜</div>
+<div class="logo"><img src="logo.png" style="width:100%;height:100%;transform:scale(1.03)"></div>
+</body></html>
