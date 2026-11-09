@@ -12,10 +12,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
 body.A{--bg:#EFE6D2;--ink:#141414;--acc:#B3241D;--acc2:#2E5E4E;--muted:#6A5D4A;--card:rgba(255,250,240,.75);--fJ:Brush;--fH:Mincho;--fHand:Brush}
 body.B{--bg:#F1E3C2;--ink:#2B2118;--acc:#D9572B;--acc2:#1F6F78;--muted:#6E5B44;--card:#FFF6E0;--fJ:NotoJP;--fH:Archivo;--fHand:Archivo}
 body.C{--bg:#0E0C0A;--ink:#F3E2BF;--acc:#E6A23C;--acc2:#7FC4B6;--muted:#9C8455;--card:rgba(255,235,200,.06);--fJ:Mincho;--fH:Corm;--fHand:Corm}
+body.E{--bg:#F2EBDD;--ink:#16130F;--acc:#B3241D;--acc2:#2E5E4E;--muted:#6A5D4A;--card:rgba(255,250,240,.75);--fJ:Brush;--fH:Mincho;--fHand:Brush}
 body.D{--bg:#F3EEE4;--ink:#1B1A18;--acc:#D3262E;--acc2:#1F8A4C;--muted:#6B655C;--card:#fff;--fJ:NotoJP;--fH:NotoJP;--fHand:Caveat}
 #stage{position:relative;width:1080px;height:1920px;overflow:hidden;color:var(--ink)}
 .bgl{position:absolute;inset:0;display:none}
-body.A #bgA,body.B #bgB,body.C #bgC,body.D #bgD{display:block}
+body.A #bgA,body.B #bgB,body.C #bgC,body.D #bgD,body.E #bgE{display:block}
+.eonly{display:none}body.E .eonly{display:block}body.E .noE{visibility:hidden}
 .grain{position:absolute;inset:0;mix-blend-mode:multiply;opacity:.45;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .40  0 0 0 0 .32  0 0 0 .6 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
 .top{position:absolute;top:250px;left:110px;right:110px;display:flex;justify-content:space-between;font-family:var(--fH);font-weight:900;font-size:32px;z-index:20}
 .top .t{color:var(--acc)}
@@ -25,24 +27,24 @@ body.C .top{font-size:36px;letter-spacing:3px}
 .hd{position:absolute;left:110px;right:110px;font-family:var(--fH);font-weight:900;font-size:62px;line-height:1.15}
 body.C .hd{font-size:74px;font-weight:600}
 .bub{position:absolute;padding:14px 40px;border-radius:999px;font-family:var(--fH);font-weight:900;font-size:96px;line-height:1.1;background:var(--card);border:6px solid var(--ink)}
-body.A .bub{border:none;background:none;font-family:Brush;font-size:130px;padding:0}
+body.A .bub,body.E .bub{border:none;background:none;font-family:Brush;font-size:130px;padding:0}
 body.B .bub{border-radius:0;box-shadow:12px 12px 0 var(--ink)}
 body.C .bub{border:2px solid var(--acc);color:var(--acc);font-weight:600;font-size:110px;text-shadow:0 0 30px rgba(230,162,60,.6)}
 .hand{position:absolute;font-family:var(--fHand);color:var(--acc)}
 body.D .hand{font-size:84px}
 .tl{position:absolute;left:110px;right:110px;top:1200px;height:8px;background:var(--ink);border-radius:4px}
-body.A .tl{height:10px;background:linear-gradient(90deg,transparent,var(--ink) 10%,var(--ink) 90%,transparent);opacity:.8}
+body.A .tl,body.E .tl{height:10px;background:linear-gradient(90deg,transparent,var(--ink) 10%,var(--ink) 90%,transparent);opacity:.8}
 body.C .tl{height:3px;background:linear-gradient(90deg,transparent,var(--acc),transparent)}
 .dot{position:absolute;top:-16px;width:40px;height:40px;border-radius:50%;background:var(--acc);margin-left:-20px}
 .era{position:absolute;top:44px;transform:translateX(-50%);font-family:var(--fH);font-weight:900;font-size:40px;white-space:nowrap;color:var(--muted)}
 .tile{display:inline-flex;align-items:center;justify-content:center;width:230px;height:250px;margin:0 10px;border:6px solid var(--ink);border-radius:26px;background:var(--card);font-family:var(--fJ);font-size:170px;position:relative}
-body.A .tile{border:none;background:none}
+body.A .tile,body.E .tile{border:none;background:none}
 body.B .tile{border-radius:0;box-shadow:10px 10px 0 var(--ink)}
 body.C .tile{border:2px solid var(--muted)}
 .tile.hl{border-color:var(--acc);color:var(--acc)}
 .snd{position:absolute;left:50%;top:-110px;transform:translateX(-50%);font-family:var(--fH);font-weight:900;font-size:62px;color:var(--acc);white-space:nowrap}
 .stamp{position:absolute;border:12px solid var(--acc);color:var(--acc);border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--fH);font-weight:900}
-body.A .stamp{background:var(--acc);color:#F3E7D3;border-color:var(--acc);border-radius:14px}
+body.A .stamp,body.E .stamp{background:var(--acc);color:#F3E7D3;border-color:var(--acc);border-radius:14px}
 body.B .stamp{border-radius:0}
 body.C .stamp{border-width:3px;border-radius:999px}
 .kept{display:inline-flex;flex-direction:column;align-items:center;margin:0 26px}
@@ -62,12 +64,15 @@ body.C .stamp{border-width:3px;border-radius:999px}
  <div style="position:absolute;top:1600px;left:70px;right:70px;border:8px double #2B2118;padding:14px;text-align:center;font-family:Archivo;font-size:44px;letter-spacing:4px">NIHONGO MYSTERY · No.1</div></div>
 <div class="bgl" id="bgC"><div id="spot" style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,rgba(220,170,90,.26),rgba(0,0,0,0) 55%)"></div><div class="parts" id="parts"></div>
  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.7) 100%)"></div></div>
+<div class="bgl" id="bgE"><img id="ebg" src="ink/bg.jpg" style="position:absolute;inset:0;width:1080px;height:1920px;transform-origin:50% 80%"><div class="grain" style="opacity:.3"></div>
+ <div style="position:absolute;top:1660px;right:110px;width:110px;height:150px;background:#B3241D;color:#F3E7D3;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:Brush;font-size:54px;line-height:1.05;text-align:center;transform:rotate(-4deg);opacity:.92">墨<br>跡</div></div>
 <div class="bgl" id="bgD"><div style="position:absolute;inset:0;background-image:repeating-linear-gradient(to bottom,transparent 0 95px,#D9D1C3 95px 97px);opacity:.55"></div><div style="position:absolute;top:0;bottom:0;left:120px;width:3px;background:rgba(211,38,46,.35)"></div></div>
 <div class="top"><span>@raj_in_jp</span><span class="t" id="toptag">は = WA?!</span></div>
 <div id="content">
 
 <div class="scene" id="s1">
- <div class="big" id="h_ha" style="top:500px;font-size:560px">は</div>
+ <div class="big noE" id="h_ha" style="top:500px;font-size:560px">は</div>
+ <img class="eonly" id="inkha" style="position:absolute;left:0;top:-90px;width:1080px;height:1920px" src="ink/ha/0001.png">
  <div class="bub" id="b_ha" style="top:1120px;left:140px">"ha"</div>
  <div class="bub" id="b_wa" style="top:1120px;right:140px;border-color:var(--acc);color:var(--acc)">"wa"?</div>
  <div class="hd" id="h_t" style="top:1360px;text-align:center">Japanese changed.<br><span style="color:var(--acc)">The spelling didn't.</span></div>
@@ -111,14 +116,16 @@ body.C .stamp{border-width:3px;border-radius:999px}
 </div>
 
 <div class="scene" id="s7">
- <div class="big" style="top:480px;font-size:300px">は<span style="font-family:var(--fH);font-size:140px;color:var(--acc)"> = wa</span></div>
+ <div class="eonly" style="position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:570px 860px;transform:translate(-200px,-210px) scale(.5)"><img id="inkha7" style="width:1080px;height:1920px" src="ink/ha_final.png"></div>
+ <div class="eonly" style="position:absolute;top:540px;left:520px;font-family:Brush;font-size:150px;color:var(--acc)">= wa</div>
+ <div class="big noE" style="top:480px;font-size:300px">は<span style="font-family:var(--fH);font-size:140px;color:var(--acc)"> = wa</span></div>
  <div class="hd" id="e1" style="top:900px;text-align:center">Japanese, <span style="color:var(--acc)">explained.</span></div>
  <div id="e4" style="position:absolute;top:1100px;left:0;right:0;display:flex;justify-content:center;gap:34px">
   <div class="btn" id="bsave"><svg width="44" height="54" viewBox="0 0 44 54"><path id="bmk" d="M4 4 H40 V50 L22 37 L4 50 Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/></svg><span>Save</span><div class="ripple" id="rs"></div></div>
   <div class="btn" id="bfol" style="background:var(--acc);border-color:var(--acc);color:#fff"><span id="ftxt">＋ Follow</span><div class="ripple" id="rf"></div></div></div>
 </div>
 </div>
-<div id="blob"></div><div id="flick"></div>
+<img class="eonly" id="inksw" style="position:absolute;inset:0;width:1080px;height:1920px;z-index:30;pointer-events:none;opacity:0" src="ink/sw/0001.png"><div id="blob"></div><div id="flick"></div>
 </div>
 <script>
 const TH=(location.hash||'#D').slice(1); document.body.className=TH;
@@ -130,7 +137,7 @@ const base=id=>{const el=$(id); if(el.dataset.base===undefined) el.dataset.base=
 // theme-specific reveal
 function rev(id,t,d=0.45){ const el=base(id); const b=el.dataset.base; const p=ease(t/d);
   el.style.opacity=t<0?0:1;
-  if(TH==='A'){ el.style.clipPath= t>=d*1.6 ? 'none' : `inset(-200px -200px ${(1-cl(t/(d*1.6)))*100}% -200px)`; el.style.filter=`blur(${(1-p)*10}px)`; el.style.transform=b; }
+  if(TH==='A'||TH==='E'){ el.style.clipPath= t>=d*1.6 ? 'none' : `inset(-200px -200px ${(1-cl(t/(d*1.6)))*100}% -200px)`; el.style.filter=`blur(${(1-p)*10}px)`; el.style.transform=b; }
   else if(TH==='B'){ const q=back(t/(d*.8)); el.style.transform=`${b} scale(${t<0?0.6:0.6+0.4*q})`; el.style.filter=''; }
   else if(TH==='C'){ el.style.opacity=t<0?0:p; el.style.transform=`${b} scale(${1.06-0.06*p})`; el.style.filter=`blur(${(1-p)*6}px)`; }
   else { el.style.transform=`${b} translateY(${(1-p)*40}px)`; el.style.opacity=t<0?0:p; } }
@@ -140,7 +147,7 @@ function morph(id,t,txt){ // swap text with a blur pulse at time t
 // particles for C
 if(TH==='C'){ const P=$('parts'); for(let i=0;i<40;i++){const e=document.createElement('i'); e.dataset.x=(i*263)%1080; e.dataset.y=(i*577)%1920; e.dataset.s=8+(i*7)%20; P.appendChild(e);} }
 const sc=['s1','s2','s3','s4','s5','s6','s7'];
-function render(t){
+function renderSync(t){
   let cur='s1'; sc.forEach(s=>{if(t>=T[s]) cur=s;}); sc.forEach(s=>$(s).style.display=s===cur?'block':'none');
   const lt=t-T[cur], st=T[cur];
   // global theme motion
@@ -148,12 +155,16 @@ function render(t){
   if(TH==='B'){ const f=Math.floor(t*12); ci.style.transform=`translate(${((f*37)%5)-2}px,${((f*53)%5)-2}px)`; $('flick').style.opacity=0.03+0.03*((f*17)%3)/2; }
   else if(TH==='C'){ ci.style.transform=`scale(${1+0.035*cl(lt/8)})`; $('spot').style.transform=`translateX(${Math.sin(t*0.4)*40}px)`;
     document.querySelectorAll('#parts i').forEach(e=>{const y=((+e.dataset.y - t*e.dataset.s)%2000+2000)%2000-40; e.style.transform=`translate(${e.dataset.x}px,${y}px)`;}); }
+  else if(TH==='E'){ $('ebg').style.transform=`scale(${1.03+0.02*Math.sin(t*0.15)}) translateX(${Math.sin(t*0.2)*14}px)`; }
   else if(TH==='A'){ $('smear').style.transform=`translateX(${Math.sin(t*0.25)*60}px)`; }
   // scene transition overlay
   const tr=lt; const bl=$('blob');
   if(TH==='A' && st>0){ const p=cl(tr/0.6); bl.style.opacity=tr<0.6?(1-p)*0.9:0; bl.style.transform=`scale(${1+p*12})`; } else bl.style.opacity=0;
+  if(TH==='E'){ const fr=(lt,n)=>String(Math.min(n,Math.max(1,Math.floor(lt/0.033)+1))).padStart(4,'0');
+    setSrc('inkha',`ink/ha/${fr(lt-0.1,65)}.png`); setSrc('inkha7',`ink/ha/${fr(lt-0.05,65)}.png`);
+    const w=$('inksw'); if(st>0&&lt<0.55){ setSrc('inksw',`ink/sw/${fr(lt,16)}.png`); w.style.opacity=lt<0.3?1:1-(lt-0.3)/0.25; } else w.style.opacity=0; }
   if(cur==='s1'){ rev('h_ha',lt,0.7); rev('b_ha',lt-1.0,0.35); rev('b_wa',lt-3.4,0.35); rev('h_t',lt-4.4,0.45);
-    const sh=lt>3.4&&lt<4.0?Math.sin(lt*60)*8:0; $('h_ha').style.translate=`${sh}px 0`; }
+    const sh=lt>3.4&&lt<4.0?Math.sin(lt*60)*8:0; $('h_ha').style.translate=`${sh}px 0`; $('inkha').style.translate=`${sh}px 0`; }
   if(cur==='s2'){ rev('s2t',lt,0.4); rev('s2ha',lt-0.3,0.6); rev('tl2',lt-0.6,0.5);
     const s=$('s2s'); s.textContent = lt<5.0?'"pa"':'"fa"'; rev('s2s', lt<5.0?lt-2.2:lt-5.0, 0.35);
     $('d2').style.opacity=lt<5.0?0.25:1; rev('s2n',lt-5.4,0.4); }
@@ -176,5 +187,6 @@ function render(t){
     $('bmk').setAttribute('fill',tS>=0.1?'var(--acc)':'none'); $('bmk').style.color=tS>=0.1?'var(--acc)':'';
     const fo=tF>=0.1; const b=$('bfol'); b.style.background=fo?'var(--card)':'var(--acc)'; b.style.color=fo?'var(--ink)':'#fff'; b.style.borderColor=fo?'var(--ink)':'var(--acc)'; $('ftxt').textContent=fo?'Following ✓':'＋ Follow'; }
 }
-window.render=render;
+const pend=[]; function setSrc(id,u){const e=$(id); if(e.getAttribute('src')!==u){e.setAttribute('src',u); pend.push(e.decode().catch(()=>{}));}}
+window.render=async t=>{renderSync(t); await Promise.all(pend.splice(0));};
 </script></body></html>

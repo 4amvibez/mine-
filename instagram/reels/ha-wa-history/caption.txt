@@ -3,3 +3,6 @@
 Did you know this? Save it for later 📌
 
 #learnjapanese #hiragana #japaneselanguage #nihongo
+
+---
+Version E (Chinese ink wash): background, the brush-written は and the ink sweeps are painted with poly_ink from 4amvibez/chinese-ink-wash (see ink_assets.py; frames regenerate with `python ink_assets.py <repo> ink`).
