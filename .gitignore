@@ -1,3 +1,4 @@
 .claude/lib/.env
 __pycache__/
 *.pyc
+node_modules/
