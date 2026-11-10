@@ -1,0 +1,151 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Archivo;src:url(fonts/ArchivoBlack.ttf)}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-900.ttf);font-weight:900}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-700.ttf);font-weight:700}
+:root{--bg:#F1E3C2;--ink:#2B2118;--acc:#D9572B;--acc2:#1F6F78;--card:#FFF6E0;--muted:#6E5B44}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Archivo,NotoJP,'Noto Color Emoji',sans-serif}
+.dots{position:absolute;inset:0;background-image:radial-gradient(rgba(60,40,20,.18) 2px,transparent 2.5px);background-size:16px 16px;opacity:.55}
+.grain{position:absolute;inset:0;mix-blend-mode:multiply;opacity:.4;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .40  0 0 0 0 .32  0 0 0 .6 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
+.top{position:absolute;top:250px;left:110px;right:110px;display:flex;justify-content:space-between;font-size:32px;z-index:5}
+.top .t{color:var(--acc)}
+.foot{position:absolute;top:1600px;left:70px;right:70px;border:8px double var(--ink);padding:14px;text-align:center;font-size:44px;letter-spacing:4px}
+.scene{position:absolute;inset:0;display:none}
+.hd{position:absolute;left:110px;right:110px;font-size:66px;line-height:1.12}
+.c{text-align:center}
+.o{color:var(--acc)} .g{color:var(--acc2)}
+.row{position:absolute;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:26px}
+.tile{display:inline-flex;align-items:center;justify-content:center;height:220px;min-width:200px;padding:0 30px;border:7px solid var(--ink);background:var(--card);box-shadow:12px 12px 0 var(--ink);font-family:NotoJP;font-weight:900;font-size:140px;line-height:1;position:relative;white-space:nowrap}
+.tile.hl{border-color:var(--acc);color:var(--acc)}
+.lab{position:absolute;left:50%;top:-100px;transform:translateX(-50%);font-family:Archivo;font-size:72px;color:var(--acc);white-space:nowrap}
+.under{position:absolute;left:50%;bottom:-100px;transform:translateX(-50%);font-family:Archivo;font-size:72px;white-space:nowrap}
+.bub{position:absolute;padding:14px 40px;border:7px solid var(--ink);background:var(--card);box-shadow:12px 12px 0 var(--ink);font-size:80px;line-height:1.1;white-space:nowrap}
+.stamp{position:absolute;border:12px double var(--acc);color:var(--acc);background:rgba(255,246,224,.9);display:flex;align-items:center;justify-content:center;font-size:110px;white-space:nowrap}
+.btn{display:flex;align-items:center;gap:16px;border:6px solid var(--ink);padding:16px 24px;font-size:40px;position:relative;background:var(--card);box-shadow:10px 10px 0 var(--ink)}
+.ripple{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:6px solid var(--acc);opacity:0}
+.key{display:inline-flex;align-items:center;justify-content:center;width:150px;height:150px;border:6px solid var(--ink);border-radius:22px;background:var(--card);box-shadow:0 12px 0 var(--ink);font-size:80px}
+.strike{position:absolute;left:-10px;right:-10px;top:50%;height:12px;background:var(--acc);transform-origin:left center}
+#wipe{position:absolute;top:0;bottom:0;width:1300px;left:-1400px;background:var(--acc);z-index:20;box-shadow:24px 0 0 var(--ink)}
+.jp{font-family:NotoJP;font-weight:900}
+</style></head><body>
+<div class="dots"></div><div class="grain"></div>
+<div class="top"><span>@raj_in_jp</span><span class="t">NIHONGO MYSTERY #2</span></div>
+<div class="foot">NIHONGO MYSTERY · No.2</div>
+
+<!-- hook: 2 letters, 1 sound -->
+<div class="scene" id="s1">
+ <div class="hd c" id="a0" style="top:420px;font-size:72px">2 letters, <span class="o">1 sound?!</span></div>
+ <div class="row" style="top:640px;gap:80px"><span class="tile" id="a1" style="font-size:200px;height:300px;min-width:300px">お<span class="under" id="a3">"o"</span></span><span class="tile hl" id="a2" style="font-size:200px;height:300px;min-width:300px">を<span class="under o" id="a4">"o"?!</span></span></div>
+ <div class="hd c" id="a5" style="top:1180px;font-size:170px">WHY?!</div>
+</div>
+
+<!-- callback to episode 1 -->
+<div class="scene" id="s2">
+ <div class="row" style="top:400px" id="b1"><span class="tile" style="font-size:90px;height:140px;min-width:140px;padding:0 20px">は</span><span style="font-size:64px">= "wa" <span id="b2" style="color:#1F8A4C">✓</span></span></div>
+ <div class="hd c" id="b3" style="top:620px;font-size:60px">ANOTHER letter <span class="o">breaking the rules…</span></div>
+ <div style="position:absolute;top:780px;left:0;right:0;text-align:center"><span id="b4" style="display:inline-block;width:520px;height:520px;border-radius:50%;background:var(--acc);color:var(--bg);font-family:NotoJP;font-weight:900;font-size:340px;line-height:510px;box-shadow:16px 16px 0 var(--ink)">を</span></div>
+ <div class="bub" id="b5" style="top:1180px;right:150px;transform:rotate(6deg)">???</div>
+</div>
+
+<!-- charts say wo, people say o -->
+<div class="scene" id="s3">
+ <div class="hd c" id="c1" style="top:420px;font-size:58px;white-space:nowrap;left:0;right:0">This one is <span class="o">the weird one</span></div>
+ <div class="row" style="top:600px"><span class="tile hl" id="c2" style="font-size:180px;height:260px;min-width:260px">を</span></div>
+ <div class="row" style="top:980px;gap:40px"><span class="bub" id="c3" style="position:relative;font-size:64px">charts: "wo"<div class="strike" id="c4"></div></span><span id="c5" style="font-size:90px">❌</span></div>
+ <div class="row" style="top:1200px;gap:30px" id="c6"><span class="tile hl" style="font-family:Archivo;font-size:110px;height:180px">"o"</span><span style="font-size:60px">✅ same as <span class="jp">お</span></span></div>
+</div>
+
+<!-- example -->
+<div class="scene" id="s4">
+ <div class="hd c" id="d1" style="top:420px">Example 🍣</div>
+ <div class="row" style="top:620px;gap:16px" id="d2"><span class="tile" style="font-size:92px;height:170px;padding:0 16px">すし</span><span class="tile hl" style="font-size:92px;height:170px;padding:0 16px">を</span><span class="tile" style="font-size:92px;height:170px;padding:0 16px">たべます</span></div>
+ <div class="hd c" id="d3" style="top:900px;font-size:76px">sushi <span class="o">o</span> tabemasu</div>
+ <div class="hd c" id="d4" style="top:1060px;font-size:64px">= "I eat sushi."</div>
+</div>
+
+<!-- history -->
+<div class="scene" id="s5">
+ <div class="hd c" id="e1" style="top:420px">Long ago… 📜</div>
+ <div class="row" style="top:580px;gap:30px" id="e2"><span class="tile hl" style="font-size:120px;height:190px">を</span><span style="font-size:70px">sounded <span class="o">"wo"</span></span></div>
+ <div class="row" style="top:900px;gap:30px" id="e3"><span class="tile" style="font-size:120px;height:190px"><span class="o">を</span>とこ</span><span style="font-size:70px">= man 👨</span></div>
+ <div class="hd c" id="e4" style="top:1160px;font-size:56px;color:var(--muted)">the old spelling of <span style="color:var(--ink)">"otoko"</span></div>
+</div>
+
+<!-- 1946 -->
+<div class="scene" id="s6">
+ <div class="stamp" id="f1" style="top:380px;left:310px;width:460px;height:180px">1946</div>
+ <div class="hd c" id="f2" style="top:610px;font-size:46px;white-space:nowrap;left:0;right:0">spelling updated to <span class="o">match the sound</span></div>
+ <div class="row" style="top:730px;gap:24px"><span class="tile" id="f3" style="font-size:100px;height:170px;padding:0 24px">をとこ<div class="strike" id="f4"></div></span><span id="f5a" style="font-size:80px">→</span><span class="tile" id="f5" style="font-size:100px;height:170px;padding:0 24px;border-color:#1F8A4C"><span style="color:#1F8A4C">お</span>とこ</span></div>
+ <div class="row" style="top:1010px;gap:16px" id="f6"><span class="tile" style="font-size:100px;height:170px;padding:0 24px">すし</span><span class="tile hl" style="font-size:100px;height:170px;padding:0 24px">を</span></div>
+ <div class="stamp" id="f7" style="top:1220px;left:220px;width:640px;height:150px;font-size:78px;border-color:var(--acc2);color:var(--acc2)">🔒 EXCEPTION</div>
+ <div class="hd c" id="f8" style="top:1430px;font-size:54px;white-space:nowrap;left:0;right:0">just like <span class="jp o">は</span> = "wa"</div>
+</div>
+
+<!-- quick tip -->
+<div class="scene" id="s7">
+ <div class="hd c" id="g0" style="top:410px;font-size:62px;white-space:nowrap">💡 Quick tip</div>
+ <div class="hd c" id="g1" style="top:520px;font-size:50px;white-space:nowrap;left:0;right:0"><span class="jp o">を</span> = right after <span class="o">the thing</span></div>
+ <div class="row" style="top:640px;gap:22px">
+  <div id="g2" style="text-align:center"><span class="tile" style="font-size:72px;height:130px;padding:0 18px">すし<span class="o">を</span></span><div style="font-size:42px;margin-top:22px">🍣 eat</div></div>
+  <div id="g3" style="text-align:center"><span class="tile" style="font-size:72px;height:130px;padding:0 18px">みず<span class="o">を</span></span><div style="font-size:42px;margin-top:22px">💧 drink</div></div>
+  <div id="g4" style="text-align:center"><span class="tile" style="font-size:72px;height:130px;padding:0 18px">ほん<span class="o">を</span></span><div style="font-size:42px;margin-top:22px">📖 read</div></div></div>
+ <div class="hd c" id="g5" style="top:1000px;font-size:56px">⌨️ to type it:</div>
+ <div class="row" style="top:1110px;gap:30px"><span class="key" id="g6">W</span><span class="key" id="g7">O</span><span id="g8" style="font-size:80px">→ <span class="tile hl" style="font-size:100px;height:150px;min-width:150px;padding:0 20px">を</span></span></div>
+</div>
+
+<!-- CTA -->
+<div class="scene" id="s8">
+ <div style="position:absolute;top:380px;left:0;right:0;display:flex;justify-content:center"><div id="lg" style="width:420px;height:420px;border-radius:50%;overflow:hidden;border:8px solid var(--ink);box-shadow:14px 14px 0 var(--ink);background:#fff"><img src="logo.png" style="width:100%;height:100%;transform:scale(1.03)"></div></div>
+ <div class="hd c" id="p1" style="top:850px;font-size:66px">@raj_in_jp</div>
+ <div class="hd c" id="p2" style="top:950px;font-size:50px">Japanese mysteries,<br><span class="o">one step at a time <span class="jp">一歩</span></span></div>
+ <div class="row" style="top:1180px;gap:22px" id="p3">
+  <div class="btn" id="bl"><span id="lt">♡ Like</span><div class="ripple" id="rl"></div></div>
+  <div class="btn" id="bs"><span id="st">↗ Share</span><div class="ripple" id="rsh"></div></div>
+  <div class="btn" id="bfol" style="background:var(--acc);color:#fff"><span id="ftxt">＋ Follow</span><div class="ripple" id="rf"></div></div></div>
+ <div id="fing" style="position:absolute;font-size:100px;left:0;top:0;opacity:0">👆</div>
+</div>
+<div id="wipe"></div>
+<script>
+// scene starts and cue times (s) follow the voiceover word timings
+window.T={s1:0,s2:4.3,s3:9.0,s4:14.3,s5:17.7,s6:25.3,s7:36.6,s8:46.45,end:52.3}; window.TOTAL=T.end;
+// a 0.45 s pause before the CTA; the orange wipe plays only there (no other wipes)
+const GAPS=[['s8',0.45]], WIPE=0.45;
+const cl=x=>Math.min(Math.max(x,0),1);
+const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+const $=id=>document.getElementById(id);
+const base=id=>{const el=$(id); if(el.dataset.base===undefined) el.dataset.base=el.style.transform||''; return el;};
+function pop(id,at,t,d=0.32){ const el=base(id), lt=t-at; el.style.opacity=lt<0?0:1; el.style.transform=`${el.dataset.base} scale(${lt<0?0.6:0.6+0.4*back(lt/d)})`; }
+function stamp(id,at,t,r){ const el=base(id), p=cl((t-at)/0.16); el.style.opacity=t<at?0:1; el.style.transform=`rotate(${r}deg) scale(${2-p})`; }
+function strike(id,at,t){ $(id).style.transform=`translateY(-50%) rotate(-8deg) scaleX(${cl((t-at)/0.25)})`; }
+function press(id,at,t){ const el=$(id), on=t>=at&&t<at+0.25; el.style.transform=on?'translateY(10px)':''; el.style.boxShadow=on?'0 2px 0 var(--ink)':''; el.style.background=t>=at?'var(--acc)':''; el.style.color=t>=at?'#fff':''; }
+const sc=['s1','s2','s3','s4','s5','s6','s7','s8'];
+function renderSync(t0){
+  let off=0, gp=null;
+  for(const [g,d] of GAPS){ const gs=T[g]+off; if(t0<gs) break; if(t0<gs+d){ gp={e:t0-gs,d,s:g,p:cl((t0-gs-(d-WIPE))/WIPE)}; break; } off+=d; }
+  const t = gp ? T[gp.s]-0.001 : t0-off;
+  let cur='s1'; const tc = gp&&gp.p>=0.5 ? T[gp.s] : t; sc.forEach(s=>{if(tc>=T[s]) cur=s;}); sc.forEach(s=>$(s).style.display=s===cur?'block':'none');
+  $('wipe').style.left=(gp&&gp.p>0? -1300+gp.p*2700 : -1400)+'px';
+  if(cur==='s1'){ pop('a0',0.05,t); pop('a1',0.3,t); pop('a2',0.7,t); pop('a3',2.06,t); pop('a4',2.78,t); pop('a5',3.36,t,0.3); }
+  if(cur==='s2'){ pop('b1',4.4,t); pop('b2',6.02,t,0.25); pop('b3',6.86,t); pop('b4',7.08,t,0.4); pop('b5',7.8,t); }
+  if(cur==='s3'){ pop('c1',9.1,t); pop('c2',9.4,t); pop('c3',10.88,t); strike('c4',12.24,t); pop('c5',12.3,t); pop('c6',13.64,t); }
+  if(cur==='s4'){ pop('d1',14.46,t); pop('d2',15.02,t); pop('d3',15.3,t); pop('d4',16.5,t); }
+  if(cur==='s5'){ pop('e1',17.82,t); pop('e2',19.36,t); pop('e3',22.0,t); pop('e4',24.02,t); }
+  if(cur==='s6'){ stamp('f1',25.62,t,-5); pop('f2',27.12,t); pop('f3',29.46,t); strike('f4',29.94,t); pop('f5a',30.0,t); pop('f5',30.6,t);
+    pop('f6',31.7,t); stamp('f7',33.02,t,-4); pop('f8',35.76,t); }
+  if(cur==='s7'){ pop('g0',36.72,t); pop('g1',38.66,t); pop('g2',41.86,t); pop('g3',42.4,t); pop('g4',42.98,t); pop('g5',43.6,t);
+    pop('g6',44.88,t); pop('g7',44.95,t); press('g6',45.36,t); press('g7',45.82,t); pop('g8',46.1,t); }
+  if(cur==='s8'){ const lp=cl((t-46.46)/0.5); $('lg').style.opacity=t<46.46?0:1; $('lg').style.transform=`scale(${0.6+0.4*back(lp)}) rotate(${(1-lp)*-12}deg)`;
+    pop('p3',46.5,t); pop('p1',48.3,t); pop('p2',48.66,t);
+    const B=['bl','bs','bfol'].map(id=>{const r=$(id).getBoundingClientRect(); return [r.left+r.width/2-30, r.top+r.height/2-10];});
+    const taps=[46.85,47.35,47.9]; let fx=B[0][0], fy=B[0][1]+120;
+    if(t>=46.55){ const k=(t<taps[0])?0:(t<taps[1]?1:2); const prev=k?B[k-1]:[B[0][0],B[0][1]+120], st=k?taps[k-1]+0.1:46.55, en=taps[k]-0.03, p=cl((t-st)/Math.max(en-st,0.01)), e=1-Math.pow(1-p,3);
+      fx=prev[0]+(B[k][0]-prev[0])*e; fy=prev[1]+(B[k][1]-prev[1])*e; }
+    const f=$('fing'); f.style.opacity=t<46.55?0:(t>49.4?1-cl((t-49.4)/0.3):1); const pr=taps.some(x=>t>x&&t<x+0.15);
+    f.style.left=fx+'px'; f.style.top=fy+'px'; f.style.transform=`scale(${pr?0.85:1})`;
+    [['rl',taps[0]],['rsh',taps[1]],['rf',taps[2]]].forEach(([id,x])=>{const tt=t-x, r=$(id), p=cl(tt/0.5); r.style.opacity=(tt<0||tt>0.5)?0:(1-p); r.style.transform=`scale(${1+6*p})`;});
+    const L=t>=taps[0]+0.05; $('lt').textContent=L?'❤️ Liked':'♡ Like'; $('bl').style.color=L?'var(--acc)':'';
+    const S=t>=taps[1]+0.05; $('st').textContent=S?'✓ Shared':'↗ Share'; $('bs').style.color=S?'var(--acc2)':'';
+    const fo=t>=taps[2]+0.05, b=$('bfol'); b.style.background=fo?'var(--card)':'var(--acc)'; b.style.color=fo?'var(--ink)':'#fff'; $('ftxt').textContent=fo?'Following ✓':'＋ Follow'; }
+}
+window.render=renderSync;
+</script></body></html>
