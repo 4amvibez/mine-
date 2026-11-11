@@ -2,10 +2,10 @@
 # Build the vertical-quote reel: black bg, vertical JP + italic EN cues timed to the voice,
 # voice on top, music quietly underneath (vocal band scooped, ducked under speech).
 #
-# Usage: ./build.sh <voice_video> <music_video> <frames_dir> <out.mp4>
+# Usage: ./build.sh <cues.json> <voice_audio_or_video> <music_video> <frames_dir> <out.mp4>
 #   frames_dir = output of: node render_frames.js cues.json <frames_dir> <fontsource_dir>
 set -euo pipefail
-VOICE="$1"; MUSIC="$2"; FRAMES="$3"; OUT="$4"
+CUES="$1"; VOICE="$2"; MUSIC="$3"; FRAMES="$4"; OUT="$5"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 
 LEAD=0.5        # black before the first line (reference style)
@@ -17,7 +17,7 @@ TOTAL=$(python3 -c "print(round($LEAD+$VDUR+$TAIL,3))")
 TMP=$(mktemp -d)
 
 # 1) Image sequence with per-cue durations (concat demuxer)
-python3 - "$HERE/cues.json" "$FRAMES" "$LEAD" "$TOTAL" > "$TMP/list.txt" <<'PY'
+python3 - "$CUES" "$FRAMES" "$LEAD" "$TOTAL" > "$TMP/list.txt" <<'PY'
 import json, sys, os
 cues = json.load(open(sys.argv[1]))["cues"]; d = os.path.abspath(sys.argv[2])
 lead, total = float(sys.argv[3]), float(sys.argv[4])
@@ -50,8 +50,8 @@ ffmpeg -v error -y \
   -map "[v]" -map "[a]" -t "$TOTAL" \
   -c:v libx264 -preset medium -crf 18 -r 30 -c:a aac -b:a 192k -ar 48000 -profile:v high -level 4.1 -movflags +faststart "$OUT"
 
-# Cover image for Instagram (the video itself opens on black): the opening hook line
-cp "$FRAMES/cue_002.png" "${OUT%.*}_cover.png"
+# Cover image for Instagram (the video itself opens on black): cues.json "cover" if given
+if [ -f "$FRAMES/cover.png" ]; then cp "$FRAMES/cover.png" "${OUT%.*}_cover.png"; else cp "$FRAMES/cue_000.png" "${OUT%.*}_cover.png"; fi
 
 rm -rf "$TMP"
 echo "wrote $OUT ($TOTAL s)"
