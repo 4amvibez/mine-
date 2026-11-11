@@ -121,6 +121,19 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:
   <div class="cap" style="font-size:36px">ニッカウ<span style="color:#E8261E">ヰ</span>スキー = Nikka Whisky 🥃</div></div>
 </div>
 
+<!-- noren: still used on shop curtains today (silent beat inside the pause before the CTA) -->
+<div class="scene" id="sn">
+ <div class="hd c" id="n0" style="top:390px;font-size:54px;white-space:nowrap;left:0;right:0">…and on <span class="o">shop curtains</span> today! 🏮</div>
+ <div class="clip" id="n1" style="top:500px;left:70px;width:580px;transform:rotate(-4deg)"><div class="tape"></div>
+  <div class="ph" style="height:397px"><img src="user/noren_ebisu.jpg">
+   <svg class="hlc" id="n2" style="left:0;top:0;width:100%;height:100%" viewBox="0 0 100 100" preserveAspectRatio="none"><ellipse cx="48.8" cy="52.9" rx="8" ry="11" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg></div>
+  <div class="cap"><span style="color:#E8261E">ゑ</span>びす → read "e"</div></div>
+ <div class="clip" id="n3" style="top:1000px;left:420px;width:560px;transform:rotate(4deg)"><div class="tape"></div>
+  <div class="ph" style="height:417px"><img src="user/noren_inoue.jpg">
+   <svg class="hlc" id="n4" style="left:0;top:0;width:100%;height:100%" viewBox="0 0 100 100" preserveAspectRatio="none"><ellipse cx="33" cy="63.2" rx="6" ry="8" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg></div>
+  <div class="cap"><span style="color:#E8261E">ゐ</span>乃上 → read "i"</div></div>
+</div>
+
 <!-- CTA -->
 <div class="scene" id="s9">
  <div style="position:absolute;top:380px;left:0;right:0;display:flex;justify-content:center"><div id="lg" style="width:420px;height:420px;border-radius:50%;overflow:hidden;border:8px solid var(--ink);box-shadow:14px 14px 0 var(--ink);background:#fff"><img src="logo.png" style="width:100%;height:100%;transform:scale(1.03)"></div></div>
@@ -134,9 +147,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:
 </div>
 <div id="wipe"></div>
 <script>
-window.T={s1:0,s2:5.5,s3:11.0,s4:17.85,s5:19.6,s6:23.85,s7:30.9,s8:36.85,s9:45.82,end:51.5}; window.TOTAL=T.end;
+window.T={s1:0,s2:5.5,s3:11.0,s4:17.85,s5:19.6,s6:23.85,s7:30.9,s8:36.85,s9:45.82,end:56.5}; window.TOTAL=T.end;
 // a 0.45 s pause before the CTA; the orange wipe plays only there
-const GAPS=[['s9',0.45]], WIPE=0.45;
+const GAPS=[['s9',3.65]], WIPE=0.45, NOREN=3.2;   // 3.2 s silent noren beat, then the wipe into the CTA
 const cl=x=>Math.min(Math.max(x,0),1);
 const ease=x=>1-Math.pow(1-cl(x),3);
 const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
@@ -150,12 +163,14 @@ function strike(id,at,t){ $(id).style.transform=`translateY(-50%) rotate(-8deg) 
 function circle(id,at,t){ $(id).querySelector('ellipse').setAttribute('stroke-dashoffset', String(1-ease((t-at)/0.45))); }
 // zoom a snapshot toward its circled letter (origin in % of the clip)
 function zoom(id,at,t,ox,oy,s){ const el=$(id), p=ease((t-at)/0.6); el.style.transformOrigin=`${ox}% ${oy}%`; el.style.transform=`${el.dataset.base} scale(${1+(s-1)*p})`; }
-const sc=['s1','s2','s3','s4','s5','s6','s7','s8','s9'];
+const sc=['s1','s2','s3','s4','s5','s6','s7','s8','sn','s9'];
 function renderSync(t0){
   let off=0, gp=null;
   for(const [g,d] of GAPS){ const gs=T[g]+off; if(t0<gs) break; if(t0<gs+d){ gp={e:t0-gs,d,s:g,p:cl((t0-gs-(d-WIPE))/WIPE)}; break; } off+=d; }
   const t = gp ? T[gp.s]-0.001 : t0-off;
-  let cur='s1'; const tc = gp&&gp.p>=0.5 ? T[gp.s] : t; sc.forEach(s=>{if(tc>=T[s]) cur=s;}); sc.forEach(s=>$(s).style.display=s===cur?'block':'none');
+  let cur='s1'; const tc = gp&&gp.p>=0.5 ? T[gp.s] : t; ['s1','s2','s3','s4','s5','s6','s7','s8','s9'].forEach(s=>{if(tc>=T[s]) cur=s;});
+  if(gp && gp.p<0.5) cur='sn';
+  sc.forEach(s=>$(s).style.display=s===cur?'block':'none');
   $('wipe').style.left=(gp&&gp.p>0? -1300+gp.p*2700 : -1400)+'px';
   if(cur==='s1'){ pop('a0',0.05,t); pop('a1',1.0,t); stamp('a2',3.72,t,-6); pop('a3',4.5,t); }
   if(cur==='s2'){ pop('b0',5.6,t); pop('b1',7.1,t); pop('b5',7.88,t); pop('b2',6.4,t); pop('b4',6.5,t); pop('b3',6.6,t); pop('b6',8.68,t);
@@ -169,6 +184,7 @@ function renderSync(t0){
     pop('g6',35.38,t); strike('g6s',35.7,t); pop('g7',35.8,t); pop('g8',36.12,t); }
   if(cur==='s8'){ pop('h0',37.0,t); drop('h1',41.2,t); if(t>41.6) zoom('h1',42.2,t,75,62,1.12); circle('h2',41.75,t); pop('h3',42.6,t);
     drop('h4',43.5,t); circle('h5',44.1,t); if(t>43.9) zoom('h4',44.5,t,38,40,1.1); }
+  if(cur==='sn'){ const n=gp.e; pop('n0',0.0,n); drop('n1',0.15,n); circle('n2',0.65,n); drop('n3',1.25,n); circle('n4',1.75,n); }
   if(cur==='s9'){ const lp=cl((t-45.83)/0.5); $('lg').style.opacity=t<45.83?0:1; $('lg').style.transform=`scale(${0.6+0.4*back(lp)}) rotate(${(1-lp)*-12}deg)`;
     pop('p3',45.88,t); pop('p1',47.9,t); pop('p2',48.18,t);
     const B=['bl','bs','bfol'].map(id=>{const r=$(id).getBoundingClientRect(); return [r.left+r.width/2-30, r.top+r.height/2-10];});
