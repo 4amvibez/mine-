@@ -16,13 +16,16 @@ const page = (jp, en) => `<!doctype html><html><head><meta charset="utf-8">
 <link href="400.css" rel="stylesheet">
 <style>
   html,body{margin:0;width:1080px;height:1920px;background:#000;overflow:hidden}
-  .jp{position:absolute;left:50%;top:45.5%;transform:translate(-50%,-50%);
-      writing-mode:vertical-rl;font-family:'Noto Serif JP',serif;font-size:56px;
-      line-height:1;letter-spacing:2px;color:#f2f2f2;white-space:nowrap}
-  .en{position:absolute;left:0;right:0;top:75%;transform:translateY(-50%);text-align:center;
-      font-family:'Inter',sans-serif;font-style:italic;font-weight:500;font-size:36px;color:#f2f2f2;
-      padding:0 60px}
-  .h{position:absolute;left:0;right:0;top:82%;transform:translateY(-50%);text-align:center;
+  /* Instagram Reels safe zone: keep clear of top ~250px, bottom ~420px (caption/audio bar)
+     and the right ~150px (like/comment/share buttons). */
+  .jp{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);
+      writing-mode:vertical-rl;text-orientation:mixed;font-family:'Noto Serif JP',serif;font-size:56px;
+      line-height:1;letter-spacing:2px;color:#f2f2f2;white-space:nowrap;
+      font-feature-settings:'vert' 1,'vpal' 0}
+  .en{position:absolute;left:150px;right:150px;top:66%;transform:translateY(-50%);text-align:center;
+      font-family:'Inter',sans-serif;font-style:italic;font-weight:500;font-size:36px;line-height:1.35;
+      color:#f2f2f2;text-wrap:balance}
+  .h{position:absolute;left:0;right:0;top:71.5%;transform:translateY(-50%);text-align:center;
      font-family:'Inter',sans-serif;font-size:24px;color:#8a8a8a}
 </style></head><body>
 <div class="jp">${esc(jp)}</div><div class="en">${esc(en)}</div>

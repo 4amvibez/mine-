@@ -48,7 +48,10 @@ ffmpeg -v error -y \
     [bgm][sc]sidechaincompress=threshold=0.05:ratio=4:attack=20:release=400[duck];
     [voice][duck]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.89[a]" \
   -map "[v]" -map "[a]" -t "$TOTAL" \
-  -c:v libx264 -preset medium -crf 18 -r 30 -c:a aac -b:a 192k -ar 44100 -movflags +faststart "$OUT"
+  -c:v libx264 -preset medium -crf 18 -r 30 -c:a aac -b:a 192k -ar 48000 -profile:v high -level 4.1 -movflags +faststart "$OUT"
+
+# Cover image for Instagram (the video itself opens on black): the opening hook line
+cp "$FRAMES/cue_002.png" "${OUT%.*}_cover.png"
 
 rm -rf "$TMP"
 echo "wrote $OUT ($TOTAL s)"
