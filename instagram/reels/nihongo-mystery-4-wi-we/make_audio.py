@@ -2,7 +2,7 @@
 """Original soft lo-fi bed + paper/pen sound effects for NIHONGO MYSTERY #4 (ゐ/ゑ)."""
 import numpy as np, wave, os
 SR = 44100
-TOTAL = 56.5
+TOTAL = 55.5
 N = int(TOTAL * SR); rng = np.random.default_rng(3)
 
 def env(n, a=0.005, d=0.2):
@@ -64,12 +64,13 @@ add(sfx, 3.72, thud(), .8); add(sfx, 10.2, ding(), .28); add(sfx, 31.22, thud(),
 add(sfx, 34.22, pen(.3), .45); add(sfx, 35.7, pen(.3), .45)
 for d in (46.25, 46.85, 47.3): add(sfx, d, tick(), 1.0); add(sfx, d + .05, pop(), .45)
 add(sfx, 45.83, ding(), .3)
-# 3.65 s pause before the CTA (same as the video): the noren beat, then the wipe
-B=45.82; G=3.65; i=int(B*SR); sfx=np.concatenate([sfx[:i], np.zeros(int(G*SR)), sfx[i:]])[:N]
-for c in (0.0,): add(sfx, B + c, pop(), .3)
-for c in (0.15, 1.25): add(sfx, B + c, page_turn(), .5)   # noren snapshots
-for c in (0.65, 1.75): add(sfx, B + c, pen(.45), .5)      # red-pen circles
-add(sfx, B + G - 0.45, swoosh(.45, 2600), .45)            # the only wipe, into the CTA
+# two pauses, same as the video: 2.2 s hold at 19.55 (noren snapshots), 0.45 s before the CTA (the only wipe)
+def insert(buf, at, g): i=int(at*SR); return np.concatenate([buf[:i], np.zeros(int(g*SR)), buf[i:]])
+sfx = insert(sfx, 45.82, 0.45); sfx = insert(sfx, 19.55, 2.2)[:N]
+H=19.55
+for c in (0.05, 0.6): add(sfx, H + c, page_turn(), .5)      # noren snapshots dropped
+for c in (0.5, 1.05): add(sfx, H + c, pen(.45), .5)         # red-pen circles
+add(sfx, 45.82 + 2.2, swoosh(.45, 2600), .45)               # the only wipe, into the CTA
 t_all = np.arange(N) / SR
 mix = music * 0.0 + sfx * 0.8  # bed sits under the voiceover
 mix *= np.minimum(1, t_all / .05) * np.minimum(1, (TOTAL - t_all) / 1.2)
