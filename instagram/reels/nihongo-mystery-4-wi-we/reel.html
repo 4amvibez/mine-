@@ -1,0 +1,186 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Archivo;src:url(fonts/ArchivoBlack.ttf)}
+@font-face{font-family:Caveat;src:url(fonts/Caveat.ttf)}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-900.ttf);font-weight:900}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-700.ttf);font-weight:700}
+:root{--bg:#F1E3C2;--ink:#2B2118;--acc:#D9572B;--acc2:#1F6F78;--card:#FFF6E0;--muted:#6E5B44}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Archivo,NotoJP,'Noto Color Emoji',sans-serif}
+.dots{position:absolute;inset:0;background-image:radial-gradient(rgba(60,40,20,.18) 2px,transparent 2.5px);background-size:16px 16px;opacity:.55}
+.grain{position:absolute;inset:0;mix-blend-mode:multiply;opacity:.4;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .40  0 0 0 0 .32  0 0 0 .6 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
+.top{position:absolute;top:250px;left:110px;right:110px;display:flex;justify-content:space-between;font-size:32px;z-index:5}
+.top .t{color:var(--acc)}
+.foot{position:absolute;top:1600px;left:70px;right:70px;border:8px double var(--ink);padding:14px;text-align:center;font-size:44px;letter-spacing:4px}
+.scene{position:absolute;inset:0;display:none}
+.hd{position:absolute;left:110px;right:110px;font-size:66px;line-height:1.12}
+.c{text-align:center}
+.o{color:var(--acc)} .g{color:var(--acc2)}
+.row{position:absolute;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:26px}
+.tile{display:inline-flex;align-items:center;justify-content:center;height:220px;min-width:200px;padding:0 30px;border:7px solid var(--ink);background:var(--card);box-shadow:12px 12px 0 var(--ink);font-family:NotoJP;font-weight:900;font-size:140px;line-height:1;position:relative;white-space:nowrap}
+.tile.hl{border-color:var(--acc);color:var(--acc)}
+.lab{position:absolute;left:50%;top:-100px;transform:translateX(-50%);font-family:Archivo;font-size:72px;color:var(--acc);white-space:nowrap}
+.under{position:absolute;left:50%;bottom:-100px;transform:translateX(-50%);font-family:Archivo;font-size:72px;white-space:nowrap}
+.bub{position:absolute;padding:14px 40px;border:7px solid var(--ink);background:var(--card);box-shadow:12px 12px 0 var(--ink);font-size:80px;line-height:1.1;white-space:nowrap}
+.stamp{position:absolute;border:12px double var(--acc);color:var(--acc);background:rgba(255,246,224,.9);display:flex;align-items:center;justify-content:center;font-size:110px;white-space:nowrap}
+.btn{display:flex;align-items:center;gap:16px;border:6px solid var(--ink);padding:16px 24px;font-size:40px;position:relative;background:var(--card);box-shadow:10px 10px 0 var(--ink)}
+.ripple{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:6px solid var(--acc);opacity:0}
+.key{display:inline-flex;align-items:center;justify-content:center;width:150px;height:150px;border:6px solid var(--ink);border-radius:22px;background:var(--card);box-shadow:0 12px 0 var(--ink);font-size:80px}
+.strike{position:absolute;left:-10px;right:-10px;top:50%;height:12px;background:var(--acc);transform-origin:left center}
+#wipe{position:absolute;top:0;bottom:0;width:1300px;left:-1400px;background:var(--acc);z-index:20;box-shadow:24px 0 0 var(--ink)}
+.jp{font-family:NotoJP;font-weight:900}
+.clip{position:absolute;background:#fffdf6;padding:16px 16px 62px;box-shadow:0 18px 40px rgba(43,33,24,.35),0 2px 0 rgba(0,0,0,.08);transform-origin:50% 50%}
+.clip .ph{position:relative;overflow:hidden}
+.clip .ph img{display:block;width:100%;height:100%;object-fit:cover}
+.clip .cap{position:absolute;left:0;right:0;bottom:10px;text-align:center;font-family:Caveat;font-size:44px;color:#3a2e22;white-space:nowrap}
+.tape{position:absolute;top:-22px;left:50%;width:170px;height:46px;margin-left:-85px;background:rgba(240,220,150,.75);transform:rotate(-4deg);box-shadow:0 2px 4px rgba(0,0,0,.1)}
+.hlc{position:absolute;overflow:visible;pointer-events:none}
+.hlc ellipse{fill:none;stroke:#E8261E;stroke-width:1.3;stroke-linecap:round}
+.arrow{position:absolute;font-family:Caveat;font-size:56px;color:#E8261E;white-space:nowrap}
+.gap{background:rgba(217,87,43,.12);border:6px dashed var(--acc);color:var(--acc)}
+</style></head><body>
+<div class="dots"></div><div class="grain"></div>
+<div class="top"><span>@raj_in_jp</span><span class="t">NIHONGO MYSTERY #4</span></div>
+<div class="foot">NIHONGO MYSTERY · No.4</div>
+
+<!-- hook: 2 letters, 1 sound -->
+<!-- hook -->
+<!-- hook -->
+<div class="scene" id="s1">
+ <div class="hd c" id="a0" style="top:420px;font-size:62px">Your kana chart is<br><span class="o">missing 2 letters</span> 😳</div>
+ <div class="row" style="top:680px;gap:22px" id="a1"><span class="tile" style="font-size:110px;height:180px;min-width:180px">あ</span><span class="tile gap" style="font-size:110px;height:180px;min-width:180px">?</span><span class="tile" style="font-size:110px;height:180px;min-width:180px">ア</span><span class="tile gap" style="font-size:110px;height:180px;min-width:180px">?</span></div>
+ <div class="stamp" id="a2" style="top:960px;left:250px;width:580px;height:170px;font-size:100px">DELETED</div>
+ <div class="hd c" id="a3" style="top:1200px;font-size:54px">…on purpose.</div>
+</div>
+
+<!-- the W row -->
+<div class="scene" id="s2">
+ <div class="hd c" id="b0" style="top:420px;font-size:62px">The W row today:</div>
+ <div class="row" style="top:640px;gap:16px">
+  <span class="tile" id="b1" style="font-size:110px;height:180px;min-width:170px;padding:0 10px">わ<span class="under" style="font-size:44px;bottom:-70px">wa</span></span>
+  <span class="tile gap" id="b2" style="font-size:110px;height:180px;min-width:170px;padding:0 10px"><span id="b2t">?</span><span class="under o" id="b2u" style="font-size:44px;bottom:-70px">wi</span></span>
+  <span class="tile" id="b3" style="font-size:110px;height:180px;min-width:170px;padding:0 10px;opacity:.35">う</span>
+  <span class="tile gap" id="b4" style="font-size:110px;height:180px;min-width:170px;padding:0 10px"><span id="b4t">?</span><span class="under o" id="b4u" style="font-size:44px;bottom:-70px">we</span></span>
+  <span class="tile" id="b5" style="font-size:110px;height:180px;min-width:170px;padding:0 10px">を<span class="under" style="font-size:44px;bottom:-70px">wo</span></span></div>
+ <div class="hd c" id="b6" style="top:1000px;font-size:58px">only 2? It used to be <span class="o">4!</span></div>
+</div>
+
+<!-- the pairs -->
+<div class="scene" id="s3">
+ <div class="hd c" id="c0" style="top:420px;font-size:62px">Meet the lost letters</div>
+ <div class="row" style="top:600px;gap:26px"><span class="tile hl2" id="c1" style="font-size:130px;height:210px;min-width:210px">ゐ<span class="under" style="font-size:36px;bottom:-62px">hiragana</span></span><span class="tile" id="c2" style="font-size:130px;height:210px;min-width:210px">ヰ<span class="under" style="font-size:36px;bottom:-62px">katakana</span></span><span id="c3" style="font-family:Archivo;font-size:84px" class="o">= wi</span></div>
+ <div class="row" style="top:960px;gap:26px"><span class="tile" id="c4" style="font-size:130px;height:210px;min-width:210px">ゑ<span class="under" style="font-size:36px;bottom:-62px">hiragana</span></span><span class="tile" id="c5" style="font-size:130px;height:210px;min-width:210px">ヱ<span class="under" style="font-size:36px;bottom:-62px">katakana</span></span><span id="c6" style="font-family:Archivo;font-size:84px" class="o">= we</span></div>
+ <div class="hd c" id="c7" style="top:1340px;font-size:46px;color:var(--muted)">just like え / エ: same letter, two scripts</div>
+</div>
+
+<!-- old documents (snapshots) -->
+<div class="scene" id="s4">
+ <div class="hd c" id="d0" style="top:400px;font-size:52px;white-space:nowrap;left:0;right:0">People used them <span class="o">every day</span> 📜</div>
+ <div class="clip" id="d1" style="top:540px;left:70px;width:560px;transform:rotate(-6deg)"><div class="tape"></div><div class="ph" style="height:373px"><img src="user/doc_manuscript.jpg"></div><div class="cap">old handwritten book</div></div>
+ <div class="clip" id="d2" style="top:610px;left:470px;width:560px;transform:rotate(5deg)"><div class="tape"></div><div class="ph" style="height:213px"><img src="user/doc_woodblock.jpg"></div><div class="cap">woodblock-printed book</div></div>
+ <div class="clip" id="d3" style="top:880px;left:250px;width:580px;transform:rotate(-2deg)"><div class="tape"></div>
+  <div class="ph" style="height:480px;display:flex"><img src="img/hokusai_full.jpg" style="width:52%;object-fit:cover"><div style="position:relative;width:48%;height:100%"><img src="img/hokusai_title.jpg" style="width:100%;height:100%;object-fit:cover">
+   <svg class="hlc" id="d4" style="left:0;top:0;width:100%;height:100%" viewBox="0 0 100 100" preserveAspectRatio="none"><ellipse cx="56.7" cy="65" rx="13" ry="7.5" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+   <svg class="hlc" id="d5" style="left:0;top:0;width:100%;height:100%" viewBox="0 0 100 100" preserveAspectRatio="none"><ellipse cx="46.7" cy="77.3" rx="13" ry="7.5" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg></div></div>
+  <div class="cap" style="font-size:38px">Hokusai print, 1834: <span style="color:#E8261E">ゑ</span>ちぜん ふく<span style="color:#E8261E">ゐ</span></div></div>
+</div>
+
+<!-- examples -->
+<div class="scene" id="s5">
+ <div class="row" style="top:500px;gap:30px" id="e1"><span class="tile" style="font-size:120px;height:200px">絵</span><span style="font-size:80px">=</span><span class="tile hl" style="font-size:120px;height:200px">ゑ</span><span style="font-size:56px">picture 🖼️</span></div>
+ <div class="row" style="top:820px;gap:30px" id="e2"><span class="tile" style="font-size:120px;height:200px">声</span><span style="font-size:80px">=</span><span class="tile" style="font-size:120px;height:200px">こ<span class="o">ゑ</span></span><span style="font-size:56px">"koe" 🗣️</span></div>
+ <div class="hd c" id="e3" style="top:1140px;font-size:50px;color:var(--muted)">how people wrote before 1946</div>
+</div>
+
+<!-- sounds merged -->
+<div class="scene" id="s6">
+ <div class="hd c" id="f0" style="top:420px;font-size:60px">Over time… 🔊</div>
+ <div class="row" style="top:600px;gap:30px" id="f1"><span class="tile hl" style="font-size:120px;height:190px">ゐ</span><span style="font-size:60px">wi → i</span><span class="tile" style="font-size:120px;height:190px">い</span></div>
+ <div class="row" style="top:900px;gap:30px" id="f2"><span class="tile hl" style="font-size:120px;height:190px">ゑ</span><span style="font-size:60px">we → e</span><span class="tile" style="font-size:120px;height:190px">え</span></div>
+ <div class="hd c" id="f3" style="top:1200px;font-size:60px">same sound, <span class="o">extra letters</span></div>
+</div>
+
+<!-- 1946 -->
+<div class="scene" id="s7">
+ <div class="stamp" id="g1" style="top:390px;left:310px;width:460px;height:180px">1946</div>
+ <div class="hd c" id="g2" style="top:620px;font-size:48px;white-space:nowrap;left:0;right:0">the same rule from our <span class="jp o">は</span> episode</div>
+ <div class="row" style="top:740px;gap:40px"><span class="tile" id="g3" style="font-size:130px;height:200px;min-width:200px">ゐ<div class="strike" id="g3s"></div></span><span class="tile" id="g4" style="font-size:130px;height:200px;min-width:200px">ゑ<div class="strike" id="g4s"></div></span><span id="g5" style="font-size:90px">✂️</span></div>
+ <div class="row" style="top:1040px;gap:24px"><span class="tile" id="g6" style="font-size:100px;height:170px;padding:0 24px">こゑ<div class="strike" id="g6s"></div></span><span id="g7" style="font-size:80px">→</span><span class="tile" id="g8" style="font-size:100px;height:170px;padding:0 24px;border-color:#1F8A4C">こ<span style="color:#1F8A4C">え</span></span></div>
+</div>
+
+<!-- still alive: label + gate -->
+<div class="scene" id="s8">
+ <div class="hd c" id="h0" style="top:390px;font-size:56px">…but they're <span class="o">not fully gone!</span></div>
+ <div class="clip" id="h1" style="top:490px;left:100px;width:500px;transform:rotate(-5deg)"><div class="tape"></div>
+  <div class="ph" style="height:496px"><img src="img/yebisu_label.jpg">
+   <svg class="hlc" id="h2" style="left:0;top:0;width:100%;height:100%" viewBox="0 0 100 100" preserveAspectRatio="none"><ellipse cx="75.2" cy="69.7" rx="10" ry="10" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg></div>
+  <div class="cap"><span style="color:#E8261E">ヱ</span>ビス = Ebisu 🍺</div></div>
+ <div class="arrow" id="h3" style="top:1110px;left:120px;font-size:50px">← read right to left: <b>ヱ</b>ビスビール</div>
+ <div class="clip" id="h4" style="top:1220px;left:390px;width:600px;transform:rotate(3deg)"><div class="tape"></div>
+  <div class="ph" style="height:240px"><img src="img/nikka_gate.jpg">
+   <svg class="hlc" id="h5" style="left:0;top:0;width:100%;height:100%" viewBox="0 0 100 100" preserveAspectRatio="none"><ellipse cx="38" cy="55.7" rx="6" ry="15" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg></div>
+  <div class="cap" style="font-size:36px">ニッカウ<span style="color:#E8261E">ヰ</span>スキー = Nikka Whisky 🥃</div></div>
+</div>
+
+<!-- CTA -->
+<div class="scene" id="s9">
+ <div style="position:absolute;top:380px;left:0;right:0;display:flex;justify-content:center"><div id="lg" style="width:420px;height:420px;border-radius:50%;overflow:hidden;border:8px solid var(--ink);box-shadow:14px 14px 0 var(--ink);background:#fff"><img src="logo.png" style="width:100%;height:100%;transform:scale(1.03)"></div></div>
+ <div class="hd c" id="p1" style="top:850px;font-size:66px">@raj_in_jp</div>
+ <div class="hd c" id="p2" style="top:950px;font-size:50px">Japanese mysteries,<br><span class="o">one step at a time <span class="jp">一歩</span></span></div>
+ <div class="row" style="top:1180px;gap:22px" id="p3">
+  <div class="btn" id="bl"><span id="lt">♡ Like</span><div class="ripple" id="rl"></div></div>
+  <div class="btn" id="bs"><span id="st">↗ Share</span><div class="ripple" id="rsh"></div></div>
+  <div class="btn" id="bfol" style="background:var(--acc);color:#fff"><span id="ftxt">＋ Follow</span><div class="ripple" id="rf"></div></div></div>
+ <div id="fing" style="position:absolute;font-size:100px;left:0;top:0;opacity:0">👆</div>
+</div>
+<div id="wipe"></div>
+<script>
+window.T={s1:0,s2:5.5,s3:11.0,s4:17.85,s5:19.6,s6:23.85,s7:30.9,s8:36.85,s9:45.82,end:51.5}; window.TOTAL=T.end;
+// a 0.45 s pause before the CTA; the orange wipe plays only there
+const GAPS=[['s9',0.45]], WIPE=0.45;
+const cl=x=>Math.min(Math.max(x,0),1);
+const ease=x=>1-Math.pow(1-cl(x),3);
+const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+const $=id=>document.getElementById(id);
+const base=id=>{const el=$(id); if(el.dataset.base===undefined) el.dataset.base=el.style.transform||''; return el;};
+function pop(id,at,t,d=0.32){ const el=base(id), lt=t-at; el.style.opacity=lt<0?0:1; el.style.transform=`${el.dataset.base} scale(${lt<0?0.6:0.6+0.4*back(lt/d)})`; }
+// a snapshot dropped onto the table: falls in from a bigger, more tilted pose
+function drop(id,at,t){ const el=base(id), lt=t-at, p=ease(lt/0.4); el.style.opacity=lt<0?0:1; el.style.transform=`${el.dataset.base} translateY(${(1-p)*-60}px) rotate(${(1-p)*8}deg) scale(${1.25-0.25*p})`; }
+function stamp(id,at,t,r){ const el=base(id), p=cl((t-at)/0.16); el.style.opacity=t<at?0:1; el.style.transform=`rotate(${r}deg) scale(${2-p})`; }
+function strike(id,at,t){ $(id).style.transform=`translateY(-50%) rotate(-8deg) scaleX(${cl((t-at)/0.25)})`; }
+function circle(id,at,t){ $(id).querySelector('ellipse').setAttribute('stroke-dashoffset', String(1-ease((t-at)/0.45))); }
+// zoom a snapshot toward its circled letter (origin in % of the clip)
+function zoom(id,at,t,ox,oy,s){ const el=$(id), p=ease((t-at)/0.6); el.style.transformOrigin=`${ox}% ${oy}%`; el.style.transform=`${el.dataset.base} scale(${1+(s-1)*p})`; }
+const sc=['s1','s2','s3','s4','s5','s6','s7','s8','s9'];
+function renderSync(t0){
+  let off=0, gp=null;
+  for(const [g,d] of GAPS){ const gs=T[g]+off; if(t0<gs) break; if(t0<gs+d){ gp={e:t0-gs,d,s:g,p:cl((t0-gs-(d-WIPE))/WIPE)}; break; } off+=d; }
+  const t = gp ? T[gp.s]-0.001 : t0-off;
+  let cur='s1'; const tc = gp&&gp.p>=0.5 ? T[gp.s] : t; sc.forEach(s=>{if(tc>=T[s]) cur=s;}); sc.forEach(s=>$(s).style.display=s===cur?'block':'none');
+  $('wipe').style.left=(gp&&gp.p>0? -1300+gp.p*2700 : -1400)+'px';
+  if(cur==='s1'){ pop('a0',0.05,t); pop('a1',1.0,t); stamp('a2',3.72,t,-6); pop('a3',4.5,t); }
+  if(cur==='s2'){ pop('b0',5.6,t); pop('b1',7.1,t); pop('b5',7.88,t); pop('b2',6.4,t); pop('b4',6.5,t); pop('b3',6.6,t); pop('b6',8.68,t);
+    const f=t>=10.2; $('b2t').textContent=f?'ゐ':'?'; $('b4t').textContent=f?'ゑ':'?'; ['b2','b4'].forEach(id=>{$(id).classList.toggle('gap',!f); $(id).classList.toggle('hl',f);});
+    $('b2u').style.opacity=f?1:0; $('b4u').style.opacity=f?1:0; if(f){ pop('b2',10.2,t,0.3); pop('b4',10.35,t,0.3); } }
+  if(cur==='s3'){ pop('c0',11.1,t); pop('c1',12.82,t); pop('c2',13.94,t); pop('c3',11.42,t); pop('c4',16.34,t); pop('c5',17.28,t); pop('c6',14.98,t); pop('c7',17.5,t); }
+  if(cur==='s4'){ pop('d0',17.9,t); drop('d1',18.0,t); drop('d2',18.3,t); drop('d3',18.6,t); circle('d4',19.05,t); circle('d5',19.3,t); }
+  if(cur==='s5'){ pop('e1',19.76,t); pop('e2',21.58,t); pop('e3',22.9,t); }
+  if(cur==='s6'){ pop('f0',24.0,t); pop('f1',25.08,t); pop('f2',27.36,t); pop('f3',28.6,t); }
+  if(cur==='s7'){ stamp('g1',31.22,t,-5); pop('g2',32.46,t); pop('g3',33.2,t); pop('g4',33.35,t); strike('g3s',34.22,t); strike('g4s',34.4,t); pop('g5',34.3,t);
+    pop('g6',35.38,t); strike('g6s',35.7,t); pop('g7',35.8,t); pop('g8',36.12,t); }
+  if(cur==='s8'){ pop('h0',37.0,t); drop('h1',41.2,t); if(t>41.6) zoom('h1',42.2,t,75,62,1.12); circle('h2',41.75,t); pop('h3',42.6,t);
+    drop('h4',43.5,t); circle('h5',44.1,t); if(t>43.9) zoom('h4',44.5,t,38,40,1.1); }
+  if(cur==='s9'){ const lp=cl((t-45.83)/0.5); $('lg').style.opacity=t<45.83?0:1; $('lg').style.transform=`scale(${0.6+0.4*back(lp)}) rotate(${(1-lp)*-12}deg)`;
+    pop('p3',45.88,t); pop('p1',47.9,t); pop('p2',48.18,t);
+    const B=['bl','bs','bfol'].map(id=>{const r=$(id).getBoundingClientRect(); return [r.left+r.width/2-30, r.top+r.height/2-10];});
+    const taps=[46.25,46.85,47.3]; let fx=B[0][0], fy=B[0][1]+120;
+    if(t>=45.95){ const k=(t<taps[0])?0:(t<taps[1]?1:2); const prev=k?B[k-1]:[B[0][0],B[0][1]+120], st=k?taps[k-1]+0.1:45.95, en=taps[k]-0.03, p=cl((t-st)/Math.max(en-st,0.01)), e=1-Math.pow(1-p,3);
+      fx=prev[0]+(B[k][0]-prev[0])*e; fy=prev[1]+(B[k][1]-prev[1])*e; }
+    const f=$('fing'); f.style.opacity=t<45.95?0:(t>49.0?1-cl((t-49.0)/0.3):1); const pr=taps.some(x=>t>x&&t<x+0.15);
+    f.style.left=fx+'px'; f.style.top=fy+'px'; f.style.transform=`scale(${pr?0.85:1})`;
+    [['rl',taps[0]],['rsh',taps[1]],['rf',taps[2]]].forEach(([id,x])=>{const tt=t-x, r=$(id), p=cl(tt/0.5); r.style.opacity=(tt<0||tt>0.5)?0:(1-p); r.style.transform=`scale(${1+6*p})`;});
+    const L=t>=taps[0]+0.05; $('lt').textContent=L?'❤️ Liked':'♡ Like'; $('bl').style.color=L?'var(--acc)':'';
+    const S=t>=taps[1]+0.05; $('st').textContent=S?'✓ Shared':'↗ Share'; $('bs').style.color=S?'var(--acc2)':'';
+    const fo=t>=taps[2]+0.05, b=$('bfol'); b.style.background=fo?'var(--card)':'var(--acc)'; b.style.color=fo?'var(--ink)':'#fff'; $('ftxt').textContent=fo?'Following ✓':'＋ Follow'; }
+}
+window.render=async t=>{ renderSync(t); await Promise.all([...document.images].map(i=>i.complete?null:i.decode().catch(()=>{}))); };
+</script></body></html>
