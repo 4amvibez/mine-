@@ -7,7 +7,9 @@ const path = require('path');
 
 const [cuesPath, outDir, fontDir] = process.argv.slice(2);
 const htmlPath = path.join(path.resolve(fontDir), '_cue.html');
-const { handle, cues, cover } = JSON.parse(fs.readFileSync(cuesPath, 'utf8'));
+// Optional per-reel "style": { jpSize, jpSpacing, jpColor, english:false } (english:false = Japanese only)
+const { handle, cues, cover, style = {} } = JSON.parse(fs.readFileSync(cuesPath, 'utf8'));
+const S = { jpSize: '64px', jpSpacing: '0.1em', jpColor: '#ededed', english: true, ...style };
 fs.mkdirSync(outDir, { recursive: true });
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
@@ -19,8 +21,8 @@ const page = (jp, en) => `<!doctype html><html><head><meta charset="utf-8">
   /* Instagram Reels safe zone: keep clear of top ~250px, bottom ~420px (caption/audio bar)
      and the right ~150px (like/comment/share buttons). */
   .jp{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);
-      writing-mode:vertical-rl;text-orientation:mixed;font-family:'Noto Serif JP',serif;font-size:64px;
-      line-height:1;letter-spacing:0.1em;color:#ededed;white-space:nowrap;
+      writing-mode:vertical-rl;text-orientation:mixed;font-family:'Noto Serif JP',serif;font-size:${S.jpSize};
+      line-height:1;letter-spacing:${S.jpSpacing};color:${S.jpColor};white-space:nowrap;
       font-feature-settings:'vert' 1,'vpal' 0}
   .en{position:absolute;left:150px;right:150px;top:66%;transform:translateY(-50%);text-align:center;
       font-family:'Inter',sans-serif;font-style:italic;font-weight:500;font-size:40px;line-height:1.35;letter-spacing:0.01em;
@@ -28,7 +30,7 @@ const page = (jp, en) => `<!doctype html><html><head><meta charset="utf-8">
   .h{position:absolute;left:0;right:0;top:71.5%;transform:translateY(-50%);text-align:center;
      font-family:'Inter',sans-serif;font-size:25px;color:#7a7a7a}
 </style></head><body>
-<div class="jp">${esc(jp)}</div><div class="en">${esc(en)}</div>
+<div class="jp">${esc(jp)}</div>${S.english && en ? `<div class="en">${esc(en)}</div>` : ''}
 ${handle ? `<div class="h">${esc(handle)}</div>` : ''}
 </body></html>`;
 
