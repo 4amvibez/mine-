@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Archivo;src:url(fonts/ArchivoBlack.ttf)}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-900.ttf);font-weight:900}
+:root{--bg:#F1E3C2;--ink:#2B2118;--acc:#D9572B;--card:#FFF6E0}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Archivo,NotoJP,'Noto Color Emoji',sans-serif;position:relative}
+.dots{position:absolute;inset:0;background-image:radial-gradient(rgba(60,40,20,.18) 2px,transparent 2.5px);background-size:16px 16px;opacity:.55}
+.grain{position:absolute;inset:0;mix-blend-mode:multiply;opacity:.4;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .40  0 0 0 0 .32  0 0 0 .6 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
+.hd{position:absolute;left:0;right:0;text-align:center;line-height:1}
+.ladder{position:absolute;top:560px;left:130px;right:130px;display:flex;flex-direction:column;gap:18px}
+.r{display:flex;align-items:center;gap:22px;height:118px}
+.lv{width:150px;height:100%;display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;border:6px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
+.k{flex:1;height:100%;display:flex;align-items:center;justify-content:center;background:var(--card);border:6px solid var(--ink);box-shadow:8px 8px 0 var(--ink);font-family:NotoJP;font-weight:900;font-size:86px;letter-spacing:6px}
+.logo{position:absolute;bottom:110px;right:90px;width:150px;height:150px;border-radius:50%;overflow:hidden;border:6px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
+</style></head><body>
+<div class="dots"></div><div class="grain"></div>
+<div class="hd" style="top:290px;font-size:112px">READ UNTIL</div>
+<div class="hd" style="top:410px;font-size:112px;color:var(--acc)">YOU FAIL 💀</div>
+<div class="ladder">
+ <div class="r"><div class="lv" style="background:#1F8A4C">LV 1</div><div class="k">山</div></div>
+ <div class="r"><div class="lv" style="background:#5E9E3A">LV 2</div><div class="k">学校</div></div>
+ <div class="r"><div class="lv" style="background:#C9A227">LV 3</div><div class="k">経験</div></div>
+ <div class="r"><div class="lv" style="background:#E07A2E">LV 4</div><div class="k">林檎</div></div>
+ <div class="r"><div class="lv" style="background:#D9572B">LV 5</div><div class="k">薔薇</div></div>
+ <div class="r"><div class="lv" style="background:#8E1F1F;font-size:34px;line-height:1.05;text-align:center">BOSS</div><div class="k" style="border-color:#8E1F1F;color:#8E1F1F">憂鬱</div></div>
+</div>
+<div class="hd" style="top:1475px;font-size:58px">Where did you stop? <span style="color:var(--acc)">👇</span></div>
+<div class="logo"><img src="logo.png" style="width:100%;height:100%;transform:scale(1.03)"></div>
+</body></html>
