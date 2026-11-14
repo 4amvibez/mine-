@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Archivo;src:url(fonts/ArchivoBlack.ttf)}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-900.ttf);font-weight:900}
+:root{--bg:#F1E3C2;--ink:#2B2118;--acc:#D9572B;--muted:#6E5B44;--card:#FFF6E0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);font-family:Archivo,NotoJP,'Noto Color Emoji',sans-serif;color:var(--ink);position:relative}
+.dots{position:absolute;inset:0;background-image:radial-gradient(rgba(60,40,20,.16) 2px,transparent 2.5px);background-size:16px 16px;opacity:.6}
+.top{position:absolute;top:150px;left:90px;right:90px;display:flex;justify-content:space-between;font-size:30px;color:var(--muted)}
+.t{position:absolute;left:40px;right:40px;text-align:center;line-height:1.08}
+.bezel{position:absolute;left:222px;top:540px;width:636px;height:1166px;border-radius:56px;background:var(--ink);box-shadow:16px 16px 0 rgba(43,33,24,.35)}
+.url{position:absolute;top:1745px;left:0;right:0;text-align:center;font-size:36px}
+.url b{background:var(--card);border:5px solid var(--ink);padding:8px 26px;box-shadow:6px 6px 0 var(--ink)}
+</style></head><body><div class="dots"></div>
+<div class="top"><span>@raj_in_jp</span><span style="color:var(--acc)">FREE 🇯🇵 STUDY SITE</span></div>
+<div class="t" id="t1" style="top:250px;font-size:84px"></div>
+<div class="t" id="t2" style="top:430px;font-size:42px;color:var(--acc)"></div>
+<div class="bezel" id="bz"></div>
+<div class="url" id="url"><b>raj-in-jp.github.io</b></div>
+<script>
+const q=new URLSearchParams(location.search);
+document.getElementById('t1').innerHTML=q.get('a')||''; document.getElementById('t2').innerHTML=q.get('b')||'';
+if(q.get('t1top')) document.getElementById('t1').style.top=q.get('t1top')+'px';
+if(q.get('t1size')) document.getElementById('t1').style.fontSize=q.get('t1size')+'px';
+</script></body></html>
