@@ -1,0 +1,186 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Archivo;src:url(fonts/ArchivoBlack.ttf)}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-900.ttf);font-weight:900}
+@font-face{font-family:NotoJP;src:url(fonts/NotoSansJP-700.ttf);font-weight:700}
+@font-face{font-family:KR;src:url(xfonts/kr.ttf)}
+@font-face{font-family:TA;src:url(xfonts/tamil.ttf)}
+@font-face{font-family:DV;src:url(xfonts/deva.ttf)}
+:root{--bg:#F1E3C2;--ink:#2B2118;--acc:#D9572B;--teal:#1F6F78;--mus:#C9A227;--card:#FFF6E0;--muted:#6E5B44;--grey:#D8CBAA}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#888;font-family:Archivo,NotoJP,'Noto Color Emoji',sans-serif;color:var(--ink)}
+.s{position:relative;width:1080px;height:1350px;overflow:hidden;background:var(--bg);margin-bottom:20px}
+.s::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(60,40,20,.16) 2px,transparent 2.5px);background-size:16px 16px;opacity:.6}
+.grain{position:absolute;inset:0;mix-blend-mode:multiply;opacity:.35;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .40  0 0 0 0 .32  0 0 0 .6 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
+.hand{position:absolute;left:60px;bottom:44px;font-size:30px;color:var(--muted);z-index:5}
+.num{position:absolute;right:60px;top:52px;font-size:30px;color:var(--muted);z-index:5}
+.tag{position:absolute;left:60px;top:52px;font-size:28px;letter-spacing:3px;color:var(--acc);z-index:5}
+.swipe{position:absolute;right:60px;bottom:40px;font-size:34px;color:var(--acc);z-index:5}
+.h{position:absolute;left:90px;right:90px;text-align:center;line-height:1.08;z-index:3}
+.sub{font-family:Archivo;color:var(--muted)}
+.jp{font-family:NotoJP;font-weight:900}
+.kr{font-family:KR;font-weight:800}
+.ta{font-family:TA;font-weight:700}
+.dv{font-family:DV;font-weight:700}
+.o{color:var(--acc)} .t{color:var(--teal)}
+.card{background:var(--card);border:6px solid var(--ink);box-shadow:10px 10px 0 var(--ink)}
+.blk{display:inline-flex;align-items:center;justify-content:center;height:96px;padding:0 22px;border:5px solid var(--ink);box-shadow:6px 6px 0 var(--ink);white-space:nowrap;color:#fff;font-size:44px}
+.bS{background:var(--teal)} .bO{background:var(--mus);color:var(--ink)} .bV{background:var(--acc)}
+.row{display:flex;align-items:center;gap:14px}
+.flag{width:86px;font-size:60px;text-align:center}
+.pill{position:absolute;transform:translate(-50%,-50%);background:var(--card);border:4px solid var(--ink);border-radius:999px;padding:4px 16px;font-size:26px;white-space:nowrap;box-shadow:4px 4px 0 var(--ink)}
+.tier{display:flex;align-items:stretch;gap:14px;height:118px}
+.tl{width:200px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:30px;border:5px solid var(--ink);text-align:center;line-height:1.05}
+.tc{flex:1;display:flex;align-items:center;padding:0 24px;background:var(--card);border:5px solid var(--ink);font-size:36px;gap:10px;flex-wrap:wrap}
+.bul{display:flex;align-items:center;gap:26px;padding:22px 30px;font-size:44px}
+.bul .ic{width:120px;height:120px;flex:none;display:flex;align-items:center;justify-content:center;font-size:62px;border:5px solid var(--ink);background:#fff}
+</style></head><body>
+
+<!-- 1 COVER -->
+<section class="s" id="p1"><div class="grain"></div>
+ <img src="map.svg" style="position:absolute;left:40px;top:640px;width:1000px;opacity:.95">
+ <div class="tag">NIHONGO × YOUR LANGUAGE</div><div class="num">1/10</div>
+ <div class="h" style="top:150px;font-size:96px">IS JAPANESE<br>GRAMMAR <span class="o">HARD</span><br>FOR YOU?</div>
+ <div class="h sub" style="top:520px;font-size:48px">Your mother tongue decides 👀</div>
+ <div class="pill" style="left:948px;top:840px">🇯🇵 Japan</div>
+ <div class="pill" style="left:472px;top:1080px">🇮🇳 India</div>
+ <div class="pill" style="left:862px;top:880px">🇰🇷</div>
+ <div class="hand">@raj_in_jp</div><div class="swipe">swipe →</div>
+</section>
+
+<!-- 2 STAKE -->
+<section class="s" id="p2"><div class="grain"></div>
+ <div class="tag">NIHONGO × YOUR LANGUAGE</div><div class="num">2/10</div>
+ <div class="h" style="top:190px;font-size:80px">Same grammar =<br><span class="o">faster Japanese</span></div>
+ <div class="h sub" style="top:420px;font-size:38px;line-height:1.35;left:0;right:0">Some learners get Japanese word order for FREE.<br>Others fight it every day.</div>
+ <div style="position:absolute;left:90px;right:90px;top:640px;display:flex;flex-direction:column;gap:40px">
+  <div class="card" style="padding:30px 36px"><div style="font-size:40px">🏃‍♂️ <span class="o">Verb at the END</span> in your language</div>
+   <div style="margin-top:20px;height:44px;border:5px solid var(--ink);background:#fff"><div style="width:86%;height:100%;background:var(--acc)"></div></div>
+   <div class="sub" style="font-size:32px;margin-top:12px">Japanese order feels natural</div></div>
+  <div class="card" style="padding:30px 36px"><div style="font-size:40px">🐢 <span class="t">Verb in the MIDDLE</span> (like English)</div>
+   <div style="margin-top:20px;height:44px;border:5px solid var(--ink);background:#fff"><div style="width:34%;height:100%;background:var(--teal)"></div></div>
+   <div class="sub" style="font-size:32px;margin-top:12px">You must flip every sentence</div></div>
+ </div>
+ <div class="hand">@raj_in_jp</div><div class="swipe">swipe →</div>
+</section>
+
+<!-- 3 MAP -->
+<section class="s" id="p3"><div class="grain"></div>
+ <div class="tag">NIHONGO × YOUR LANGUAGE</div><div class="num">3/10</div>
+ <div class="h" style="top:130px;font-size:64px;white-space:nowrap;left:0;right:0">The <span class="o">"verb-LAST"</span> world 🗺️</div>
+ <div class="h sub" style="top:225px;font-size:34px;white-space:nowrap;left:0;right:0">Orange = verb at the END, like Japanese</div>
+ <div style="position:absolute;left:40px;top:330px;width:1000px;height:760px">
+  <img src="map.svg" style="width:1000px;height:760px">
+  <div class="pill" style="left:908px;top:200px">🇯🇵 Japanese</div>
+  <div class="pill" style="left:800px;top:380px">🇰🇷 Korean</div>
+  <div class="pill" style="left:432px;top:470px">🇮🇳 Hindi · Tamil…</div>
+  <div class="pill" style="left:100px;top:300px">🇹🇷 Turkish</div>
+  <div class="pill" style="left:624px;top:150px">🇲🇳 Mongolian</div>
+  <div class="pill" style="left:232px;top:360px">🇮🇷 Persian</div>
+  <div class="pill" style="left:640px;top:290px;background:#eee;color:var(--muted)">🇨🇳 verb in middle</div>
+ </div>
+ <div style="position:absolute;left:90px;right:90px;top:1120px;display:flex;justify-content:center;gap:40px;font-size:32px">
+  <div class="row"><span style="width:44px;height:44px;background:var(--acc);border:4px solid var(--ink);display:inline-block"></span>verb LAST</div>
+  <div class="row"><span style="width:44px;height:44px;background:var(--grey);border:4px solid #8C7C5E;display:inline-block"></span>verb in the MIDDLE</div></div>
+ <div class="h sub" style="top:1190px;font-size:26px">main language · basic word order</div>
+ <div class="hand">@raj_in_jp</div><div class="swipe">swipe →</div>
+</section>
+
+<!-- 4 SENTENCE -->
+<section class="s" id="p4"><div class="grain"></div>
+ <div class="tag">NIHONGO × YOUR LANGUAGE</div><div class="num">4/10</div>
+ <div class="h" style="top:130px;font-size:76px">"I rice eat" 🍚</div>
+ <div class="h" style="top:240px;font-size:34px"><span class="blk bS" style="height:58px;font-size:30px">I</span> &nbsp;<span class="blk bO" style="height:58px;font-size:30px">rice</span> &nbsp;<span class="blk bV" style="height:58px;font-size:30px">eat</span></div>
+ <div style="position:absolute;left:70px;right:50px;top:380px;display:flex;flex-direction:column;gap:34px">
+  <div class="row"><div class="flag">🇯🇵</div><span class="blk bS jp">私は</span><span class="blk bO jp">ご飯を</span><span class="blk bV jp">食べる</span></div>
+  <div class="row"><div class="flag">🇰🇷</div><span class="blk bS kr">나는</span><span class="blk bO kr">밥을</span><span class="blk bV kr">먹는다</span></div>
+  <div class="row"><div class="flag">🇮🇳</div><span class="blk bS ta" style="font-size:34px">நான்</span><span class="blk bO ta" style="font-size:34px">சாப்பாடு</span><span class="blk bV ta" style="font-size:34px">சாப்பிடுகிறேன்</span><span style="font-size:28px" class="sub">Tamil</span></div>
+  <div class="row"><div class="flag">🇮🇳</div><span class="blk bS dv">मैं</span><span class="blk bO dv">चावल</span><span class="blk bV dv">खाता हूँ</span><span style="font-size:28px" class="sub">Hindi</span></div>
+  <div class="row" style="margin-top:20px"><div class="flag">🇬🇧</div><span class="blk bS">I</span><span class="blk bV" style="outline:6px dashed var(--acc);outline-offset:6px">eat</span><span class="blk bO">rice</span><span style="font-size:60px">❌</span></div>
+ </div>
+ <div class="h" style="top:1150px;font-size:40px">English is the <span class="o">odd one out!</span></div>
+ <div class="hand">@raj_in_jp</div><div class="swipe">swipe →</div>
+</section>
+
+<!-- 5 LITTLE WORDS -->
+<section class="s" id="p5"><div class="grain"></div>
+ <div class="tag">NIHONGO × YOUR LANGUAGE</div><div class="num">5/10</div>
+ <div class="h" style="top:130px;font-size:70px">"Tokyo <span class="o">FROM</span>"<br>not "from Tokyo"</div>
+ <div class="h sub" style="top:330px;font-size:36px">The little word comes AFTER the place 📍</div>
+ <div style="position:absolute;left:110px;right:60px;top:450px;display:flex;flex-direction:column;gap:34px">
+  <div class="row"><div class="flag">🇯🇵</div><span class="blk bS jp">東京</span><span class="blk bV jp">から</span></div>
+  <div class="row"><div class="flag">🇰🇷</div><span class="blk bS kr">도쿄</span><span class="blk bV kr">에서</span></div>
+  <div class="row"><div class="flag">🇮🇳</div><span class="blk bS ta" style="font-size:36px">டோக்கியோ</span><span class="blk bV ta" style="font-size:36px">விலிருந்து</span><span style="font-size:28px" class="sub">Tamil</span></div>
+  <div class="row"><div class="flag">🇮🇳</div><span class="blk bS dv">टोक्यो</span><span class="blk bV dv">से</span><span style="font-size:28px" class="sub">Hindi</span></div>
+  <div class="row" style="margin-top:20px"><div class="flag">🇬🇧</div><span class="blk bV">from</span><span class="blk bS">Tokyo</span><span style="font-size:60px">❌</span></div>
+ </div>
+ <div class="h" style="top:1170px;font-size:38px">Japanese calls these <span class="o jp">助詞</span> (particles)</div>
+ <div class="hand">@raj_in_jp</div><div class="swipe">swipe →</div>
+</section>
+
+<!-- 6 TIER LIST -->
+<section class="s" id="p6"><div class="grain"></div>
+ <div class="tag">NIHONGO × YOUR LANGUAGE</div><div class="num">6/10</div>
+ <div class="h" style="top:120px;font-size:64px">Japanese grammar:<br><span class="o">easy → hard</span> for…</div>
+ <div style="position:absolute;left:70px;right:70px;top:330px;display:flex;flex-direction:column;gap:20px">
+  <div class="tier"><div class="tl" style="background:#1F8A4C">EASIEST</div><div class="tc">🇰🇷 Korean</div></div>
+  <div class="tier"><div class="tl" style="background:#5E9E3A">VERY EASY</div><div class="tc">🇮🇳 Tamil · Telugu · 🇹🇷 Turkish · 🇲🇳 Mongolian</div></div>
+  <div class="tier"><div class="tl" style="background:#C9A227">EASY</div><div class="tc">🇮🇳 Hindi · Bengali · 🇳🇵 Nepali · Urdu</div></div>
+  <div class="tier"><div class="tl" style="background:#E07A2E">MEDIUM*</div><div class="tc">🇨🇳 Chinese <span class="sub" style="font-size:28px">(*kanji = big head start!)</span></div></div>
+  <div class="tier"><div class="tl" style="background:#D9572B">HARD</div><div class="tc">🇬🇧 English · 🇩🇪 German · 🇪🇸 Spanish · 🇫🇷 French</div></div>
+  <div class="tier"><div class="tl" style="background:#8E1F1F">HARDEST</div><div class="tc">🇹🇭 Thai · 🇻🇳 Vietnamese · 🇮🇩 Indonesian</div></div>
+ </div>
+ <div class="h sub" style="top:1150px;font-size:28px;line-height:1.3">based on grammar similarity · Thai/Vietnamese/Indonesian<br>verbs never change form, Japanese verbs change a lot</div>
+ <div class="hand">@raj_in_jp</div><div class="swipe">swipe →</div>
+</section>
+
+<!-- 7 GOOD NEWS -->
+<section class="s" id="p7"><div class="grain"></div>
+ <div class="tag">NIHONGO × YOUR LANGUAGE</div><div class="num">7/10</div>
+ <div class="h" style="top:130px;font-size:76px">Good news ✅<br><span class="t">easy for EVERYONE</span></div>
+ <div style="position:absolute;left:90px;right:90px;top:400px;display:flex;flex-direction:column;gap:30px">
+  <div class="card bul"><div class="ic">🚹🚺</div><div><b>No gender</b><div class="sub" style="font-size:32px">no "he eats / she eats" endings</div></div></div>
+  <div class="card bul"><div class="ic">🐕</div><div><b>No plurals</b><div class="sub" style="font-size:32px"><span class="jp">犬</span> = dog AND dogs</div></div></div>
+  <div class="card bul"><div class="ic" style="font-family:Archivo;font-size:44px">a/the</div><div><b>No "a / the"</b><div class="sub" style="font-size:32px">no articles at all</div></div></div>
+  <div class="card bul"><div class="ic jp" style="font-size:44px">2</div><div><b>Only 2 irregular verbs</b><div class="sub" style="font-size:32px"><span class="jp">する</span> (do) and <span class="jp">来る</span> (come)</div></div></div>
+ </div>
+ <div class="hand">@raj_in_jp</div><div class="swipe">swipe →</div>
+</section>
+
+<!-- 8 BAD NEWS -->
+<section class="s" id="p8"><div class="grain"></div>
+ <div class="tag">NIHONGO × YOUR LANGUAGE</div><div class="num">8/10</div>
+ <div class="h" style="top:130px;font-size:76px">Bad news 😅<br><span class="o">hard for EVERYONE</span></div>
+ <div style="position:absolute;left:90px;right:90px;top:420px;display:flex;flex-direction:column;gap:34px">
+  <div class="card bul"><div class="ic jp" style="font-size:52px">漢字</div><div><b>Kanji</b><div class="sub" style="font-size:32px">2,136 for daily life (only Chinese speakers get a head start)</div></div></div>
+  <div class="card bul"><div class="ic jp" style="font-size:52px">敬語</div><div><b>Keigo</b><div class="sub" style="font-size:32px">polite speech levels for boss, customer, friend</div></div></div>
+  <div class="card bul"><div class="ic jp" style="font-size:44px">は<span style="font-size:30px">vs</span>が</div><div><b>は vs が</b><div class="sub" style="font-size:32px">even advanced learners still mix them up</div></div></div>
+ </div>
+ <div class="hand">@raj_in_jp</div><div class="swipe">swipe →</div>
+</section>
+
+<!-- 9 RECAP -->
+<section class="s" id="p9"><div class="grain"></div>
+ <div class="tag">NIHONGO × YOUR LANGUAGE</div><div class="num">9/10</div>
+ <div class="h" style="top:120px;font-size:72px">Your language →<br><span class="o">your advantage</span></div>
+ <div class="card" style="position:absolute;left:80px;right:80px;top:370px;padding:40px 44px;display:flex;flex-direction:column;gap:34px;font-size:40px">
+  <div>✅ <b>Verb at the end?</b><div class="sub" style="font-size:34px;margin:6px 0 0 60px">Japanese word order is free</div></div>
+  <div>✅ <b>Little words after nouns?</b><div class="sub" style="font-size:34px;margin:6px 0 0 60px">Particles feel natural</div></div>
+  <div>✅ <b>You know Chinese characters?</b><div class="sub" style="font-size:34px;margin:6px 0 0 60px">Kanji reading head start</div></div>
+  <div>✅ <b>Everyone:</b><div class="sub" style="font-size:34px;margin:6px 0 0 60px">no gender · no plurals · no "a/the"</div></div>
+  <div>⚠️ <b>Everyone:</b><div class="sub" style="font-size:34px;margin:6px 0 0 60px">kanji · keigo · は vs が</div></div>
+ </div>
+ <div class="h sub" style="top:1200px;font-size:32px">📸 screenshot this</div>
+ <div class="hand">@raj_in_jp</div><div class="swipe">swipe →</div>
+</section>
+
+<!-- 10 CTA -->
+<section class="s" id="p10"><div class="grain"></div>
+ <div class="tag">NIHONGO × YOUR LANGUAGE</div><div class="num">10/10</div>
+ <div style="position:absolute;top:150px;left:0;right:0;display:flex;justify-content:center"><div style="width:300px;height:300px;border-radius:50%;overflow:hidden;border:8px solid var(--ink);box-shadow:12px 12px 0 var(--ink)"><img src="logo.png" style="width:100%;height:100%;transform:scale(1.03)"></div></div>
+ <div class="h" style="top:540px;font-size:84px">What's YOUR<br><span class="o">native language?</span> 👇</div>
+ <div class="h sub" style="top:800px;font-size:42px;line-height:1.3">Comment it.<br>I'll reply with your biggest<br>Japanese advantage 🇯🇵</div>
+ <div style="position:absolute;left:0;right:0;top:1100px;display:flex;justify-content:center;gap:24px;font-size:40px">
+  <div class="card" style="padding:16px 30px">📌 Save</div><div class="card" style="padding:16px 30px;background:var(--acc);color:#fff">＋ Follow</div></div>
+ <div class="hand">@raj_in_jp</div>
+</section>
+</body></html>
