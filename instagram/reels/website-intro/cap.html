@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Archivo;src:url(fonts/ArchivoBlack.ttf)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;background:transparent;font-family:Archivo,'Noto Color Emoji',sans-serif}
+.box{position:absolute;left:60px;right:60px;top:110px;background:#2B2118;color:#FFF6E0;border-radius:28px;padding:30px 34px;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.a{font-size:66px;line-height:1.08}.b{font-size:38px;color:#FF9A6B;margin-top:12px}
+.url{position:absolute;left:0;right:0;bottom:70px;text-align:center}
+.url span{background:rgba(43,33,24,.88);color:#FFF6E0;font-size:34px;padding:12px 28px;border-radius:999px}
+</style></head><body><div class="box"><div class="a" id="a"></div><div class="b" id="b"></div></div><div class="url"><span>raj-in-jp.github.io</span></div>
+<script>const q=new URLSearchParams(location.search);document.getElementById('a').innerHTML=q.get('a');const b=q.get('b');if(b)document.getElementById('b').innerHTML=b;else document.getElementById('b').remove();</script></body></html>
